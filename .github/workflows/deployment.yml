@@ -14,12 +14,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: dev
+          submodules: recursive
 
       - name: Prepare files
         run: |
           mkdir prod
           cp -r -t prod/ src libraries .gitignore
           cp Makefile prod/Makefile
+          rm -rf prod/libraries/mlx42/.git
         #   cp CleanMakefile prod/Makefile
 
     #   - name: Install dependencies
@@ -31,6 +33,10 @@ jobs:
           cd prod
           make
           make fclean
+
+      - name: Remove mlx42
+        run: |
+          rm -rf prod/libraries/mlx42
 
       - name: Commit and push to prod
         run: |
