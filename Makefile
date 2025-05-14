@@ -7,8 +7,8 @@ INCLUDES				 = $(addprefix -I,$(SRC_DIRS)) $(addprefix -I,$(LIB_DIRS))
 
 #-----------------------BINARIES---------------------------------------------------------
 # Output Files
-NAME					:= cub3D
-LIBRARY_FOR_TESTS		:= libcub3D.a
+NAME					:= cub3d
+LIBRARY_FOR_TESTS		:= libcub3d.a
 
 #-----------------------ROOT FOLDERS----------------------------------------------------------
 # Directories
@@ -43,6 +43,7 @@ OBJ     				:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(C_FILES)))
 
 #-----------------------LIBRARY FOLDERS----------------------------------------------------------
 # Library directories (libraries/)
+MLX_LIB_DIR				:= $(LIB_DIR)/mlx42
 STRING_LIB_DIR			:= $(LIB_DIR)/ft_string
 LIST_LIB_DIR			:= $(LIB_DIR)/list
 GNL_LIB_DIR				:= $(LIB_DIR)/get_next_line
@@ -58,6 +59,7 @@ LIB_DIRS				:= $(STRING_LIB_DIR) \
 
 #-----------------------LIBRARIES--------------------------------------------------------
 # Libraries
+MLX_LIB     			:= $(MLX_LIB_DIR)/build/libmlx42.a
 STRING_LIB				:= $(STRING_LIB_DIR)/ft_string.a
 LIST_LIB				:= $(LIST_LIB_DIR)/list.a
 GNL_LIB					:= $(GNL_LIB_DIR)/get_next_line.a
@@ -74,7 +76,9 @@ LIBRARIES				:= $(STRING_LIB) \
 #-----------------------COLORS-----------------------------------------------------------
 # Colors for Output
 GREEN					:= \033[0;32m
-RED						:= \033[31m
+RED						:= \033[0;31m
+BLUE					:= \033[0;34m
+YELLOW					:= \033[0;33m
 RESET					:= \033[0m
 
 #-----------------------RULES------------------------------------------------------------
@@ -85,7 +89,7 @@ vpath %.h $(SRC_DIRS)
 all: $(NAME)
 
 # Build the Executable
-$(NAME): $(OBJ) $(LIBRARIES)
+$(NAME): $(OBJ) $(LIBRARIES) $(MLX_LIB)
 	@$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 	@echo "$(GREEN)Compiled $@ successfully!$(RESET)"
 
@@ -94,10 +98,21 @@ $(OBJ_DIR)/%.o: %.c $(HEADERS)
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-# Compile libraries
+# Compile custom libraries
 %.a:
 	@cd $(dir $@); $(MAKE) > /dev/null; $(MAKE) clean > /dev/null
 
+# Compile mlx42 library
+$(MLX_LIB):
+	@if [ ! -d "$(MLX_LIB_DIR)" ] || [ -z "$$(ls -A $(MLX_LIB_DIR))" ]; then \
+		echo "$(YELLOW)>> Initializing MLX42 submodule...$(RESET)"; \
+		git submodule update --init --recursive $(MLX_LIB_DIR) > /dev/null; \
+	fi
+	@echo "$(YELLOW)>> Building MLX42...$(RESET)"
+	@cmake -S $(MLX_LIB_DIR) -B $(MLX_LIB_DIR)/build > /dev/null
+	@cmake --build $(MLX_LIB_DIR)/build > /dev/null
+
+# Compile cub3d.a file to use inside tests/ folder
 $(LIBRARY_FOR_TESTS): $(OBJ) $(LIBRARIES)
 	@for lib in $(LIBRARIES); do \
 		ar x $$lib ; \
@@ -133,6 +148,7 @@ re: fclean all
 # Phony Targets
 .PHONY: all clean fclean re
 
+# Print all of the source (.c, .h) files list, to help prepare makefile for an eval
 print:
 	@echo $(notdir $(C_FILES)) | tr ' ' '\n' > c_files.txt
 	@echo $(notdir $(HEADERS)) | tr ' ' '\n' > headers.txt
