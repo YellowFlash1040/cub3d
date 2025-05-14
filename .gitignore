@@ -1,0 +1,16 @@
+*
+!*/
+.*
+!.gitkeep
+!.gitignore
+!.github/
+!src/**/*.c
+!src/**/*.h
+!Makefile
+!libraries/**/*.c
+!libraries/**/*.h
+!libraries/**/Makefile
+!tests/**/*.c
+!tests/**/*.h
+!tests/**/Makefile
+!CleanMakefile
