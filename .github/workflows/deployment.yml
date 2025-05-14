@@ -19,7 +19,8 @@ jobs:
         run: |
           mkdir prod
           cp -r -t prod/ src libraries .gitignore
-          cp CleanMakefile prod/Makefile
+          cp Makefile prod/Makefile
+        #   cp CleanMakefile prod/Makefile
 
     #   - name: Install dependencies
     #     run: |
