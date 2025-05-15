@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:33:47 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/14 12:34:30 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:08:43 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-
 	printf("Hello from cub3d\n");
 	return (0);
 }
