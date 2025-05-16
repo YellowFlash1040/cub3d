@@ -5,12 +5,16 @@ CFLAGS				 	 = -Wall -Wextra -Werror $(INCLUDES) -g
 LDFLAGS					:= -ldl -lglfw -pthread -lm
 INCLUDES				 = $(addprefix -I,$(SRC_DIRS)) \
 							$(addprefix -I,$(LIB_DIRS)) \
-							-I$(MLX_REPO_DIR)/include/MLX42
+							-I$(MLX_REPO_DIR)/include
 
 #-----------------------BINARIES---------------------------------------------------------
 # Output Files
 NAME					:= cub3d
 LIBRARY_FOR_TESTS		:= libcub3d.a
+
+############################################################################################
+############################################################################################
+############################################################################################
 
 #-----------------------ROOT FOLDERS----------------------------------------------------------
 # Directories
@@ -18,26 +22,79 @@ SRC_DIR					:= src
 OBJ_DIR					:= obj
 LIB_DIR 				:= libraries
 
-#-----------------------SOURCE FOLDERS----------------------------------------------------------
+#------------------------------SRC/----------------------------------------------------
 
 # Source directories (src/)
 BUILDERS_DIR			:= $(SRC_DIR)/builders
-HELPERS_DIR				:= $(SRC_DIR)/helpers
+ERROR_DIR				:= $(SRC_DIR)/error
 LOGIC_DIR				:= $(SRC_DIR)/logic
 MODEL_DIR				:= $(SRC_DIR)/model
 SHARED_DIR				:= $(SRC_DIR)/shared
 
-# Source directories (logic/)
+#---------------------------BUILDERS/--------------------------------------------------
+# Directories (builders/)
+MAP_BUILDER_DIR			:= $(BUILDERS_DIR)/map_builder
+
+#Sum up
+BUILDERS_DIRS			:= $(MAP_BUILDER_DIR)
+
+#---------------------------LOGIC/--------------------------------------------------
+# Directories (logic/)
 GUI_DIR					:= $(LOGIC_DIR)/gui
 
-# List of all source directories
+#Sum up
+LOGIC_DIRS				= $(GUI_DIRS)
+
+#---------------------------MODEL/--------------------------------------------------
+# Directories (model/)
+APP_CLASS_DIR			:= $(MODEL_DIR)/app
+COLOR_CLASS_DIR			:= $(MODEL_DIR)/color
+DIRECTION_CLASS_DIR		:= $(MODEL_DIR)/direction
+GAME_CLASS_DIR			:= $(MODEL_DIR)/game
+MAP_CLASS_DIR			:= $(MODEL_DIR)/map
+PLAYER_CLASS_DIR		:= $(MODEL_DIR)/player
+POINT_CLASS_DIR			:= $(MODEL_DIR)/point
+SURFACE_CLASS_DIR		:= $(MODEL_DIR)/surface
+WALL_CLASS_DIR			:= $(MODEL_DIR)/wall
+
+#Sum up
+MODEL_DIRS				= $(APP_CLASS_DIR) \
+							$(COLOR_CLASS_DIR) \
+							$(DIRECTION_CLASS_DIR) \
+							$(GAME_CLASS_DIR) \
+							$(MAP_CLASS_DIR) \
+							$(PLAYER_CLASS_DIR) \
+							$(POINT_CLASS_DIR) \
+							$(SURFACE_CLASS_DIR) \
+							$(WALL_CLASS_DIR)
+
+#---------------------------LOGIC/GUI/--------------------------------------------------
+# Directories (logic/gui/)
+CANVAS_DIR				:= $(GUI_DIR)/canvas
+EVENT_HANDLERS_DIR		:= $(GUI_DIR)/event_handlers
+MINIMAP_DIR				:= $(GUI_DIR)/minimap
+WINDOW_DIR				:= $(GUI_DIR)/window
+MOVEMENTS_DIR			:= $(GUI_DIR)/movements
+
+#Sum up
+GUI_DIRS				= $(CANVAS_DIR) \
+							$(EVENT_HANDLERS_DIR) \
+							$(MINIMAP_DIR) \
+							$(WINDOW_DIR) \
+							$(MOVEMENTS_DIR)
+
+
+#----------------------------------SUM UP-----------------------------------------------
 SRC_DIRS				:= $(SRC_DIR) \
-							$(BUILDERS_DIR) \
-							$(HELPERS_DIR) \
-							$(LOGIC_DIR) \
-							$(MODEL_DIR) \
-							$(SHARED_DIR) \
-							$(GUI_DIR)
+							$(BUILDERS_DIRS) \
+							$(ERROR_DIR) \
+							$(LOGIC_DIRS) \
+							$(MODEL_DIRS) \
+							$(SHARED_DIR)
+
+############################################################################################
+############################################################################################
+############################################################################################
 
 #-----------------------SOURCE FILES------------------------------------------------------------
 # Sources
@@ -59,6 +116,7 @@ LIST_LIB_DIR			:= $(LIB_DIR)/list
 GNL_LIB_DIR				:= $(LIB_DIR)/get_next_line
 CONVERTER_LIB_DIR		:= $(LIB_DIR)/converter
 FILE_LIB_DIR			:= $(LIB_DIR)/file
+MEMORY_LIB_DIR			:= $(LIB_DIR)/ft_memory
 
 # List of all library directories
 LIB_DIRS				:= $(MLX_LIB_DIR) \
@@ -66,7 +124,8 @@ LIB_DIRS				:= $(MLX_LIB_DIR) \
 							$(LIST_LIB_DIR) \
 							$(GNL_LIB_DIR) \
 							$(CONVERTER_LIB_DIR) \
-							$(FILE_LIB_DIR)
+							$(FILE_LIB_DIR) \
+							$(MEMORY_LIB_DIR)
 
 #-----------------------LIBRARIES--------------------------------------------------------
 # Libraries
@@ -76,6 +135,7 @@ LIST_LIB				:= $(LIST_LIB_DIR)/list.a
 GNL_LIB					:= $(GNL_LIB_DIR)/get_next_line.a
 CONVERTER_LIB			:= $(CONVERTER_LIB_DIR)/converter.a
 FILE_LIB				:= $(FILE_LIB_DIR)/file.a
+MEMORY_LIB				:= $(MEMORY_LIB_DIR)/ft_memory.a
 
 # List of all libraries
 LIBRARIES				:= $(MLX_LIB) \
@@ -83,7 +143,8 @@ LIBRARIES				:= $(MLX_LIB) \
 							$(LIST_LIB) \
 							$(GNL_LIB) \
 							$(CONVERTER_LIB) \
-							$(FILE_LIB)
+							$(FILE_LIB) \
+							$(MEMORY_LIB)
 
 #-----------------------COLORS-----------------------------------------------------------
 # Colors for Output
