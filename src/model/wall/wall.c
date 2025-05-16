@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:29:35 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/15 15:35:09 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:22:34 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	destroy_wall(t_wall **wall_ref)
 		return ;
 	wall = *wall_ref;
 	if (wall->texture_path)
-		destroy_string(wall->texture_path);
+		destroy_string(&wall->texture_path);
 	free(wall);
 	*wall_ref = NULL;
 }
