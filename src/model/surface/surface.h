@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:41:51 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/15 15:49:34 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:57:23 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 typedef struct surface
 {
 	t_surface_type	type;
-	t_color			*color;
+	t_color			color;
 }	t_surface;
 
 t_surface	*init_surface(void);
