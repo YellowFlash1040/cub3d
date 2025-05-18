@@ -12,94 +12,18 @@ INCLUDES				 = $(addprefix -I,$(SRC_DIRS)) \
 NAME					:= cub3d
 LIBRARY_FOR_TESTS		:= libcub3d.a
 
-############################################################################################
-############################################################################################
-############################################################################################
-
 #-----------------------ROOT FOLDERS----------------------------------------------------------
 # Directories
 SRC_DIR					:= src
 OBJ_DIR					:= obj
 LIB_DIR 				:= libraries
 
-#------------------------------SRC/----------------------------------------------------
-
-# Source directories (src/)
-BUILDERS_DIR			:= $(SRC_DIR)/builders
-ERROR_DIR				:= $(SRC_DIR)/error
-LOGIC_DIR				:= $(SRC_DIR)/logic
-MODEL_DIR				:= $(SRC_DIR)/model
-SHARED_DIR				:= $(SRC_DIR)/shared
-
-#---------------------------BUILDERS/--------------------------------------------------
-# Directories (builders/)
-MAP_BUILDER_DIR			:= $(BUILDERS_DIR)/map_builder
-
-#Sum up
-BUILDERS_DIRS			:= $(MAP_BUILDER_DIR)
-
-#---------------------------LOGIC/--------------------------------------------------
-# Directories (logic/)
-GUI_DIR					:= $(LOGIC_DIR)/gui
-
-#Sum up
-LOGIC_DIRS				= $(GUI_DIRS)
-
-#---------------------------MODEL/--------------------------------------------------
-# Directories (model/)
-APP_CLASS_DIR			:= $(MODEL_DIR)/app
-COLOR_CLASS_DIR			:= $(MODEL_DIR)/color
-DIRECTION_CLASS_DIR		:= $(MODEL_DIR)/direction
-GAME_CLASS_DIR			:= $(MODEL_DIR)/game
-MAP_CLASS_DIR			:= $(MODEL_DIR)/map
-PLAYER_CLASS_DIR		:= $(MODEL_DIR)/player
-POINT_CLASS_DIR			:= $(MODEL_DIR)/point
-SURFACE_CLASS_DIR		:= $(MODEL_DIR)/surface
-WALL_CLASS_DIR			:= $(MODEL_DIR)/wall
-
-#Sum up
-MODEL_DIRS				= $(APP_CLASS_DIR) \
-							$(COLOR_CLASS_DIR) \
-							$(DIRECTION_CLASS_DIR) \
-							$(GAME_CLASS_DIR) \
-							$(MAP_CLASS_DIR) \
-							$(PLAYER_CLASS_DIR) \
-							$(POINT_CLASS_DIR) \
-							$(SURFACE_CLASS_DIR) \
-							$(WALL_CLASS_DIR)
-
-#---------------------------LOGIC/GUI/--------------------------------------------------
-# Directories (logic/gui/)
-CANVAS_DIR				:= $(GUI_DIR)/canvas
-EVENT_HANDLERS_DIR		:= $(GUI_DIR)/event_handlers
-MINIMAP_DIR				:= $(GUI_DIR)/minimap
-WINDOW_DIR				:= $(GUI_DIR)/window
-MOVEMENTS_DIR			:= $(GUI_DIR)/movements
-
-#Sum up
-GUI_DIRS				= $(CANVAS_DIR) \
-							$(EVENT_HANDLERS_DIR) \
-							$(MINIMAP_DIR) \
-							$(WINDOW_DIR) \
-							$(MOVEMENTS_DIR)
-
-
-#----------------------------------SUM UP-----------------------------------------------
-SRC_DIRS				:= $(SRC_DIR) \
-							$(BUILDERS_DIRS) \
-							$(ERROR_DIR) \
-							$(LOGIC_DIRS) \
-							$(MODEL_DIRS) \
-							$(SHARED_DIR)
-
-############################################################################################
-############################################################################################
-############################################################################################
+SRC_DIRS				:= $(shell find $(SRC_DIR) -type d)
 
 #-----------------------SOURCE FILES------------------------------------------------------------
 # Sources
-C_FILES 				:= $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
-HEADERS 				:= $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.h))
+C_FILES 				:= $(shell find $(SRC_DIR) -name '*.c')
+HEADERS 				:= $(shell find $(SRC_DIR) -name '*.h')
 
 # Objects
 OBJ     				:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(C_FILES)))
@@ -156,7 +80,6 @@ RESET					:= \033[0m
 
 #-----------------------RULES------------------------------------------------------------
 vpath %.c $(SRC_DIRS)
-vpath %.h $(SRC_DIRS)
 
 # Default Target
 all: $(MLX_LIB) $(NAME)
