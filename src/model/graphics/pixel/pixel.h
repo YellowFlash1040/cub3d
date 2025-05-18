@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   pixel.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 15:48:25 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/15 15:53:39 by akovtune         ###   ########.fr       */
+/*   Created: 2025/05/17 16:54:43 by akovtune          #+#    #+#             */
+/*   Updated: 2025/05/17 16:56:01 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
+#ifndef PIXEL_H
+# define PIXEL_H
 
-# include <stdlib.h>
-# include "map.h"
-# include "point.h"
+#include <bits/types.h>
 
-# define GAME_INIT_ERR 1
-
-typedef struct game
-{
-	t_point	player_position;
-	t_map	*map;
-}	t_game;
-
-t_game	*init_game(void);
-void	destroy_game(t_game **game_ref);
+typedef __uint8_t t_pixel;
 
 #endif

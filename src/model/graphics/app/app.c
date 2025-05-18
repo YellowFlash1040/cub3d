@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   app.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 17:01:36 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/16 17:01:37 by akovtune         ###   ########.fr       */
+/*   Created: 2025/05/16 13:56:51 by akovtune          #+#    #+#             */
+/*   Updated: 2025/05/17 17:46:30 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "player.h"
+#include "app.h"
 
-t_player	*init_player(void)
+t_app	*init_app(void)
 {
-	t_player	*player;
+	t_app	*app;
 
-	player = (t_player *)malloc(sizeof(t_player));
-	if (!player)
+	app = (t_app *)malloc(sizeof(t_app));
+	if (!app)
 		return (NULL);
-	player->position = (t_point){-1, -1};
-	player->angle = 0;
-	return (player);
+	app->mlx = NULL;
+	app->game = NULL;
+	app->canvas = NULL;
+	return (app);
 }
 
-void	destroy_player(t_player **player_ref)
+void	destroy_app(t_app **app_ref)
 {
-	t_player	*player;
+	t_app	*app;
 
-	if (!player_ref || !*player_ref)
+	if (!app_ref || !*app_ref)
 		return ;
-	player = *player_ref;
-	free(player);
-	*player_ref = NULL;
+	app = *app_ref;
+	if (app->game)
+		destroy_game(&app->game);
+	mlx_terminate(app->mlx);
+	free(app);
+	*app_ref = NULL;
 }

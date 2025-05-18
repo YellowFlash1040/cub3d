@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   app.h                                              :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 12:58:54 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/16 17:27:25 by akovtune         ###   ########.fr       */
+/*   Created: 2025/05/15 15:48:25 by akovtune          #+#    #+#             */
+/*   Updated: 2025/05/18 12:58:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef APP_H
-# define APP_H
+#ifndef GAME_H
+# define GAME_H
 
-# include "game.h"
-# include <MLX42/MLX42.h>
-# include <stdlib.h>
+# include "map.h"
+# include "player.h"
 
-# define APP_INIT_ERR 1
+# define GAME_INIT_ERR 1
 
-typedef struct app
+typedef struct game
 {
-	mlx_t		*client;
-	t_game		*game;
-	mlx_image_t	*canvas;
-}				t_app;
+	t_player	*player;
+	t_map		*map;
+}	t_game;
 
-t_app			*init_app(void);
-void			destroy_app(t_app **app_ref);
+t_game	*init_game(void);
+void	destroy_game(t_game **game_ref);
 
 #endif

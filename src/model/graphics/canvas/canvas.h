@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.h                                           :+:      :+:    :+:   */
+/*   canvas.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 15:45:42 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/16 17:02:11 by akovtune         ###   ########.fr       */
+/*   Created: 2025/05/16 12:37:58 by akovtune          #+#    #+#             */
+/*   Updated: 2025/05/17 17:50:30 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
+#ifndef CANVAS_H
+# define CANVAS_H
 
-# include <stdlib.h>
+# include <MLX42/MLX42.h>
 # include "point.h"
+# include "size.h"
+# include "pixel.h"
+# include "status_codes.h"
 
-# define PLAYER_INIT_ERR 1
-
-typedef struct player
+typedef struct canvas
 {
-	t_point	position;
-	float	angle;
-}	t_player;
+	t_size		size;
+	t_point		position;
+	t_pixel		*pixels;
+	mlx_image_t	*image;
+}	t_canvas;
 
-t_player	*init_player(void);
-void		destroy_player(t_player **player_ref);
+t_canvas	*init_canvas(t_size size, t_point position);
+void		destroy_canvas(t_canvas **canvas_ref);
+
+int	create_canvas(mlx_t* mlx, t_canvas **canvas_ref, t_size size,
+	t_point position);
 
 #endif

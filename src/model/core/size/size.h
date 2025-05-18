@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.c                                             :+:      :+:    :+:   */
+/*   size.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 15:48:27 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/16 17:52:49 by akovtune         ###   ########.fr       */
+/*   Created: 2025/05/17 16:45:14 by akovtune          #+#    #+#             */
+/*   Updated: 2025/05/17 16:46:16 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#ifndef SIZE_H
+# define SIZE_H
 
-t_game	*init_game(void)
+# include <stdlib.h>
+
+# define SIZE_INIT_ERR 1
+
+typedef struct size
 {
-	t_game	*game;
+	int	width;
+	int	height;
+}	t_size;
 
-	game = (t_game *)malloc(sizeof(t_game));
-	if (!game)
-		return (NULL);
-	game->map = NULL;
-	game->player_position = (t_point){0};
-	return (game);
-}
+t_size	*init_size(void);
+void	destroy_size(t_size **size_ref);
 
-void	destroy_game(t_game **game_ref)
-{
-	t_game	*game;
-
-	if (!game_ref || !*game_ref)
-		return ;
-	game = *game_ref;
-	if (game->map)
-		destroy_map(&game->map);
-	free(game);
-	*game_ref = NULL;
-}
+#endif
