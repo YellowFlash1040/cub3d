@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:11:43 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/16 17:42:56 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/18 15:51:40 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <MLX42/MLX42.h>
 # include "game.h"
-# include "color.h"
+# include "drawing.h"
 
-void	draw_minimap(mlx_image_t *screen, t_game *game);
+void	draw_minimap(t_canvas *canvas, t_game *game);
 
 #endif
