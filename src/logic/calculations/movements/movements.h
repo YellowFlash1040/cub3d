@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:55:30 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/18 15:30:53 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/18 16:00:26 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include "player.h"
 # include "status_codes.h"
+# include "window.h"
 
 # define STEP 10
 
