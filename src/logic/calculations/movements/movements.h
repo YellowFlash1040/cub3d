@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:55:30 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/18 16:00:26 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/18 18:32:02 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 # define STEP 10
 
-int	move_player_up(t_player *player);
-int	move_player_down(t_player *player);
-int	move_player_left(t_player *player);
-int	move_player_right(t_player *player);
+int	move_player_forward(t_player *player);
+int	move_player_back(t_player *player);
+int	rotate_player_left(t_player *player);
+int	rotate_player_right(t_player *player);
 
 #endif

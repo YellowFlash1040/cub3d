@@ -6,42 +6,134 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:55:25 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/18 16:01:51 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:17:06 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "movements.h"
+#include <stdio.h>
 
-int	move_player_up(t_player *player)
+#define EPSILON 1e-9 //1e-9 means 1 × 10⁻⁹, which is: 0.000000001
+#define ROTATION_ANGLE 0.05
+
+static void	normalize_angle(double *angle_ref);
+static void	update_player_deltas(t_player *player);
+
+int	move_player_forward(t_player *player)
 {
 	player->position.x += player->delta_x;
 	player->position.y += player->delta_y;
 	return (SUCCESS);
 }
 
-int	move_player_down(t_player *player)
+int	move_player_back(t_player *player)
 {
 	player->position.x -= player->delta_x;
 	player->position.y -= player->delta_y;
 	return (SUCCESS);
 }
 
-int	move_player_left(t_player *player)
+int	rotate_player_left(t_player *player)
 {
-	player->angle -= 0.1;
-	if (player->angle < 0)
-		player->angle += 2 * M_PI;
-	player->delta_x = cos(player->angle) * 5;
-	player->delta_y = sin(player->angle) * 5;
+	player->angle += ROTATION_ANGLE;
+
+	normalize_angle(&player->angle);
+	update_player_deltas(player);
+	printf("Angle: %.2f degrees\n", player->angle * (180.0 / M_PI));
 	return (SUCCESS);
 }
 
-int	move_player_right(t_player *player)
+int	rotate_player_right(t_player *player)
 {
-	player->angle += 0.1;
-	if (player->angle > 2 * M_PI)
-		player->angle -= 2 * M_PI;
-	player->delta_x = cos(player->angle) * 5;
-	player->delta_y = sin(player->angle) * 5;
+	player->angle -= ROTATION_ANGLE;
+
+	normalize_angle(&player->angle);
+	update_player_deltas(player);
+	printf("Angle: %.2f degrees\n", player->angle * (180.0 / M_PI));
 	return (SUCCESS);
 }
+
+static void	normalize_angle(double *angle_ref)
+{
+	const double	two_pi = 2.0 * M_PI;
+	double			angle;
+
+	if (!angle_ref)
+		return ;
+	angle = *angle_ref;
+	angle = fmod(angle, two_pi);
+	if (angle < 0)
+		angle += two_pi;
+
+	if (angle < EPSILON || two_pi - angle < EPSILON)
+		angle = 0.0;
+
+	*angle_ref = angle;
+}
+
+/*
+	fmod(x, y) - function from math.h
+	which is equivalent to
+	x % y
+	for floating point numbers
+
+	fabs(x) - function from math.h
+	which is equivalent to
+	|x|
+	in math
+	for floating numbers
+
+	abs(x)
+	is the |x| for integers
+*/
+
+/*
+	// keep the angle between -2pi and 2pi
+	angle = fmod(angle, two_pi);
+
+	//keep the angle between 0 and 2pi
+	if (angle < 0)
+		angle += two_pi;
+
+	// if the angle is pretty close to 2pi or 0
+	// (which is the same for us but not for a computer)
+	// make it 0
+	if (angle < EPSILON || fabs(angle - two_pi) < EPSILON)
+		angle = 0.0;
+*/
+
+static void	update_player_deltas(t_player *player)
+{
+	player->delta_x = cos(player->angle);
+	player->delta_y = -sin(player->angle);
+}
+
+// In Math (Unit Circle):
+/*
+
+(0,0) is at the center.
+
++x goes right.
+
++y goes up.
+
+Angles increase counter-clockwise (CCW).
+
+cos(θ) = horizontal movement (left/right).
+sin(θ) = vertical movement (up/down).
+*/
+
+// In Screen Coordinates (MiniLibX):
+/*
+(0,0) is at the top-left corner.
+
++x still goes right ✅
+
++y goes down ❗️
+-y goes up ❗️
+
+So if you want to go up you have to subtract value from y
+
+Angles increase ClockWise ❗️
+unless you flip the value of delta_y using -sin()
+*/
