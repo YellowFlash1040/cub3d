@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:18:46 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/18 15:53:01 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:47:09 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ void	handle_key_pressed(mlx_key_data_t keydata, void *param)
 	app = (t_app *)param;
 	if (keydata.key == KEY_UP && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 	{
-		move_player_up(app->game->player);
+		move_player_forward(app->game->player);
 	}
 	else if (keydata.key == KEY_DOWN && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 	{
-		move_player_down(app->game->player);
+		move_player_back(app->game->player);
 	}
 	else if (keydata.key == KEY_LEFT && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 	{
-		move_player_left(app->game->player);
+		rotate_player_left(app->game->player);
 	}
 	else if (keydata.key == KEY_RIGHT && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 	{
-		move_player_right(app->game->player);
+		rotate_player_right(app->game->player);
 	}
 	else if (keydata.key == KEY_CLOSE_WINDOW && keydata.action == MLX_PRESS)
 	{
