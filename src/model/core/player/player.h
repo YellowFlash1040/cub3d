@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:45:42 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/18 15:39:04 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:25:56 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 # define PLAYER_H
 
 # include <stdlib.h>
-# include "point.h"
+# include "fpoint.h"
 
 # define PLAYER_INIT_ERR 1
 
 typedef struct player
 {
-	t_point	position;
-	float	angle;
-	float	delta_x;
-	float	delta_y;
+	t_fpoint	position;
+	double		angle;
+	double		delta_x;
+	double		delta_y;
 }	t_player;
 
 t_player	*init_player(void);
