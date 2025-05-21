@@ -7,8 +7,8 @@
 
 typedef struct fpoint
 {
-	float x;
-	float y;
+	double x;
+	double y;
 }	t_fpoint;
 
 t_fpoint	*init_fpoint(void);
