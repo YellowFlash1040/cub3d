@@ -6,30 +6,27 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:55:25 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/20 17:17:06 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:53:44 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "movements.h"
 #include <stdio.h>
 
-#define EPSILON 1e-9 //1e-9 means 1 × 10⁻⁹, which is: 0.000000001
-#define ROTATION_ANGLE 0.05
-
 static void	normalize_angle(double *angle_ref);
 static void	update_player_deltas(t_player *player);
 
 int	move_player_forward(t_player *player)
 {
-	player->position.x += player->delta_x;
-	player->position.y += player->delta_y;
+	player->position.x += player->delta_x * STEP;
+	player->position.y += player->delta_y * STEP;
 	return (SUCCESS);
 }
 
 int	move_player_back(t_player *player)
 {
-	player->position.x -= player->delta_x;
-	player->position.y -= player->delta_y;
+	player->position.x -= player->delta_x * STEP;
+	player->position.y -= player->delta_y * STEP;
 	return (SUCCESS);
 }
 

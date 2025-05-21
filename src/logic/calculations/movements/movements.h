@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:55:30 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/18 18:32:02 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:42:15 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 # include "player.h"
 # include "status_codes.h"
 # include "window.h"
+# include "constants.h"
 
-# define STEP 10
+# define ROTATION_ANGLE 0.05
+# define STEP 4
 
 int	move_player_forward(t_player *player);
 int	move_player_back(t_player *player);
