@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:11:37 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/21 13:39:26 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:14:02 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	draw_map(t_canvas *canvas, t_map* map);
 static void	draw_player(t_canvas *canvas, t_player *player);
-// static void	draw_player_direction(t_canvas *canvas, t_player *player);
 
 void	draw_minimap(t_canvas *canvas, t_game *game)
 {
@@ -30,17 +29,20 @@ void	draw_minimap(t_canvas *canvas, t_game *game)
 	t_point player_pos = (t_point){player->position.x, player->position.y};
 	t_point wall;
 
-	// t_fpoint horizontal_hit = find_horizontal_hit(player, map);
-	// wall = (t_point){horizontal_hit.x, horizontal_hit.y};
-	// draw_line(canvas, player_pos, wall, 0xff0000ff);
+	int		rays_count;
+	double	ray_angle;
 
-	// t_fpoint vertical_hit = find_vertical_hit(player, map);
-	// wall = (t_point){vertical_hit.x, vertical_hit.y};
-	// draw_line(canvas, player_pos, wall, 0x00ff00ff);
-
-	t_fpoint hit = find_ray_hit(player, map);
-	wall = (t_point){hit.x, hit.y};
-	draw_line(canvas, player_pos, wall, 0x00ffffff);
+	rays_count = 60;
+	ray_angle = player->angle + 30 * DEGREE;
+	normalize_angle(&ray_angle);
+	for (int i = 0; i < rays_count; i++)
+	{
+		t_fpoint hit = find_ray_hit(map, player, ray_angle);
+		wall = (t_point){hit.x, hit.y};
+		draw_line(canvas, player_pos, wall, 0x00ffffff);
+		ray_angle -= DEGREE;
+		normalize_angle(&ray_angle);
+	}
 }
 
 static void draw_map(t_canvas *canvas, t_map* map)
@@ -83,16 +85,11 @@ static void draw_map(t_canvas *canvas, t_map* map)
 
 static void	draw_player(t_canvas *canvas, t_player *player)
 {
-	draw_rectangle(canvas, (t_point){player->position.x, player->position.y}, (t_size){10, 10},
-		(t_color)0xffff00ff);
+	t_size	size;
+	t_point	position;
+
+	size = (t_size){10, 10};
+	position.x = player->position.x - size.width / 2;
+	position.y = player->position.y - size.height / 2;
+	draw_rectangle(canvas, position, size, (t_color)0xffff00ff);
 }
-
-// static void draw_player_direction(t_canvas *canvas, t_player *player)
-// {
-// 	t_point ray_end;
-
-// 	ray_end.x = player->position.x + player->delta_x * 5;
-// 	ray_end.y = player->position.y + player->delta_y * 5;
-// 	t_point player_pos = (t_point){player->position.x, player->position.y};
-// 	draw_line(canvas, player_pos, ray_end, (t_color)0xffff00ff);
-// }

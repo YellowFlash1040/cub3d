@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:11:43 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/18 17:19:36 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:58:56 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "game.h"
 # include "drawing.h"
 # include "rays.h"
+
+# define RAYS_COUNT 60
 
 void	draw_minimap(t_canvas *canvas, t_game *game);
 
