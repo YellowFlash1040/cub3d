@@ -6,11 +6,13 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:22:57 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/23 13:23:03 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:47:01 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "drawing.h"
+
+static int	determine_step(int start, int end);
 
 void	draw_rectangle(t_canvas *canvas, t_point top_left, t_size size,
 	t_color color)
@@ -35,37 +37,46 @@ void	draw_rectangle(t_canvas *canvas, t_point top_left, t_size size,
 	}
 }
 
-// Needs to be rewritten by me
-void	draw_pixel(t_canvas *canvas, int x, int y, t_color color)
-{
-	if (x < 0 || x >= canvas->size.width || y < 0 || y >= canvas->size.height)
-		return;
-	mlx_put_pixel(canvas->image, x, y, color);
-}
-
+// Bresenham's Line Algorithm
 void	draw_line(t_canvas *canvas, t_point start, t_point end, t_color color)
 {
-	int dx = abs(end.x - start.x);
-	int dy = abs(end.y - start.y);
-	int sx = (start.x < end.x) ? 1 : -1;
-	int sy = (start.y < end.y) ? 1 : -1;
-	int err = dx - dy;
+	t_line_params	lp;
+	int				error_times_two;
 
-	while (1)
+	lp.dx = abs(end.x - start.x);
+	lp.dy = abs(end.y - start.y);
+	lp.step_x = determine_step(start.x, end.x);
+	lp.step_y = determine_step(start.y, end.y);
+	lp.error = lp.dx - lp.dy;
+	while (true)
 	{
 		draw_pixel(canvas, start.x, start.y, color);
 		if (start.x == end.x && start.y == end.y)
-			break;
-		int e2 = 2 * err;
-		if (e2 > -dy)
+			break ;
+		error_times_two = 2 * lp.error;
+		if (error_times_two > -lp.dy)
 		{
-			err -= dy;
-			start.x += sx;
+			lp.error -= lp.dy;
+			start.x += lp.step_x;
 		}
-		if (e2 < dx)
+		if (error_times_two < lp.dx)
 		{
-			err += dx;
-			start.y += sy;
+			lp.error += lp.dx;
+			start.y += lp.step_y;
 		}
 	}
+}
+
+void	draw_pixel(t_canvas *canvas, int x, int y, t_color color)
+{
+	if (x < 0 || x >= canvas->size.width || y < 0 || y >= canvas->size.height)
+		return ;
+	mlx_put_pixel(canvas->image, x, y, color);
+}
+
+static int	determine_step(int start, int end)
+{
+	if (start < end)
+		return (1);
+	return (-1);
 }
