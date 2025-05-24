@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:46:45 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/17 17:50:20 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:52:42 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_canvas	*init_canvas(t_size size, t_point position)
 	return (canvas);
 }
 
-int	create_canvas(mlx_t* mlx, t_canvas **canvas_ref, t_size size,
+int	create_canvas(mlx_t *mlx, t_canvas **canvas_ref, t_size size,
 	t_point position)
 {
 	int			result;

@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:22:44 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/23 16:29:04 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:54:29 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ void	normalize_angle(double *angle_ref)
 	angle = fmod(angle, two_pi);
 	if (angle < 0)
 		angle += two_pi;
-
 	if (angle < EPSILON || two_pi - angle < EPSILON)
 		angle = 0.0;
-
 	*angle_ref = angle;
 }
 

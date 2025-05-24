@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:03:26 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/23 13:44:46 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:57:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define EPSILON 1e-9 //1e-9 means 1 × 10⁻⁹, which is: 0.000000001
 
-# define M_TWO_PI   (2.0 * M_PI)
-# define M_3_PI_2 (1.5 * M_PI)
+# define M_TWO_PI 6.2831853071795862
+# define M_3_PI_2 4.7123889803846897
 
 # define DEGREE 0.0174533
 

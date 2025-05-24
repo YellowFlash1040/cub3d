@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:55:25 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/23 16:15:02 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:53:38 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	move_player_back(t_player *player)
 int	rotate_player_left(t_player *player)
 {
 	player->angle += ROTATION_ANGLE;
-
 	normalize_angle(&player->angle);
 	player->direction = get_unit_vector(player->angle);
 	printf("Angle: %.2f degrees\n", player->angle * (180.0 / M_PI));
@@ -40,7 +39,6 @@ int	rotate_player_left(t_player *player)
 int	rotate_player_right(t_player *player)
 {
 	player->angle -= ROTATION_ANGLE;
-
 	normalize_angle(&player->angle);
 	player->direction = get_unit_vector(player->angle);
 	printf("Angle: %.2f degrees\n", player->angle * (180.0 / M_PI));

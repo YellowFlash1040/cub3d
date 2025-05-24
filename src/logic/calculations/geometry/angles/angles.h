@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:25:17 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/23 16:52:48 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:54:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ bool	angle_looks_up(double angle);
 bool	angle_looks_down(double angle);
 bool	angle_looks_right(double angle);
 bool	angle_looks_left(double angle);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 14:03:16 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/23 16:28:12 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:54:14 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,19 @@
 double	find_distance(t_fpoint a, t_fpoint b)
 {
 	double	distance;
-	double	dx; // Difference in x-coordinates
-	double	dy; // Difference in y-coordinates
+	double	dx;
+	double	dy;
 
 	dx = b.x - a.x;
 	dy = b.y - a.y;
 	distance = sqrt(dx * dx + dy * dy);
 	return (distance);
 }
+
+/*
+double	dx; // Difference in x-coordinates
+double	dy; // Difference in y-coordinates
+*/
 
 t_vector	get_unit_vector(double angle)
 {

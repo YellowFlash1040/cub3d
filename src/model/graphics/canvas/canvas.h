@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:37:58 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/17 17:50:30 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:52:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct canvas
 t_canvas	*init_canvas(t_size size, t_point position);
 void		destroy_canvas(t_canvas **canvas_ref);
 
-int	create_canvas(mlx_t* mlx, t_canvas **canvas_ref, t_size size,
-	t_point position);
+int			create_canvas(mlx_t *mlx, t_canvas **canvas_ref, t_size size,
+				t_point position);
 
 #endif

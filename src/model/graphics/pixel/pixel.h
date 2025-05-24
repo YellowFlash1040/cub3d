@@ -6,15 +6,15 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:54:43 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/17 16:56:01 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:51:02 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIXEL_H
 # define PIXEL_H
 
-#include <bits/types.h>
+# include <bits/types.h>
 
-typedef __uint8_t t_pixel;
+typedef __uint8_t	t_pixel;
 
 #endif
