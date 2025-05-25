@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:45:42 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/23 16:11:02 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:00:53 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include "fpoint.h"
 # include "vector.h"
+# include "camera.h"
 
 # define PLAYER_INIT_ERR 1
 
@@ -24,6 +25,7 @@ typedef struct player
 	t_fpoint	position;
 	double		angle;
 	t_vector	direction;
+	t_camera	*camera;
 }	t_player;
 
 t_player	*init_player(void);
