@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:48:18 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/16 16:56:46 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:10:14 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "ft_string.h"
 
 # define MAP_INIT_ERR 1
+
+# define CELL_SIZE 64
 
 typedef struct map
 {
