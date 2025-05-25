@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:56:33 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/16 15:05:06 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:06:16 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ int	build_map(t_map *map, int width, int height)
 {
 	int	i;
 
+	if (!map)
+		return (EMPTY_PTR_ERR);
+	if (width <= 0 || height <= 0)
+		return (INVALID_VALUE);
 	map->width = width;
 	map->height = height;
 	map->cells = (t_string *)malloc(sizeof(t_string) * (map->height + 1));
