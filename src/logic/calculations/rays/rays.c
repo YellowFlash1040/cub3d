@@ -6,45 +6,75 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:28:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/23 17:06:37 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:19:15 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rays.h"
 
-t_fpoint	find_ray_hit(t_map *map, t_player *player, double ray_angle)
+void	populate_rays(t_map *map, t_player *player)
+{
+	t_camera	*camera;
+	t_ray		*ray;
+	double		ray_angle;
+
+	camera = player->camera;
+	ray_angle = player->camera->angle + player->camera->fov / 2;
+	normalize_angle(&ray_angle);
+	for (int i = 0; i < player->camera->rays_count; i++)
+	{
+		ray = &camera->rays[i];
+		ray->angle = ray_angle;
+		find_ray_hit(map, player, ray);
+		ray->length = find_distance(player->position, ray->position);
+		ray_angle -= DEGREE;
+		normalize_angle(&ray_angle);
+	}
+}
+
+void	find_ray_hit(t_map *map, t_player *player, t_ray *ray)
 {
 	t_fpoint	horizontal_hit;
 	t_fpoint	vertical_hit;
 	double		horizontal_hit_distance;
 	double		vertical_hit_distance;
 
-	horizontal_hit = find_horizontal_hit(map, player, ray_angle);
-	vertical_hit = find_vertical_hit(map, player, ray_angle);
+	horizontal_hit = find_horizontal_hit(map, player, ray->angle);
+	vertical_hit = find_vertical_hit(map, player, ray->angle);
 	horizontal_hit_distance = find_distance(player->position, horizontal_hit);
 	vertical_hit_distance = find_distance(player->position, vertical_hit);
 	if (horizontal_hit_distance <= vertical_hit_distance)
-		return (horizontal_hit);
-	return (vertical_hit);
+	{
+		ray->hit_type = HORIZONTAL_HIT;
+		ray->position = horizontal_hit;
+	}
+	else
+	{
+		ray->hit_type = VERTICAL_HIT;
+		ray->position = vertical_hit;
+	}
 }
 
 t_fpoint	find_horizontal_hit(t_map *map, t_player *player, double ray_angle)
 {
 	t_ray		ray;
 	double		angle_cotan;
+	double		x_offset;
+	double		y_offset;
 
+	x_offset = 0;
+	y_offset = 0;
 	ray.position = player->position;
-	ray.angle = ray_angle;
-	if (is_almost_zero(tan(ray.angle))) // if tan(angle) is very close to 0
-		ray.angle += 0.0001; // nudge (shift) the angle a bit
-	angle_cotan = -1 / tan(ray.angle);
+	if (is_almost_zero(tan(ray_angle))) // if tan(angle) is very close to 0
+		ray_angle += 0.0001; // nudge (shift) the angle a bit
+	angle_cotan = -1 / tan(ray_angle);
 	// so that it will not break here
 	// because of the possible division by zero or by a really small number
 	// figure out in which direction our ray is looking
-	if (is_horizontal_angle(ray.angle)) // looking straight to the left or right
+	if (is_horizontal_angle(ray_angle)) // looking straight to the left or right
 		// then no horizontal intersections are possible
 		return (ray.position);
-	else if (angle_looks_up(ray.angle)) // looking up
+	else if (angle_looks_up(ray_angle)) // looking up
 	{
 		// calculate what is the y coordinate of the start of my cell
 		// and then go a bit beyond that edge to the top
@@ -55,20 +85,20 @@ t_fpoint	find_horizontal_hit(t_map *map, t_player *player, double ray_angle)
 		//                        length if the
 		ray.position.x = (ray.position.y - player->position.y) * angle_cotan
 			+ player->position.x;
-		ray.y_offset = -CELL_SIZE;
-		ray.x_offset = ray.y_offset * angle_cotan;
+		y_offset = -CELL_SIZE;
+		x_offset = y_offset * angle_cotan;
 	}
-	else if (angle_looks_down(ray.angle)) // looking down
+	else if (angle_looks_down(ray_angle)) // looking down
 	{
 		ray.position.y = (int)player->position.y / CELL_SIZE * CELL_SIZE
 			+ CELL_SIZE;
 		ray.position.x = (ray.position.y - player->position.y) * angle_cotan
 			+ player->position.x;
-		ray.y_offset = CELL_SIZE;
-		ray.x_offset = ray.y_offset * angle_cotan;
+		y_offset = CELL_SIZE;
+		x_offset = y_offset * angle_cotan;
 	}
 	// go in that direction and look for a hit
-	ray.position = cast_ray(map, &ray);
+	ray.position = cast_ray(map, &ray, x_offset, y_offset);
 	return (ray.position);
 }
 
@@ -103,38 +133,41 @@ t_fpoint	find_vertical_hit(t_map *map, t_player *player, double ray_angle)
 {
 	t_ray		ray;
 	double		angle_tan;
+	double		x_offset;
+	double		y_offset;
 
+	x_offset = 0;
+	y_offset = 0;
 	ray.position = player->position;
-	ray.angle = ray_angle;
-	if (is_almost_zero(tan(ray.angle)))
-		ray.angle += 0.0001;
-	angle_tan = -tan(ray.angle);
-	if (is_vertical_angle(ray.angle)) // looking straight to the top or to the bottom
+	if (is_almost_zero(tan(ray_angle)))
+		ray_angle += 0.0001;
+	angle_tan = -tan(ray_angle);
+	if (is_vertical_angle(ray_angle)) // looking straight to the top or to the bottom
 		return (ray.position);
-	else if (angle_looks_right(ray.angle)) // looking right
+	else if (angle_looks_right(ray_angle)) // looking right
 	{
 		ray.position.x = (int)player->position.x / CELL_SIZE * CELL_SIZE
 			+ CELL_SIZE;
 		ray.position.y = (ray.position.x - player->position.x) * angle_tan
 			+ player->position.y;
-		ray.x_offset = CELL_SIZE;
-		ray.y_offset = ray.x_offset * angle_tan;
+		x_offset = CELL_SIZE;
+		y_offset = x_offset * angle_tan;
 	}
-	else if (angle_looks_left(ray.angle)) // looking left
+	else if (angle_looks_left(ray_angle)) // looking left
 	{
 		ray.position.x = (int)player->position.x / CELL_SIZE * CELL_SIZE
 			- 0.0001;
 		ray.position.y = (ray.position.x - player->position.x) * angle_tan
 			+ player->position.y;
-		ray.x_offset = -CELL_SIZE;
-		ray.y_offset = ray.x_offset * angle_tan;
+		x_offset = -CELL_SIZE;
+		y_offset = x_offset * angle_tan;
 	}
 	// go in that direction and look for a hit
-	ray.position = cast_ray(map, &ray);
+	ray.position = cast_ray(map, &ray, x_offset, y_offset);
 	return (ray.position);
 }
 
-t_fpoint	cast_ray(t_map *map, t_ray *ray)
+t_fpoint	cast_ray(t_map *map, t_ray *ray, double x_offset, double y_offset)
 {
 	int	depth_of_field;
 	int	map_x;
@@ -154,8 +187,8 @@ t_fpoint	cast_ray(t_map *map, t_ray *ray)
 			break ;
 		if (map->cells[map_y][map_x] == '1')
 			break ;
-		ray->position.x += ray->x_offset;
-		ray->position.y += ray->y_offset;
+		ray->position.x += x_offset;
+		ray->position.y += y_offset;
 		depth_of_field++;
 	}
 	return (ray->position);
