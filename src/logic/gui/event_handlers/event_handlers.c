@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:18:46 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/24 20:01:44 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:06:11 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,7 @@ void	handle_key_pressed(mlx_key_data_t keydata, void *param)
 	else if (keydata.key == KEY_CLOSE_WINDOW
 		&& keydata.action == MLX_PRESS)
 		mlx_close_window(app->mlx);
+	else if (keydata.key == KEY_TOGGLE_MINIMAP
+		&& keydata.action == MLX_PRESS)
+		app->settings->is_minimap_visible = !app->settings->is_minimap_visible;
 }

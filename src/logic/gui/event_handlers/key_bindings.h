@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:44:39 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/16 16:22:29 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:05:45 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@
 # define KEY_RIGHT MLX_KEY_D
 
 # define KEY_CLOSE_WINDOW MLX_KEY_ESCAPE
+
+# define KEY_TOGGLE_MINIMAP MLX_KEY_TAB
 
 #endif
