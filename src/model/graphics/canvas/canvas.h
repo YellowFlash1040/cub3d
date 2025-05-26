@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:37:58 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/24 19:52:20 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/26 15:42:59 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "point.h"
 # include "size.h"
 # include "pixel.h"
-# include "status_codes.h"
+# include "errors.h"
 
 typedef struct canvas
 {
