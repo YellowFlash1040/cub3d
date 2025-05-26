@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:45:42 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/25 15:00:53 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/25 18:34:30 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 typedef struct player
 {
 	t_fpoint	position;
-	double		angle;
 	t_vector	direction;
 	t_camera	*camera;
 }	t_player;

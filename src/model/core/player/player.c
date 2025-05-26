@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:01:36 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/25 14:59:13 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/26 16:41:59 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ t_player	*init_player(void)
 	player = (t_player *)malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
-	player->position = (t_fpoint){-1, -1};
-	player->angle = 0;
+	player->position = (t_fpoint){0, 0};
 	player->direction.x = 0;
 	player->direction.y = 0;
 	player->camera = NULL;
