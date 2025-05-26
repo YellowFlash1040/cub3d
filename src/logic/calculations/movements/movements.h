@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:55:30 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/23 14:06:42 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/26 15:43:13 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include "player.h"
-# include "status_codes.h"
+# include "errors.h"
 # include "window.h"
 # include "geometry.h"
 
