@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:55:22 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/25 15:06:02 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/26 15:42:09 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include <MLX42/MLX42.h>
 # include <unistd.h>
-# include "status_codes.h"
 # include "ft_string.h"
+
+# define SUCCESS EXIT_SUCCESS
+# define FAILURE EXIT_FAILURE
 
 # define MLX_ERR 10
 # define MALLOC_FAIL_ERR 11
