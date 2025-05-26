@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:11:37 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/23 17:14:02 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:22:21 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,12 @@
 
 static void	draw_map(t_canvas *canvas, t_map* map);
 static void	draw_player(t_canvas *canvas, t_player *player);
+static void	draw_rays(t_canvas *canvas, t_camera *camera);
 
-void	draw_minimap(t_canvas *canvas, t_game *game)
+void	draw_minimap(t_canvas *canvas, t_map *map, t_player *player)
 {
-	t_player	*player;
-	t_map		*map;
-
-	player = game->player;
-	map = game->map;
-
 	draw_map(canvas, map);
 	draw_player(canvas, player);
-
-	t_point player_pos = (t_point){player->position.x, player->position.y};
-	t_point wall;
-
-	int		rays_count;
-	double	ray_angle;
-
-	rays_count = 60;
-	ray_angle = player->angle + 30 * DEGREE;
-	normalize_angle(&ray_angle);
-	for (int i = 0; i < rays_count; i++)
-	{
-		t_fpoint hit = find_ray_hit(map, player, ray_angle);
-		wall = (t_point){hit.x, hit.y};
-		draw_line(canvas, player_pos, wall, 0x00ffffff);
-		ray_angle -= DEGREE;
-		normalize_angle(&ray_angle);
-	}
 }
 
 static void draw_map(t_canvas *canvas, t_map* map)
@@ -92,4 +69,20 @@ static void	draw_player(t_canvas *canvas, t_player *player)
 	position.x = player->position.x - size.width / 2;
 	position.y = player->position.y - size.height / 2;
 	draw_rectangle(canvas, position, size, (t_color)0xffff00ff);
+	draw_rays(canvas, player->camera);
+}
+
+static void	draw_rays(t_canvas *canvas, t_camera *camera)
+{
+	t_fpoint	hit;
+	t_point		camera_pos;
+	t_point		wall;
+
+	camera_pos = (t_point){(int)round(camera->position.x), (int)round(camera->position.y)};
+	for (int i = 0; i < camera->rays_count; i++)
+	{
+		hit = camera->rays[i].position;
+		wall = (t_point){(int)round(hit.x), (int)round(hit.y)};
+		draw_line(canvas, camera_pos, wall, 1, 0x00ffffff);
+	}
 }
