@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:53:18 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/24 19:53:20 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/26 16:41:46 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ t_ray	*init_ray(void)
 	ray = (t_ray *)malloc(sizeof(t_ray));
 	if (!ray)
 		return (NULL);
+	ray->angle = 0;
+	ray->length = 0;
+	ray->position = (t_fpoint){0};
+	ray->hit_type = NONE_HIT;
 	return (ray);
 }
 
