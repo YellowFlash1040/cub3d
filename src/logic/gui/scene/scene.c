@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/26 19:02:34 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:07:18 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	draw_scene(t_canvas *canvas, t_camera *camera)
 		//the smalller the line_height will be,
 		//making depth effect
 		line_height = CELL_SIZE * WINDOW_HEIGHT / ray->length;
+		// line_height = 10 * WINDOW_HEIGHT / ray->length;
 
 		//make sure that if object goes outside of the screen to not draw it fully,
 		//since you will not see it anyway
@@ -45,11 +46,16 @@ void	draw_scene(t_canvas *canvas, t_camera *camera)
 
 		//define where users game screen starts
 		int x = 600 + i * line_width;
+		// int x = 300 + i * line_width;
 
 		//not sure yet, but it seems like you can control camera pitch with it
 		//for now it puts all of the lines in the middle of the screen
 		line_offset = WINDOW_HEIGHT / 2 - line_height / 2;
 
+		// line_offset = 0;
+		// line_offset = WINDOW_HEIGHT - line_height;
+		// line_offset = camera->lean - line_height / 2;
+		line_offset = WINDOW_HEIGHT / 2 - line_height / 2 + camera->lean;
 
 		//creates the shadow effect
 		if (ray->hit_type == VERTICAL_HIT)

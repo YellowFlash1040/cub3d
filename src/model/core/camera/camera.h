@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 15:53:05 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/26 17:32:21 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/26 18:46:56 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct camera
 	int			rays_count;
 	t_fpoint	position;
 	double		angle;
+	int			lean;
 }	t_camera;
 
 t_camera	*init_camera(void);
