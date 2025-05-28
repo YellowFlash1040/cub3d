@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:18:46 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/25 16:06:11 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:41:33 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	handle_key_pressed(mlx_key_data_t keydata, void *param)
 	app = (t_app *)param;
 	if (keydata.key == KEY_UP
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		move_player_forward(app->game->player);
+		move_player_forward(app->game->map, app->game->player);
 	else if (keydata.key == KEY_DOWN
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		move_player_back(app->game->player);
+		move_player_back(app->game->map, app->game->player);
 	else if (keydata.key == KEY_LEFT
 		&& (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 		rotate_player_left(app->game->player);
