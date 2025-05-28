@@ -6,19 +6,22 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 14:17:24 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:24:57 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
 
-void	draw_scene(t_canvas *canvas, t_camera *camera)
+void	draw_scene(t_canvas *canvas, t_camera *camera, t_settings *settings)
 {
 	t_ray	*ray;
 	int		line_height;
 	int		line_width;
 	int		line_offset;
 	double	correction_angle;
+
+	draw_surface(canvas, settings->ceiling);
+	draw_surface(canvas, settings->floor);
 
 	line_width = 20;
 	for (int i = 0; i < camera->rays_count; i++)
@@ -64,22 +67,22 @@ void	draw_scene(t_canvas *canvas, t_camera *camera)
 	}
 }
 
-
-/*
-void	draw_scene(t_canvas *canvas, t_camera *camera)
+void	draw_surface(t_canvas *canvas, t_surface *surface)
 {
-	t_ray	ray;
-	double	line_height;
+	t_point	position;
+	t_size	size;
 
-	(void)canvas;
-	for (int i = 0; i < camera->rays_count; i++)
+	size.width = 1200;
+	size.height = WINDOW_HEIGHT / 2;
+	position.x = 590;
+	if (surface->type == CEILING)
 	{
-		ray = camera->rays[i];
-		line_height = CELL_SIZE * WINDOW_HEIGHT / ray.length;
-		if (line_height > WINDOW_HEIGHT)
-			line_height = WINDOW_HEIGHT;
-		int x = 800 + CELL_SIZE * i;
-		draw_line(canvas, (t_point){x, 0}, (t_point){x, line_height}, 8, (t_color)0xffff00ff);
+		position.y = 0;
+		draw_rectangle(canvas, position, size, surface->color);
+	}
+	else if (surface->type == FLOOR)
+	{
+		position.y = WINDOW_HEIGHT / 2;
+		draw_rectangle(canvas, position, size, surface->color);
 	}
 }
-*/
