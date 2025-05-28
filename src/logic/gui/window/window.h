@@ -6,14 +6,13 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:34:50 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/26 15:42:47 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:05:18 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WINDOW_H
 # define WINDOW_H
 
-# include <MLX42/MLX42.h>
 # include "settings.h"
 # include "errors.h"
 
