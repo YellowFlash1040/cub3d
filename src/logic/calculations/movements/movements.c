@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:55:25 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 15:48:57 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:29:59 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,22 @@ void	move_player_back(t_map *map, t_player *player, double delta_time)
 	player->camera->position = player->position;
 }
 
-void	rotate_player_left(t_player *player)
+void	rotate_player_left(t_player *player, double delta_time)
 {
-	player->camera->angle += ROTATION_ANGLE;
+	double	angle;
+
+	angle = ROTATION_SPEED * delta_time;
+	player->camera->angle += angle;
 	normalize_angle(&player->camera->angle);
 	player->direction = get_unit_vector(player->camera->angle);
 }
 
-void	rotate_player_right(t_player *player)
+void	rotate_player_right(t_player *player, double delta_time)
 {
-	player->camera->angle -= ROTATION_ANGLE;
+	double	angle;
+
+	angle = ROTATION_SPEED * delta_time;
+	player->camera->angle -= angle;
 	normalize_angle(&player->camera->angle);
 	player->direction = get_unit_vector(player->camera->angle);
 }

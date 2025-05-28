@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:18:46 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 15:41:15 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:25:09 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static void	handle_movement(mlx_t *mlx, mlx_key_data_t keydata, t_game *game)
 	else if (keydata.key == KEY_DOWN)
 		move_player_back(game->map, game->player, mlx->delta_time);
 	else if (keydata.key == KEY_LEFT)
-		rotate_player_left(game->player);
+		rotate_player_left(game->player, mlx->delta_time);
 	else if (keydata.key == KEY_RIGHT)
-		rotate_player_right(game->player);
+		rotate_player_right(game->player, mlx->delta_time);
 }
 
 static void	toggle_minimap(t_settings *settings)
