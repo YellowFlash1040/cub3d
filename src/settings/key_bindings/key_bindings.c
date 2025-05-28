@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_bindings.h                                     :+:      :+:    :+:   */
+/*   key_bindings.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 15:44:39 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 15:37:38 by akovtune         ###   ########.fr       */
+/*   Created: 2025/05/28 15:35:32 by akovtune          #+#    #+#             */
+/*   Updated: 2025/05/28 15:37:25 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_BINDINGS_H
-# define KEY_BINDINGS_H
+#include "key_bindings.h"
 
-# include <MLX42/MLX42.h>
-
-# define KEY_UP MLX_KEY_W
-# define KEY_DOWN MLX_KEY_S
-# define KEY_LEFT MLX_KEY_A
-# define KEY_RIGHT MLX_KEY_D
-
-# define KEY_CLOSE_WINDOW MLX_KEY_ESCAPE
-
-# define KEY_TOGGLE_MINIMAP MLX_KEY_TAB
-
-bool	is_movement_key(keys_t key);
-
-#endif
+bool	is_movement_key(keys_t key)
+{
+	if (key == KEY_UP)
+		return (true);
+	if (key == KEY_DOWN)
+		return (true);
+	if (key == KEY_LEFT)
+		return (true);
+	if (key == KEY_RIGHT)
+		return (true);
+	return (false);
+}
