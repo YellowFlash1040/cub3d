@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_bindings.h                                     :+:      :+:    :+:   */
+/*   camera_settings.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 15:44:39 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/25 16:05:45 by akovtune         ###   ########.fr       */
+/*   Created: 2025/05/28 13:47:49 by akovtune          #+#    #+#             */
+/*   Updated: 2025/05/28 13:56:39 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_BINDINGS_H
-# define KEY_BINDINGS_H
+#ifndef CAMERA_SETTINGS_H
+# define CAMERA_SETTINGS_H
 
-# include <MLX42/MLX42.h>
-
-# define KEY_UP MLX_KEY_W
-# define KEY_DOWN MLX_KEY_S
-# define KEY_LEFT MLX_KEY_A
-# define KEY_RIGHT MLX_KEY_D
-
-# define KEY_CLOSE_WINDOW MLX_KEY_ESCAPE
-
-# define KEY_TOGGLE_MINIMAP MLX_KEY_TAB
+# define CAMERA_FIELD_OF_VIEW 60
+# define ROTATION_ANGLE 0.05
+# define STEP 4
 
 #endif

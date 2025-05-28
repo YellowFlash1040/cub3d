@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movements.h                                        :+:      :+:    :+:   */
+/*   key_bindings.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 16:55:30 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 13:42:38 by akovtune         ###   ########.fr       */
+/*   Created: 2025/05/15 15:44:39 by akovtune          #+#    #+#             */
+/*   Updated: 2025/05/28 13:50:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MOVEMENTS_H
-# define MOVEMENTS_H
+#ifndef KEY_BINDINGS_H
+# define KEY_BINDINGS_H
 
-# include <stdlib.h>
-# include <math.h>
-# include "player.h"
-# include "errors.h"
-# include "window.h"
-# include "geometry.h"
+# include <MLX42/MLX42.h>
 
-void	move_player_forward(t_player *player);
-void	move_player_back(t_player *player);
-void	rotate_player_left(t_player *player);
-void	rotate_player_right(t_player *player);
+# define KEY_UP MLX_KEY_W
+# define KEY_DOWN MLX_KEY_S
+# define KEY_LEFT MLX_KEY_A
+# define KEY_RIGHT MLX_KEY_D
+
+# define KEY_CLOSE_WINDOW MLX_KEY_ESCAPE
+
+# define KEY_TOGGLE_MINIMAP MLX_KEY_TAB
 
 #endif

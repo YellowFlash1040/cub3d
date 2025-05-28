@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movements.h                                        :+:      :+:    :+:   */
+/*   window_settings.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 16:55:30 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 13:42:38 by akovtune         ###   ########.fr       */
+/*   Created: 2025/05/28 13:47:19 by akovtune          #+#    #+#             */
+/*   Updated: 2025/05/28 13:47:26 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MOVEMENTS_H
-# define MOVEMENTS_H
+#ifndef WINDOW_SETTINGS_H
+# define WINDOW_SETTINGS_H
 
-# include <stdlib.h>
-# include <math.h>
-# include "player.h"
-# include "errors.h"
-# include "window.h"
-# include "geometry.h"
-
-void	move_player_forward(t_player *player);
-void	move_player_back(t_player *player);
-void	rotate_player_left(t_player *player);
-void	rotate_player_right(t_player *player);
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 
 #endif
