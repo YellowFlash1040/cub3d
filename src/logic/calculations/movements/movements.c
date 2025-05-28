@@ -6,20 +6,22 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:55:25 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 14:47:58 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:48:57 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "movements.h"
 
-void	move_player_forward(t_map *map, t_player *player)
+void	move_player_forward(t_map *map, t_player *player, double delta_time)
 {
 	t_fpoint	new_position;
+	double		distance;
 	int			x;
 	int			y;
 
-	new_position.x = player->position.x + player->direction.x * STEP;
-	new_position.y = player->position.y + player->direction.y * STEP;
+	distance = MOVEMENT_SPEED * delta_time;
+	new_position.x = player->position.x + player->direction.x * distance;
+	new_position.y = player->position.y + player->direction.y * distance;
 
 	// Check X movement separately
 	x = new_position.x / CELL_SIZE;
@@ -36,14 +38,16 @@ void	move_player_forward(t_map *map, t_player *player)
 	player->camera->position = player->position;
 }
 
-void	move_player_back(t_map *map, t_player *player)
+void	move_player_back(t_map *map, t_player *player, double delta_time)
 {
 	t_fpoint	new_position;
+	double		distance;
 	int			x;
 	int			y;
 
-	new_position.x = player->position.x - player->direction.x * STEP;
-	new_position.y = player->position.y - player->direction.y * STEP;
+	distance = MOVEMENT_SPEED * delta_time;
+	new_position.x = player->position.x - player->direction.x * distance;
+	new_position.y = player->position.y - player->direction.y * distance;
 	x = new_position.x / CELL_SIZE;
 	y = player->position.y / CELL_SIZE;
 	if (!is_obstacle(map, x, y))

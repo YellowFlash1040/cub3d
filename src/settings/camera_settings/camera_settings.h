@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:47:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 13:56:39 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:46:00 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define CAMERA_FIELD_OF_VIEW 60
 # define ROTATION_ANGLE 0.05
-# define STEP 4
+//Player's/camera's speed in units per second
+# define MOVEMENT_SPEED 100
 
 #endif
