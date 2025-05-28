@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:29:33 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/15 15:34:22 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:59:56 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 
 typedef struct wall
 {
-	int			width;
-	int			height;
 	t_direction	direction;
 	t_string	texture_path;
 }	t_wall;

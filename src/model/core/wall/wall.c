@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:29:35 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/16 13:22:34 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:00:10 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ t_wall	*init_wall(void)
 	wall = (t_wall *)malloc(sizeof(t_wall));
 	if (!wall)
 		return (NULL);
-	wall->width = 0;
-	wall->height = 0;
 	wall->texture_path = NULL;
 	wall->direction = DIRECTION_NONE;
 	return (wall);
