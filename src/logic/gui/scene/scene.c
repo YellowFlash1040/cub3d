@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/26 19:02:34 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:17:24 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,28 @@ void	draw_scene(t_canvas *canvas, t_camera *camera)
 	int		line_offset;
 	double	correction_angle;
 
-	(void)canvas;
 	line_width = 20;
 	for (int i = 0; i < camera->rays_count; i++)
 	{
 		ray = &camera->rays[i];
 		
-		//fish eye effect fix
+		//Fix for the "fish eye" effect
 		correction_angle = camera->angle - ray->angle;
 		normalize_angle(&correction_angle);
 		ray->length = ray->length * cos(correction_angle);
 		
-		//no idea yet about what is the logic behind this calculation
-		//the only thing that I understand for now is:
-		//the bigger the length of the ray,
-		//the smalller the line_height will be,
-		//making depth effect
+		//What I understand for now is:
+		//1) the bigger the length of the ray,
+		//the smalller the line_height will be, making depth effect
+		//2) you want to have a constant against which you can compare the ray->length
+		//in order to proportionally scale lines
+		//meaning that if you have ray->length of 10
+		//the line_height will be = constant / 10;
+		//and if you have a ray->length of 20
+		//the line height will be = constant / 20;
+		//which is twice smaller than constant / 10
+		//meaning the line_height has to be twice smaller.
+		//But where does this CELL_SIZE * WINDOW_HEIGHT come from - no idea
 		line_height = CELL_SIZE * WINDOW_HEIGHT / ray->length;
 
 		//make sure that if object goes outside of the screen to not draw it fully,
@@ -43,13 +49,12 @@ void	draw_scene(t_canvas *canvas, t_camera *camera)
 		if (line_height > WINDOW_HEIGHT)
 			line_height = WINDOW_HEIGHT;
 
-		//define where users game screen starts
+		//Defines where user's game screen starts
 		int x = 600 + i * line_width;
 
 		//not sure yet, but it seems like you can control camera pitch with it
 		//for now it puts all of the lines in the middle of the screen
 		line_offset = WINDOW_HEIGHT / 2 - line_height / 2;
-
 
 		//creates the shadow effect
 		if (ray->hit_type == VERTICAL_HIT)
