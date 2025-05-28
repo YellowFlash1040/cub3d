@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:11:37 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/26 17:22:21 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/28 13:54:25 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ static void draw_map(t_canvas *canvas, t_map* map)
 {
 	int	x;
 	int	y;
-	
-	int cell_size = 64;
+
 	t_color colorWhite = get_color(255, 255, 255, 255);
 	t_color colorRed = get_color(255, 0, 0, 255);
 	t_color colorGreen = get_color(0, 255, 0, 255);
@@ -53,8 +52,8 @@ static void draw_map(t_canvas *canvas, t_map* map)
 			else
 				color = colorGreen;
 			draw_rectangle(canvas,
-				(t_point){x * cell_size, y * cell_size},
-				(t_size){cell_size - 1, cell_size - 1},
+				(t_point){x * CELL_SIZE, y * CELL_SIZE},
+				(t_size){CELL_SIZE - 1, CELL_SIZE - 1},
 				color);
 		}
 	}
