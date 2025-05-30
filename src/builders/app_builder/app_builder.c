@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:57:30 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/25 16:01:35 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:27:42 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int	build_app(t_app *app)
 		return (MALLOC_FAIL_ERR);
 	app->game = init_game();
 	if (!app->game)
-		return (destroy_settings(&app->settings), MALLOC_FAIL_ERR);
+		return (destroy_app(&app), MALLOC_FAIL_ERR);
+	app->textures = init_textures();
+	if (!app->textures)
+		return (destroy_app(&app), MALLOC_FAIL_ERR);
 	return (SUCCESS);
 }
