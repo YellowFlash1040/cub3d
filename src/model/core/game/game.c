@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:48:27 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/18 15:40:27 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:08:18 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	destroy_game(t_game **game_ref)
 	game = *game_ref;
 	if (game->map)
 		destroy_map(&game->map);
+	if (game->player)
+		destroy_player(&game->player);
 	free(game);
 	*game_ref = NULL;
 }
