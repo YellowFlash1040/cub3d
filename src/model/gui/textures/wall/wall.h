@@ -6,23 +6,23 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:29:33 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 17:59:56 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:40:22 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WALL_H
 # define WALL_H
 
+# include <MLX42/MLX42.h>
 # include <stdlib.h>
-# include "ft_string.h"
 # include "direction.h"
 
 # define WALL_INIT_ERR 1
 
 typedef struct wall
 {
-	t_direction	direction;
-	t_string	texture_path;
+	t_direction		direction;
+	mlx_texture_t	*texture;
 }	t_wall;
 
 t_wall	*init_wall(void);

@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:29:35 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 18:00:10 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:39:27 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_wall	*init_wall(void)
 	wall = (t_wall *)malloc(sizeof(t_wall));
 	if (!wall)
 		return (NULL);
-	wall->texture_path = NULL;
+	wall->texture = NULL;
 	wall->direction = DIRECTION_NONE;
 	return (wall);
 }
@@ -31,8 +31,8 @@ void	destroy_wall(t_wall **wall_ref)
 	if (!wall_ref || !*wall_ref)
 		return ;
 	wall = *wall_ref;
-	if (wall->texture_path)
-		destroy_string(&wall->texture_path);
+	if (wall->texture)
+		mlx_delete_texture(wall->texture);
 	free(wall);
 	*wall_ref = NULL;
 }
