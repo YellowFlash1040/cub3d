@@ -6,11 +6,13 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/30 18:42:31 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:54:13 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
+
+static void	fix_fish_eye_effect(t_ray *ray, double camera_angle);
 
 void	draw_scene(t_canvas *canvas, t_camera *camera, t_settings *settings)
 {
@@ -51,11 +53,7 @@ void	draw_walls(t_canvas *canvas, t_camera *camera)
 	for (int i = 0; i < camera->rays_count; i++)
 	{
 		ray = &camera->rays[i];
-		
-		//Fix for the "fish eye" effect
-		correction_angle = camera->angle - ray->angle;
-		normalize_angle(&correction_angle);
-		ray->length = ray->length * cos(correction_angle);
+		fix_fish_eye_effect(ray, camera->angle);
 		
 		//What I understand for now is:
 		//1) the bigger the length of the ray,
@@ -89,4 +87,13 @@ void	draw_walls(t_canvas *canvas, t_camera *camera)
 		else
 			draw_line(canvas, (t_point){x, line_offset}, (t_point){x, line_offset + line_height}, line_width, (t_color)0xcc0000ff);
 	}
+}
+
+static void	fix_fish_eye_effect(t_ray *ray, double camera_angle)
+{
+	double	correction_angle;
+
+	correction_angle = camera_angle - ray->angle;
+	normalize_angle(&correction_angle);
+	ray->length = ray->length * cos(correction_angle);
 }
