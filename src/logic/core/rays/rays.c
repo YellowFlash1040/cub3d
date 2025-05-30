@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:28:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/26 17:19:15 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:33:10 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	populate_rays(t_map *map, t_player *player)
 		ray->angle = ray_angle;
 		find_ray_hit(map, player, ray);
 		ray->length = find_distance(player->position, ray->position);
-		ray_angle -= DEGREE;
+		ray_angle -= DEGREE / 2;
 		normalize_angle(&ray_angle);
 	}
 }
