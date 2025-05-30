@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:55:51 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 18:03:07 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:16:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@
 # include "window_settings.h"
 # include "camera_settings.h"
 # include "world_settings.h"
-# include "surface.h"
-# include "wall.h"
+# include "ft_string.h"
+# include "color.h"
 
 # define SETTINGS_INIT_ERR 1
 
 typedef struct settings
 {
 	bool		is_minimap_visible;
-	t_surface	*ceiling;
-	t_surface	*floor;
-	t_wall		*north_wall;
-	t_wall		*south_wall;
-	t_wall		*west_wall;
-	t_wall		*east_wall;
+	t_color		ceiling_color;
+	t_color		floor_color;
+	t_string	north_wall_filepath;
+	t_string	south_wall_filepath;
+	t_string	west_wall_filepath;
+	t_string	east_wall_filepath;
 }	t_settings;
 
 t_settings	*init_settings(void);

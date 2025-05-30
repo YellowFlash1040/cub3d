@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:55:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 18:08:17 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:17:07 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ t_settings	*init_settings(void)
 	if (!settings)
 		return (NULL);
 	settings->is_minimap_visible = true;
-	settings->ceiling = NULL;
-	settings->floor = NULL;
-	settings->north_wall = NULL;
-	settings->south_wall = NULL;
-	settings->west_wall = NULL;
-	settings->east_wall = NULL;
+	settings->ceiling_color = (t_color){0};
+	settings->floor_color = (t_color){0};
+	settings->north_wall_filepath = NULL;
+	settings->south_wall_filepath = NULL;
+	settings->west_wall_filepath = NULL;
+	settings->east_wall_filepath = NULL;
 	return (settings);
 }
 
@@ -36,18 +36,14 @@ void	destroy_settings(t_settings **settings_ref)
 	if (!settings_ref || !*settings_ref)
 		return ;
 	settings = *settings_ref;
-	if (settings->ceiling)
-		destroy_surface(&settings->ceiling);
-	if (settings->floor)
-		destroy_surface(&settings->floor);
-	if (settings->north_wall)
-		destroy_wall(&settings->north_wall);
-	if (settings->south_wall)
-		destroy_wall(&settings->south_wall);
-	if (settings->west_wall)
-		destroy_wall(&settings->west_wall);
-	if (settings->east_wall)
-		destroy_wall(&settings->east_wall);
+	if (settings->north_wall_filepath)
+		destroy_string(&settings->north_wall_filepath);
+	if (settings->south_wall_filepath)
+		destroy_string(&settings->south_wall_filepath);
+	if (settings->west_wall_filepath)
+		destroy_string(&settings->west_wall_filepath);
+	if (settings->east_wall_filepath)
+		destroy_string(&settings->east_wall_filepath);
 	free(settings);
 	*settings_ref = NULL;
 }
