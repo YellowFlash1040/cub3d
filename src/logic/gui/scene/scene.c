@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 18:24:57 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:42:31 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,38 @@
 
 void	draw_scene(t_canvas *canvas, t_camera *camera, t_settings *settings)
 {
+	draw_surface(canvas, settings->ceiling);
+	draw_surface(canvas, settings->floor);
+	draw_walls(canvas, camera);
+}
+
+void	draw_surface(t_canvas *canvas, t_surface *surface)
+{
+	t_point	position;
+	t_size	size;
+
+	size.width = 1200;
+	size.height = WINDOW_HEIGHT / 2;
+	position.x = 590;
+	if (surface->type == CEILING)
+	{
+		position.y = 0;
+		draw_rectangle(canvas, position, size, surface->color);
+	}
+	else if (surface->type == FLOOR)
+	{
+		position.y = WINDOW_HEIGHT / 2;
+		draw_rectangle(canvas, position, size, surface->color);
+	}
+}
+
+void	draw_walls(t_canvas *canvas, t_camera *camera)
+{
 	t_ray	*ray;
 	int		line_height;
 	int		line_width;
 	int		line_offset;
 	double	correction_angle;
-
-	draw_surface(canvas, settings->ceiling);
-	draw_surface(canvas, settings->floor);
 
 	line_width = 20;
 	for (int i = 0; i < camera->rays_count; i++)
@@ -64,25 +88,5 @@ void	draw_scene(t_canvas *canvas, t_camera *camera, t_settings *settings)
 			draw_line(canvas, (t_point){x, line_offset}, (t_point){x, line_offset + line_height}, line_width, (t_color)0xff0000ff);
 		else
 			draw_line(canvas, (t_point){x, line_offset}, (t_point){x, line_offset + line_height}, line_width, (t_color)0xcc0000ff);
-	}
-}
-
-void	draw_surface(t_canvas *canvas, t_surface *surface)
-{
-	t_point	position;
-	t_size	size;
-
-	size.width = 1200;
-	size.height = WINDOW_HEIGHT / 2;
-	position.x = 590;
-	if (surface->type == CEILING)
-	{
-		position.y = 0;
-		draw_rectangle(canvas, position, size, surface->color);
-	}
-	else if (surface->type == FLOOR)
-	{
-		position.y = WINDOW_HEIGHT / 2;
-		draw_rectangle(canvas, position, size, surface->color);
 	}
 }
