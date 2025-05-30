@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:01:36 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/26 16:41:59 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:10:54 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	destroy_player(t_player **player_ref)
 	if (!player_ref || !*player_ref)
 		return ;
 	player = *player_ref;
+	if (player->camera)
+		destroy_camera(&player->camera);
 	free(player);
 	*player_ref = NULL;
 }
