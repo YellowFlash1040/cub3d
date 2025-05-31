@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/30 19:02:12 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/31 16:03:59 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	draw_textured_wall_slice(
 	int x,
 	int line_offset,
 	int line_height,
-	int line_width
+	int line_width,
+	int original_line_height
 );
 
 void	draw_walls(t_canvas *canvas, t_camera *camera, t_textures *textures)
@@ -80,6 +81,7 @@ void	draw_walls(t_canvas *canvas, t_camera *camera, t_textures *textures)
 		
 		line_height = constant / ray->length;
 
+		int original_line_height = line_height;
 		if (line_height > WINDOW_HEIGHT)
 			line_height = WINDOW_HEIGHT;
 
@@ -87,19 +89,24 @@ void	draw_walls(t_canvas *canvas, t_camera *camera, t_textures *textures)
 
 		int x = 600 + i * line_width;
 
-		draw_textured_wall_slice(canvas, textures->north_wall->texture, ray, x, line_offset, line_height, line_width);
+		draw_textured_wall_slice(canvas, textures->north_wall->texture,
+			ray, x, line_offset, line_height, line_width, original_line_height);
 	}
 }
+
 
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
-//---------------------------VERSION 1------------------------------------
+//---------------------------VERSION 2------------------------------------
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
-// HERE YOU CAN SEE THE EFFECT WHERE WHEN YOU GET TOO CLOSE TO THE WALL
-// IT'S BEING DISPLAYED WEIRDLY (WALL CORNER BECOMES FLAT)
+
+// HERE I TRIED TO FIX THAT EFFECT
+// WHERE WHEN YOU GET TOO CLOSE TO THE WALL
+// IT'S BEING DISPLAYED WEIRDLY
+// BUT IT'S STILL LOOKS A BIT BROKEN / BLURRY / SHIFTED
 
 /*
 DATA NEEDED TO RUN AND SEE IT:
@@ -130,7 +137,8 @@ void draw_textured_wall_slice(
 	int x,
 	int line_offset,
 	int line_height,
-	int line_width
+	int line_width,
+	int original_line_height
 )
 {
 	int		texture_x;
@@ -143,10 +151,20 @@ void draw_textured_wall_slice(
 	else
 		texture_x = ((int)ray->position.x % CELL_SIZE) * texture->width / CELL_SIZE;
 
+	// Compute how much of the texture is being skipped
+	int draw_start = 0;
+	int skip_top = 0;
+	
+	if (original_line_height > WINDOW_HEIGHT)
+	{
+		skip_top = (original_line_height - WINDOW_HEIGHT) / 2;
+		draw_start = skip_top * texture->height / original_line_height;
+	}
+
 	// Draw the vertical line scaled to the screen
 	for (int y = 0; y < line_height; y++)
 	{
-		texture_y = (y * texture->height) / line_height;
+		texture_y = draw_start + (y * texture->height) / original_line_height;
 		color = get_texture_pixel(texture, texture_x, texture_y);
 
 		int canvas_y = line_offset + y;
@@ -163,7 +181,7 @@ void draw_textured_wall_slice(
 }
 
 /*
-This function is base on proportions:
+This function is based on proportions:
 
 Logic for the 'x' coordinate inside the texture image:
 
