@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 16:15:32 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/31 16:23:30 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,34 +98,12 @@ void	draw_walls(t_canvas *canvas, t_camera *camera, t_textures *textures)
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
-//---------------------------VERSION 3------------------------------------
+//---------------------------VERSION 4------------------------------------
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
 
-// PROBLEM SOLVED
-
-/*
-DATA NEEDED TO RUN AND SEE IT:
-
-int digital_map[] =
-	{
-		1,1,1,1,1,1,1,1,
-		1,0,0,0,0,0,0,1,
-		1,0,1,0,0,1,1,1,
-		1,1,0,0,0,1,0,1,
-		1,0,0,0,0,0,0,1,
-		1,0,0,0,0,1,0,1,
-		1,0,0,0,0,0,0,1,
-		1,1,1,1,1,1,1,1
-	};
-
-	//Player position
-	// x: 261.294118, y: 315.295798
-	
-	//Camera angle
-	// angle: 50.146168 (in degrees, not radians)
-*/
+// ADDED SHADOWS
 
 void draw_textured_wall_slice(
 	t_canvas *canvas,
@@ -170,6 +148,18 @@ void draw_textured_wall_slice(
 			tex_y = texture->height - 1;
 
 		color = get_texture_pixel(texture, texture_x, tex_y);
+
+		// Darken if it's a HORIZONTAL hit
+		if (ray->hit_type == HORIZONTAL_HIT)
+			color = darken_color(color, 0.7); // 70% brightness
+			
+		// Distance-based shading (more realistic)
+		double max_visible = 800.0;
+		double brightness = 1.0 - ray->length / max_visible;
+		if (brightness < 0.3)
+			brightness = 0.3; // Never completely black
+			
+		color = darken_color(color, brightness);
 
 		int canvas_y = line_offset + y;
 		for (int dx = 0; dx < line_width; dx++)
