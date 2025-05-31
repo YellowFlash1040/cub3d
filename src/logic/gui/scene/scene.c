@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 16:23:30 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/31 16:35:26 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	draw_surface(t_canvas *canvas, t_surface *surface)
 	t_point	position;
 	t_size	size;
 
-	size.width = 1200;
+	position.x = 600;
+	size.width = WINDOW_WIDTH - position.x;
 	size.height = WINDOW_HEIGHT / 2;
-	position.x = 590;
 	if (surface->type == CEILING)
 	{
 		position.y = 0;
