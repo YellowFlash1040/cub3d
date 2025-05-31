@@ -6,13 +6,17 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 16:35:26 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/31 22:03:02 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
 
-static void	fix_fish_eye_effect(t_ray *ray, double camera_angle);
+static void			fix_fish_eye_effect(t_ray *ray, double camera_angle);
+static t_texture	*choose_wall_texture(t_textures *textures, t_ray *ray);
+static t_color		add_shadows(t_ray *ray, t_color color);
+static void			draw_textured_wall_slice(t_canvas *canvas, t_ray *ray,
+	t_texture *texture, int ray_index);
 
 void	draw_scene(t_canvas *canvas, t_camera *camera, t_textures *textures)
 {
@@ -50,77 +54,65 @@ static void	fix_fish_eye_effect(t_ray *ray, double camera_angle)
 	ray->length = ray->length * cos(correction_angle);
 }
 
-/*-----------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------*/
-void	draw_textured_wall_slice(
-	t_canvas *canvas,
-	mlx_texture_t *texture,
-	t_ray *ray,
-	int x,
-	int line_offset,
-	int line_height,
-	int line_width,
-	int original_line_height
-);
-
 void	draw_walls(t_canvas *canvas, t_camera *camera, t_textures *textures)
 {
-	t_ray	*ray;
+	t_ray		*ray;
+	t_texture	*texture;
+
+	for (int i = 0; i < camera->rays_count; i++)
+	{
+		ray = &camera->rays[i];
+		fix_fish_eye_effect(ray, camera->angle);
+
+		texture = choose_wall_texture(textures, ray);
+		draw_textured_wall_slice(canvas, ray, texture, i);
+	}
+}
+
+static t_texture	*choose_wall_texture(t_textures *textures, t_ray *ray)
+{
+	t_texture	*texture;
+
+	if (ray->hit_type == HORIZONTAL_HIT && angle_looks_up(ray->angle))
+		texture = textures->south_wall->texture;
+	else if (ray->hit_type == HORIZONTAL_HIT && angle_looks_down(ray->angle))
+		texture = textures->north_wall->texture;
+	else if (ray->hit_type == VERTICAL_HIT && angle_looks_left(ray->angle))
+		texture = textures->east_wall->texture;
+	else if (ray->hit_type == VERTICAL_HIT && angle_looks_right(ray->angle))
+		texture = textures->west_wall->texture;
+	else
+		texture = NULL;
+	return (texture);
+}
+
+static void draw_textured_wall_slice(t_canvas *canvas, t_ray *ray,
+	t_texture *texture, int ray_index)
+{
+	double	texture_step;
+	int		texture_x;
+	double	texture_y;
+	t_color	color;
+
+	//-------------------------------
 	int		line_height;
 	int		line_width;
 	int		line_offset;
 
 	line_width = 20;
-	(void)textures;
+
 	const int constant = CELL_SIZE * WINDOW_HEIGHT;
-	for (int i = 0; i < camera->rays_count; i++)
-	{
-		ray = &camera->rays[i];
-		fix_fish_eye_effect(ray, camera->angle);
-		
-		line_height = constant / ray->length;
+	line_height = constant / ray->length;
 
-		int original_line_height = line_height;
-		if (line_height > WINDOW_HEIGHT)
-			line_height = WINDOW_HEIGHT;
+	int original_line_height = line_height;
+	if (line_height > WINDOW_HEIGHT)
+		line_height = WINDOW_HEIGHT;
 
-		line_offset = WINDOW_HEIGHT / 2 - line_height / 2;
+	line_offset = WINDOW_HEIGHT / 2 - line_height / 2;
 
-		int x = 600 + i * line_width;
+	int x = 600 + ray_index * line_width;
+	//-----------------------------------
 
-		draw_textured_wall_slice(canvas, textures->north_wall->texture,
-			ray, x, line_offset, line_height, line_width, original_line_height);
-	}
-}
-
-
-/*-----------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------*/
-//---------------------------VERSION 4------------------------------------
-/*-----------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------*/
-
-// ADDED SHADOWS
-
-void draw_textured_wall_slice(
-	t_canvas *canvas,
-	mlx_texture_t *texture,
-	t_ray *ray,
-	int x,
-	int line_offset,
-	int line_height,
-	int line_width,
-	int original_line_height
-)
-{
-	double	texture_start;
-	double	texture_step;
-	int		texture_x;
-	double	texture_y;
-	t_color	color;
 
 	// Determine the texture column (X-axis)
 	if (ray->hit_type == VERTICAL_HIT)
@@ -137,29 +129,16 @@ void draw_textured_wall_slice(
 	if (original_line_height > WINDOW_HEIGHT)
 		skip_top = (original_line_height - WINDOW_HEIGHT) / 2;
 
-	texture_start = skip_top * texture_step;
-
-	texture_y = texture_start;
-
+	texture_y = skip_top * texture_step;
 	for (int y = 0; y < line_height; y++)
 	{
-		int tex_y = (int)texture_y;
-		if (tex_y >= (int)texture->height)
-			tex_y = texture->height - 1;
+		// int tex_y = (int)texture_y;
+		// if (tex_y >= (int)texture->height)
+		// 	tex_y = texture->height - 1;
 
-		color = get_texture_pixel(texture, texture_x, tex_y);
+		color = get_texture_pixel(texture, texture_x, texture_y);
 
-		// Darken if it's a HORIZONTAL hit
-		if (ray->hit_type == HORIZONTAL_HIT)
-			color = darken_color(color, 0.7); // 70% brightness
-			
-		// Distance-based shading (more realistic)
-		double max_visible = 800.0;
-		double brightness = 1.0 - ray->length / max_visible;
-		if (brightness < 0.3)
-			brightness = 0.3; // Never completely black
-			
-		color = darken_color(color, brightness);
+		color = add_shadows(ray, color);
 
 		int canvas_y = line_offset + y;
 		for (int dx = 0; dx < line_width; dx++)
@@ -220,3 +199,19 @@ ADDITIONAL EXAMPLE for the function above:
 //This means: “If I'm 70% through the wall, pick the 70% column of the texture.”
 //meaning that 45 / 64 = 84 / 120 = 70% (simple proportion)
 */
+
+static t_color	add_shadows(t_ray *ray, t_color color)
+{
+	// Darken if it's a HORIZONTAL hit
+	if (ray->hit_type == HORIZONTAL_HIT)
+		color = darken_color(color, 0.7); // 70% brightness
+		
+	// Distance-based shading (more realistic)
+	double max_visible = 800.0;
+	double brightness = 1.0 - ray->length / max_visible;
+	if (brightness < 0.3)
+		brightness = 0.3; // Never completely black
+		
+	color = darken_color(color, brightness);
+	return (color);
+}
