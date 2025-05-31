@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:55:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/29 16:17:07 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/31 16:59:57 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ t_settings	*init_settings(void)
 	settings = (t_settings *)malloc(sizeof(t_settings));
 	if (!settings)
 		return (NULL);
+	settings->player_position = (t_fpoint){0};
+	settings->camera_fov = 0;
+	settings->camera_angle = 0;
 	settings->is_minimap_visible = true;
 	settings->ceiling_color = (t_color){0};
 	settings->floor_color = (t_color){0};
