@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:33:47 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 17:49:18 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/31 20:01:23 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ int	main(int argc, char **argv)
 	setup_camera(player->camera, app->settings);
 
 	build_textures(app->textures);
-	setup_textures(app->textures, app->settings);
+	result = setup_textures(app->textures, app->settings);
+	if (result != SUCCESS)
+		return (handle_error(app, result), result);
 	/*--------------------------------------------------------------*/
 
 	subscribe_to_keyboard_events(app);
