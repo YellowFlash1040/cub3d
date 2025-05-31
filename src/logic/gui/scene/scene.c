@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 16:03:59 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/31 16:15:32 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,12 @@ void	draw_walls(t_canvas *canvas, t_camera *camera, t_textures *textures)
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
-//---------------------------VERSION 2------------------------------------
+//---------------------------VERSION 3------------------------------------
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
 
-// HERE I TRIED TO FIX THAT EFFECT
-// WHERE WHEN YOU GET TOO CLOSE TO THE WALL
-// IT'S BEING DISPLAYED WEIRDLY
-// BUT IT'S STILL LOOKS A BIT BROKEN / BLURRY / SHIFTED
+// PROBLEM SOLVED
 
 /*
 DATA NEEDED TO RUN AND SEE IT:
@@ -141,42 +138,47 @@ void draw_textured_wall_slice(
 	int original_line_height
 )
 {
+	double	texture_start;
+	double	texture_step;
 	int		texture_x;
-	int		texture_y;
+	double	texture_y;
 	t_color	color;
 
-	// Calculate which column of the texture to use
+	// Determine the texture column (X-axis)
 	if (ray->hit_type == VERTICAL_HIT)
 		texture_x = ((int)ray->position.y % CELL_SIZE) * texture->width / CELL_SIZE;
 	else
 		texture_x = ((int)ray->position.x % CELL_SIZE) * texture->width / CELL_SIZE;
 
-	// Compute how much of the texture is being skipped
-	int draw_start = 0;
-	int skip_top = 0;
-	
-	if (original_line_height > WINDOW_HEIGHT)
-	{
-		skip_top = (original_line_height - WINDOW_HEIGHT) / 2;
-		draw_start = skip_top * texture->height / original_line_height;
-	}
+	// Compute texture_step: how much to increment per screen pixel
+	texture_step = (double)texture->height / original_line_height;
 
-	// Draw the vertical line scaled to the screen
+	// Determine where to start sampling the texture
+	// If the line is taller than the screen, skip the top part of the texture
+	int skip_top = 0;
+	if (original_line_height > WINDOW_HEIGHT)
+		skip_top = (original_line_height - WINDOW_HEIGHT) / 2;
+
+	texture_start = skip_top * texture_step;
+
+	texture_y = texture_start;
+
 	for (int y = 0; y < line_height; y++)
 	{
-		texture_y = draw_start + (y * texture->height) / original_line_height;
-		color = get_texture_pixel(texture, texture_x, texture_y);
+		int tex_y = (int)texture_y;
+		if (tex_y >= (int)texture->height)
+			tex_y = texture->height - 1;
+
+		color = get_texture_pixel(texture, texture_x, tex_y);
 
 		int canvas_y = line_offset + y;
-		//you have this loop, because you allowed to specify a width of a line
-		//meaning that if you want to draw a line of width 8, using texture's pixel
-		//you have to repeat it 8 times
-		//so if you would draw lines of the width 1 you wouldn't need this loop
 		for (int dx = 0; dx < line_width; dx++)
 		{
 			int canvas_x = x + dx;
 			draw_pixel(canvas, canvas_x, canvas_y, color);
 		}
+
+		texture_y += texture_step;
 	}
 }
 
