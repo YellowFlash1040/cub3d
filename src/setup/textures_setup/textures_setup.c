@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:47:36 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 17:55:57 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/05/31 20:02:30 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	setup_walls(t_textures *textures, t_settings *settings)
 {
 	textures->north_wall->direction = NORTH;
 	textures->north_wall->texture = mlx_load_png(settings->north_wall_filepath);
-	if (!textures->west_wall->texture)
+	if (!textures->north_wall->texture)
 		return (MLX_ERR);
 	textures->south_wall->direction = SOUTH;
 	textures->south_wall->texture = mlx_load_png(settings->south_wall_filepath);
