@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 22:03:02 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:05:15 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ void	draw_surface(t_canvas *canvas, t_surface *surface)
 	t_point	position;
 	t_size	size;
 
-	position.x = 600;
-	size.width = WINDOW_WIDTH - position.x;
-	size.height = WINDOW_HEIGHT / 2;
+	position.x = GAME_SCREEN_X_POSITION;
+	size.width = GAME_SCREEN_WIDTH;
+	size.height = GAME_SCREEN_HEIGHT / 2;
 	if (surface->type == CEILING)
 	{
-		position.y = 0;
+		position.y = GAME_SCREEN_Y_POSITION;
 		draw_rectangle(canvas, position, size, surface->color);
 	}
 	else if (surface->type == FLOOR)
 	{
-		position.y = WINDOW_HEIGHT / 2;
+		position.y = GAME_SCREEN_HEIGHT / 2;
 		draw_rectangle(canvas, position, size, surface->color);
 	}
 }
@@ -99,18 +99,18 @@ static void draw_textured_wall_slice(t_canvas *canvas, t_ray *ray,
 	int		line_width;
 	int		line_offset;
 
-	line_width = 20;
+	line_width = GAME_SCREEN_WIDTH / RAYS_COUNT;
 
-	const int constant = CELL_SIZE * WINDOW_HEIGHT;
+	const int constant = CELL_SIZE * GAME_SCREEN_HEIGHT;
 	line_height = constant / ray->length;
 
 	int original_line_height = line_height;
-	if (line_height > WINDOW_HEIGHT)
-		line_height = WINDOW_HEIGHT;
+	if (line_height > GAME_SCREEN_HEIGHT)
+		line_height = GAME_SCREEN_HEIGHT;
 
-	line_offset = WINDOW_HEIGHT / 2 - line_height / 2;
+	line_offset = GAME_SCREEN_Y_POSITION + GAME_SCREEN_HEIGHT / 2 - line_height / 2;
 
-	int x = 600 + ray_index * line_width;
+	int x = GAME_SCREEN_X_POSITION + ray_index * line_width;
 	//-----------------------------------
 
 
@@ -126,8 +126,8 @@ static void draw_textured_wall_slice(t_canvas *canvas, t_ray *ray,
 	// Determine where to start sampling the texture
 	// If the line is taller than the screen, skip the top part of the texture
 	int skip_top = 0;
-	if (original_line_height > WINDOW_HEIGHT)
-		skip_top = (original_line_height - WINDOW_HEIGHT) / 2;
+	if (original_line_height > GAME_SCREEN_HEIGHT)
+		skip_top = (original_line_height - GAME_SCREEN_HEIGHT) / 2;
 
 	texture_y = skip_top * texture_step;
 	for (int y = 0; y < line_height; y++)
