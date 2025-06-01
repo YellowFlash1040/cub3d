@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:55:51 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 17:01:38 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:54:50 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdbool.h>
 # include "key_bindings.h"
 # include "window_settings.h"
+# include "game_screen_settings.h"
 # include "camera_settings.h"
 # include "world_settings.h"
 # include "ft_string.h"
@@ -24,6 +25,8 @@
 # include "fpoint.h"
 
 # define SETTINGS_INIT_ERR 1
+
+// # define DEBUG_MODE
 
 typedef struct settings
 {
