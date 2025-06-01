@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:45:06 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 23:11:22 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:29:54 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ int	setup_settings(t_settings *settings)
 
 	settings->ceiling_color = 0xffaaaaff;
 	settings->floor_color = 0xaaaaffff;
-	settings->north_wall_filepath = ft_strdup("./assets/wall1.png");
-	settings->south_wall_filepath = ft_strdup("./assets/wall2.png");
-	settings->west_wall_filepath = ft_strdup("./assets/wall3.png");
-	settings->east_wall_filepath = ft_strdup("./assets/wall4.png");
+	settings->north_wall_filepath = ft_strdup("./assets/wall4.png"); //needs to be mirrored
+	settings->south_wall_filepath = ft_strdup("./assets/wall4.png"); //is fine
+	settings->west_wall_filepath = ft_strdup("./assets/wall5.png"); //is fine
+	settings->east_wall_filepath = ft_strdup("./assets/wall5.png"); //needs to be mirrored
+
 	return (SUCCESS);
 }
