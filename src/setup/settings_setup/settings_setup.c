@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:45:06 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/01 15:29:54 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:44:11 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ int	setup_settings(t_settings *settings)
 	// Angle: 50.146168
 	settings->player_position = (t_fpoint){261.294118, 315.295798};
 	settings->camera_angle = 50.146168 * M_PI / 180.0;
+
+	//Camera field of view tests
+	// x: 256.421416, y: 445.943927
+	// Angle: 90.744839
+	settings->player_position = (t_fpoint){256.421416, 445.943927};
+	settings->camera_angle = 90.744839 * M_PI / 180.0;
 
 	settings->ceiling_color = 0xffaaaaff;
 	settings->floor_color = 0xaaaaffff;
