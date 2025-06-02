@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:53:30 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 16:18:55 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/02 21:03:58 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,18 @@ t_color	darken_color(t_color color, double percentage)
 		percentage = 1.0;
 	if (percentage < 0.0)
 		percentage = 0.0;
-
 	r = ((color >> 24) & 0xFF) * percentage;
 	g = ((color >> 16) & 0xFF) * percentage;
 	b = ((color >> 8) & 0xFF) * percentage;
-	a = (color & 0xFF); // Preserve alpha
-
+	a = (color & 0xFF);
 	color = (r << 24) | (g << 16) | (b << 8) | a;
 	return (color);
 }
+
+/*
+We never need to change the alpha channel,
+and that's why we just extract it
+and put it back in the new color value
+
+a = (color & 0xFF); // Preserve alpha
+*/
