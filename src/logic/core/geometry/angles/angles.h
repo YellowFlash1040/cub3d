@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:25:17 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/24 19:54:20 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:52:27 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "constants.h"
 
 void	normalize_angle(double *angle_ref);
+double	get_perpendicular_angle(double angle);
 bool	is_almost_zero(double value);
 bool	is_horizontal_angle(double angle);
 bool	is_vertical_angle(double angle);

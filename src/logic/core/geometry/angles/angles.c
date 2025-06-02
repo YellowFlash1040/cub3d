@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:22:44 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/24 19:54:29 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:55:15 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ bool	is_horizontal_angle(double angle)
 bool	is_vertical_angle(double angle)
 {
 	return (is_almost_zero(M_PI_2 - angle) || is_almost_zero(M_3_PI_2 - angle));
+}
+
+double	get_perpendicular_angle(double angle)
+{
+	double	perpendicular_angle;
+
+	perpendicular_angle = angle - 90 * M_PI / 180.0;
+	return (perpendicular_angle);
 }
 
 void	normalize_angle(double *angle_ref)
