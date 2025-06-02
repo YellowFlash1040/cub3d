@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:55:51 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/01 18:54:50 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:24:43 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "game_screen_settings.h"
 # include "camera_settings.h"
 # include "world_settings.h"
+# include "minimap_settings.h"
 # include "ft_string.h"
 # include "color.h"
 # include "fpoint.h"
