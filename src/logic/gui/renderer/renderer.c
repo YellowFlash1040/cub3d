@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:40:56 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/01 15:47:34 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:23:13 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	render(t_app *app)
 static void	print_player_position(t_app *app)
 {
 	t_fpoint position = app->game->player->position;
-	printf("x: %lf, y: %lf\n", position.x, position.y);
+	printf("\033[H\033[Jx: %lf, y: %lf\n", position.x, position.y);
 	double angle = app->game->player->camera->angle;
 	printf("Angle: %lf\n", angle * (180 / M_PI));
 }
