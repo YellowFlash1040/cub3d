@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:22:57 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/26 15:52:19 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/02 20:55:00 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ void	draw_rectangle(t_canvas *canvas, t_point top_left, t_size size,
 }
 
 // Bresenham's Line Algorithm
-void	draw_line(t_canvas *canvas, t_point start, t_point end, int width,
-	t_color color)
+void	draw_line(t_canvas *canvas, t_point start, t_point end, t_color color)
 {
 	t_line_params	lp;
 	int				error_times_two;
-	int				offset;
 
 	lp.dx = abs(end.x - start.x);
 	lp.dy = abs(end.y - start.y);
@@ -52,14 +50,7 @@ void	draw_line(t_canvas *canvas, t_point start, t_point end, int width,
 	lp.error = lp.dx - lp.dy;
 	while (true)
 	{
-		// Draw a line of 'width' perpendicular to the direction
-		for (offset = -width / 2; offset <= width / 2; offset++)
-		{
-			if (lp.dx > lp.dy)
-				draw_pixel(canvas, start.x, start.y + offset, color); // mostly horizontal
-			else
-				draw_pixel(canvas, start.x + offset, start.y, color); // mostly vertical
-		}
+		draw_pixel(canvas, start.x, start.y, color);
 		if (start.x == end.x && start.y == end.y)
 			break ;
 		error_times_two = 2 * lp.error;
