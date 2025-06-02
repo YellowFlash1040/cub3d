@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:01:36 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/29 17:10:54 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:39:59 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_player	*init_player(void)
 	if (!player)
 		return (NULL);
 	player->position = (t_fpoint){0, 0};
-	player->direction.x = 0;
-	player->direction.y = 0;
+	player->vertical_direction = (t_vector){0};
+	player->horizontal_direction = (t_vector){0};
 	player->camera = NULL;
 	return (player);
 }
