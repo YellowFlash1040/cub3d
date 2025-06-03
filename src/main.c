@@ -6,33 +6,17 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:33:47 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 20:01:23 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:38:17 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-#include "window.h"
-#include "canvas.h"
-#include "renderer.h"
-#include "event_handlers.h"
-
-#include "app_builder.h"
-#include "game_builder.h"
-#include "map_builder.h"
-#include "player_builder.h"
-#include "camera_builder.h"
-#include "textures_builder.h"
-
-#include "settings_setup.h"
-#include "textures_setup.h"
-#include "player_setup.h"
-#include "camera_setup.h"
-
-void	fill_fake_map(t_map *map);
-void	print_map(t_map* map);
+#include "startup.h"
 
 void	handle_error(t_app *app, int err_code);
+
+#include <stdio.h>
+void	fill_fake_map(t_map *map);
+void	print_map(t_map* map);
 
 int	main(int argc, char **argv)
 {
@@ -42,40 +26,42 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	printf("Hello from cub3d\n");
+	
 	app = init_app();
-	result = connect_to_display(&app->mlx);
-	if (result != SUCCESS)
-		return (handle_error(app, result), result);
-	result = create_canvas(app->mlx, &app->canvas, (t_size){WINDOW_WIDTH, WINDOW_HEIGHT}, (t_point){0});
-	if (result != SUCCESS)
-		return (handle_error(app, result), result);
-	
+	if (!app)
+		return (handle_error(app, MALLOC_FAIL_ERR), MALLOC_FAIL_ERR);
+
 	/*--------------------------------------------------------------*/
-	build_app(app);
-
-	t_game* game = app->game;
-	build_game(game);
-	
-	build_map(game->map, 8, 8);
-	fill_fake_map(game->map);
-	print_map(game->map);
-
-	setup_settings(app->settings);
-
-	t_player* player = game->player;
-	build_player(player);
-	setup_player(player, app->settings);
-	build_camera(player->camera, RAYS_COUNT);
-	setup_camera(player->camera, app->settings);
-
-	build_textures(app->textures);
-	result = setup_textures(app->textures, app->settings);
+	t_map	*map;
+	map = init_map();
+	if (!map)
+		return (handle_error(NULL, MALLOC_FAIL_ERR), MALLOC_FAIL_ERR);
+	result = build_map(map, 8, 8);
 	if (result != SUCCESS)
-		return (handle_error(app, result), result);
+		return (destroy_map(&map),
+			handle_error(app, MALLOC_FAIL_ERR), MALLOC_FAIL_ERR);
+	fill_fake_map(map);
+	print_map(map);
+
+	t_settings	*settings;
+	settings = init_settings();
+	if (!settings)
+		return (destroy_map(&map),
+			handle_error(app, MALLOC_FAIL_ERR), MALLOC_FAIL_ERR);
+	setup_settings(settings);
 	/*--------------------------------------------------------------*/
 
+	result = startup(app, settings, map);
+	if (result != SUCCESS)
+	{
+		if (!(app->game && app->game->map))
+			destroy_map(&map);
+		return (handle_error(app, result), result);
+	}
 	subscribe_to_keyboard_events(app);
-	render(app);
+	result = render(app);
+	if (result != SUCCESS)
+		return (handle_error(app, result), result);
 	keep_app_running(app->mlx);
 	destroy_app(&app);
 	return (SUCCESS);
@@ -84,7 +70,8 @@ int	main(int argc, char **argv)
 void handle_error(t_app *app, int err_code)
 {
 	print_err_msg(get_err_msg(err_code));
-	destroy_app(&app);
+	if (app)
+		destroy_app(&app);
 }
 
 void	fill_fake_map(t_map *map)
