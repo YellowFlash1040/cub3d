@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   canvas.h                                           :+:      :+:    :+:   */
+/*   canvas_builder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 12:37:58 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/03 16:59:08 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/03 16:14:20 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/03 16:27:21 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CANVAS_H
-# define CANVAS_H
+#include "canvas_builder.h"
 
-# include "point.h"
-# include "size.h"
-# include "pixel.h"
-# include "errors.h"
-
-typedef struct canvas
+int	build_canvas(t_canvas *canvas, mlx_t *mlx)
 {
-	t_size		size;
-	t_point		position;
-	t_pixel		*pixels;
-	mlx_image_t	*image;
-}	t_canvas;
-
-t_canvas	*init_canvas(t_size size);
-void		destroy_canvas(t_canvas **canvas_ref);
-
-int			canvas_to_window(mlx_t *mlx, t_canvas *canvas);
-
-#endif
+	if (!canvas)
+		return (EMPTY_PTR_ERR);
+	canvas->image = mlx_new_image(mlx, canvas->size.width, canvas->size.height);
+	if (!canvas->image)
+		return (MLX_ERR);
+	canvas->pixels = canvas->image->pixels;
+	return (SUCCESS);
+}
