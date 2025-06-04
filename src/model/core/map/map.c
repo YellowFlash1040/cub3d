@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:48:20 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 14:51:59 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:17:26 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,4 @@ void	destroy_cells(t_string **cells_ref, int rows_count)
 		free(cells[i]);
 	free(cells);
 	*cells_ref = NULL;
-}
-
-bool	is_obstacle(t_map *map, int x, int y)
-{
-	if (x < 0 || x > map->width)
-		return (true);
-	if (y < 0 || y > map->height)
-		return (true);
-	if (map->cells[y][x] == '1')
-		return (true);
-	return (false);
 }
