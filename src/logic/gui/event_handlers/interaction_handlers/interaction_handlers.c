@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:31:38 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/04 17:18:10 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/04 19:33:29 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static t_direction	get_direction(double angle)
 	if ((angle >= 0 && angle < 45) || (angle >= 315 && angle < 360))
 		return (RIGHT);
 	else if (angle >= 45 && angle < 135)
-		return (DOWN);
+		return (UP);
 	else if (angle >= 135 && angle < 225)
 		return (LEFT);
 	else if (angle >= 225 && angle < 315)
-		return (UP);
+		return (DOWN);
 	return (DIRECTION_NONE);
 }
 
