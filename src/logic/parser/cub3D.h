@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3D.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/05/15 15:39:09 by rbom          #+#    #+#                 */
-/*   Updated: 2025/05/30 20:58:36 by rbom          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/15 15:39:09 by rbom              #+#    #+#             */
+/*   Updated: 2025/06/04 18:43:56 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,41 +26,8 @@
 # include <stdbool.h>
 # include <limits.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
-
-typedef struct s_list
-{
-	char			buffer[BUFFER_SIZE + 1];
-	struct s_list	*next;
-}					t_list;
-
-typedef struct s_struct
-{
-	int		store_len;
-	bool	store_break;
-	int		buffer_pos;
-	int		buffer_len;
-	bool	buffer_break;
-	bool	error;
-	t_list	*buffer;
-	char	*line;
-}			t_struct;
-
-size_t	ft_strlen(const char *s);
-
-bool	read_store(int fd, char store[], t_struct *gnl);
-
-t_list	*read_buffer(int fd, t_struct *gnl);
-
-bool	write_store(char store[], t_struct *gnl);
-
-void	write_buffer(t_struct *gnl);
-
-void	free_list(t_struct *gnl);
-
-char	*get_next_line(int fd);
+# include "ft_string.h"
+# include "get_next_line.h"
 
 typedef struct s_rgb
 {
@@ -143,7 +110,7 @@ void	check_map(t_data *data);
 void	check_dir_map(t_data *data);
 
 void	reset_dir(t_data *data);
-void	init_map(t_data *data);
+void	initialize_map(t_data *data);
 void	scrape_texture(t_data *data, int w, int i);
 bool	scrape_dir_wall_loop(t_data *data, int w);
 bool	scrape_dir_wal(t_data *data);
