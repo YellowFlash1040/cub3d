@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:28:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/01 18:53:40 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:42:12 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ t_fpoint	cast_ray(t_map *map, t_ray *ray, double x_offset, double y_offset)
 		if (map_x < 0 || map_x >= map->width
 			|| map_y < 0 || map_y >= map->height)
 			break ;
-		if (map->cells[map_y][map_x] == '1')
+		if (is_obstacle(map, map_x, map_y))
 			break ;
 		ray->position.x += x_offset;
 		ray->position.y += y_offset;
