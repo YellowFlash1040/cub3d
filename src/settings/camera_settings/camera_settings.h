@@ -6,15 +6,16 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:47:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/02 12:39:47 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:51:10 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAMERA_SETTINGS_H
 # define CAMERA_SETTINGS_H
 
-// # define RAYS_COUNT 120
-# define RAYS_COUNT 100
+// # define RAYS_COUNT 128
+# define RAYS_COUNT 120
+// # define RAYS_COUNT 100
 # define CAMERA_FIELD_OF_VIEW 60
 // # define ROTATION_ANGLE 0.05
 # define ROTATION_SPEED 2

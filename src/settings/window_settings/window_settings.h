@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:47:19 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/03 17:59:05 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:51:07 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 
 // Codam PC setup
 # define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_HEIGHT 1440
+
+// # define WINDOW_WIDTH 2560
+// # define WINDOW_HEIGHT 1440
 
 // My home PC setup
 // # define WINDOW_WIDTH 960

@@ -6,15 +6,15 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:23:33 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/02 20:46:36 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:47:51 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIMAP_SETTINGS_H
 # define MINIMAP_SETTINGS_H
 
-# define MINIMAP_CELL_SIZE 16
-# define MINIMAP_PLAYER_SIZE 4
+# define MINIMAP_CELL_SIZE 32
+# define MINIMAP_PLAYER_SIZE 8
 
 # define WALL_COLOR 0xffffffff
 # define EMPTY_SPACE_COLOR 0x000000ff
