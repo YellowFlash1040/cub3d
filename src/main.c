@@ -6,26 +6,32 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:33:47 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/04 18:17:09 by akovtune         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/14 12:33:47 by akovtune          #+#    #+#             */
 /*   Updated: 2025/06/03 18:38:17 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3D.h"
 #include "startup.h"
 
 void	handle_error(t_app *app, int err_code);
 
-#include <stdio.h>
-void	fill_fake_map(t_map *map);
-void	print_map(t_map* map);
-
 int	main(int argc, char **argv)
 {
 	int		result;
+	t_data	data;
 	t_app	*app;
 
-	(void)argc;
-	(void)argv;
-	printf("Hello from cub3d\n");
+	check_input(&data, argc, argv);
+	check_dir_map(&data);
+	scrape_dir_map(&data);
+	resize_map(&data);
 	
 	app = init_app();
 	if (!app)
@@ -64,6 +70,7 @@ int	main(int argc, char **argv)
 		return (handle_error(app, result), result);
 	keep_app_running(app->mlx);
 	destroy_app(&app);
+	exit_all(&data, 0);
 	return (SUCCESS);
 }
 
@@ -72,58 +79,4 @@ void handle_error(t_app *app, int err_code)
 	print_err_msg(get_err_msg(err_code));
 	if (app)
 		destroy_app(&app);
-}
-
-void	fill_fake_map(t_map *map)
-{
-	// int digital_map[] =
-	// {
-	// 	1,1,1,1,1,1,1,1,
-	// 	1,0,1,0,0,0,0,1,
-	// 	1,0,1,0,0,0,0,1,
-	// 	1,0,1,0,0,0,0,1,
-	// 	1,0,0,0,0,0,0,1,
-	// 	1,0,0,0,0,1,0,1,
-	// 	1,0,0,0,0,0,0,1,
-	// 	1,1,1,1,1,1,1,1
-	// };
-
-	int digital_map[] =
-	{
-		1,1,1,1,1,1,1,1,
-		1,0,0,0,0,0,0,1,
-		1,0,1,0,0,1,1,1,
-		1,1,0,0,0,1,0,1,
-		1,0,0,0,0,0,0,1,
-		1,0,0,0,0,1,0,1,
-		1,0,0,0,0,0,0,1,
-		1,1,1,1,1,1,1,1
-	};
-
-	int map_size = (int)sizeof(digital_map) / sizeof(digital_map[0]);
-	int width = 8;
-
-
-	int x, y;
-	for (int i = 0; i < map_size; i++)
-	{
-		y = i / width;
-		x = i - y * width;
-		map->cells[y][x] = digital_map[i] + '0';
-	}
-}
-
-void print_map(t_map* map)
-{
-	for (int y = 0; y < map->height; y++)
-	{
-		for (int x = 0; x < map->width; x++)
-		{
-			if (map->cells[y][x] == '0')
-				printf("\033[0;34m%c \033[0m", map->cells[y][x]);
-			else
-				printf("\033[0;31m%c \033[0m", map->cells[y][x]);
-		}
-		printf("\n");
-	}
 }
