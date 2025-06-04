@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:44:39 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/02 14:21:49 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:23:09 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define KEY_CLOSE_WINDOW MLX_KEY_ESCAPE
 
 # define KEY_TOGGLE_MINIMAP MLX_KEY_TAB
+# define KEY_TOGGLE_DOOR MLX_KEY_E
 
 bool	is_movement_key(keys_t key);
 bool	is_rotation_key(keys_t key);
