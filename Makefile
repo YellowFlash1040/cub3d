@@ -7,8 +7,8 @@ INCLUDES				 = $(addprefix -I,$(SRC_DIRS)) $(addprefix -I,$(LIB_DIRS))
 
 #-----------------------BINARIES---------------------------------------------------------
 # Output Files
-NAME					:= cub3D
-LIBRARY_FOR_TESTS		:= libcub3D.a
+NAME					:= cub3d
+LIBRARY_FOR_TESTS		:= libcub3d.a
 
 #-----------------------ROOT FOLDERS----------------------------------------------------------
 # Directories
