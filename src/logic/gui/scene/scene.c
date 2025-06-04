@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/02 12:16:37 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:34:02 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,13 @@ static void draw_textured_wall_slice(t_canvas *canvas, t_ray *ray,
 	{
 		texture_x = ((int)ray->position.y % CELL_SIZE) * texture->width / CELL_SIZE;
 		if (angle_looks_left(ray->angle))
-			texture_x = texture->width - texture_x;
+			texture_x = (texture->width - 1) - texture_x;
 	}
 	else
 	{
 		texture_x = ((int)ray->position.x % CELL_SIZE) * texture->width / CELL_SIZE;
 		if (angle_looks_down(ray->angle))
-			texture_x = texture->width - texture_x;
+			texture_x = (texture->width - 1) - texture_x;
 	}
 
 	// Compute texture_step: how much to increment per screen pixel
