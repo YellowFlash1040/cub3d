@@ -2,8 +2,10 @@
 # Compiler and Flags
 CC						:= cc
 CFLAGS				 	 = -Wall -Wextra -Werror $(INCLUDES) -g
-LDFLAGS					:= 
-INCLUDES				 = $(addprefix -I,$(SRC_DIRS)) $(addprefix -I,$(LIB_DIRS))
+LDFLAGS					:= -ldl -lglfw -pthread -lm
+INCLUDES				 = $(addprefix -I,$(SRC_DIRS)) \
+							$(addprefix -I,$(LIB_DIRS)) \
+							-I$(MLX_REPO_DIR)/include
 
 #-----------------------BINARIES---------------------------------------------------------
 # Output Files
@@ -16,62 +18,57 @@ SRC_DIR					:= src
 OBJ_DIR					:= obj
 LIB_DIR 				:= libraries
 
-#-----------------------SOURCE FOLDERS----------------------------------------------------------
-
-# Source directories (src/)
-BUILDERS_DIR			:= $(SRC_DIR)/builders
-HELPERS_DIR				:= $(SRC_DIR)/helpers
-LOGIC_DIR				:= $(SRC_DIR)/logic
-MODEL_DIR				:= $(SRC_DIR)/model
-SHARED_DIR				:= $(SRC_DIR)/shared
-
-# List of all source directories
-SRC_DIRS				:= $(SRC_DIR) \
-							$(BUILDERS_DIR) \
-							$(HELPERS_DIR) \
-							$(LOGIC_DIR) \
-							$(MODEL_DIR) \
-							$(SHARED_DIR)
+SRC_DIRS				:= $(shell find $(SRC_DIR) -type d)
 
 #-----------------------SOURCE FILES------------------------------------------------------------
 # Sources
-C_FILES 				:= $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
-HEADERS 				:= $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.h))
+C_FILES 				:= $(shell find $(SRC_DIR) -name '*.c')
+HEADERS 				:= $(shell find $(SRC_DIR) -name '*.h')
 
 # Objects
 OBJ     				:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(C_FILES)))
 
 #-----------------------LIBRARY FOLDERS----------------------------------------------------------
+
+#MLX42
+MLX_REPO_DIR			:= $(LIB_DIR)/mlx42
+
 # Library directories (libraries/)
-MLX_LIB_DIR				:= $(LIB_DIR)/mlx42
+MLX_LIB_DIR				:= $(MLX_REPO_DIR)/build
 STRING_LIB_DIR			:= $(LIB_DIR)/ft_string
 LIST_LIB_DIR			:= $(LIB_DIR)/list
 GNL_LIB_DIR				:= $(LIB_DIR)/get_next_line
 CONVERTER_LIB_DIR		:= $(LIB_DIR)/converter
 FILE_LIB_DIR			:= $(LIB_DIR)/file
+MEMORY_LIB_DIR			:= $(LIB_DIR)/ft_memory
 
 # List of all library directories
-LIB_DIRS				:= $(STRING_LIB_DIR) \
+LIB_DIRS				:= $(MLX_LIB_DIR) \
+							$(STRING_LIB_DIR) \
 							$(LIST_LIB_DIR) \
 							$(GNL_LIB_DIR) \
 							$(CONVERTER_LIB_DIR) \
-							$(FILE_LIB_DIR)
+							$(FILE_LIB_DIR) \
+							$(MEMORY_LIB_DIR)
 
 #-----------------------LIBRARIES--------------------------------------------------------
 # Libraries
-MLX_LIB     			:= $(MLX_LIB_DIR)/build/libmlx42.a
+MLX_LIB     			:= $(MLX_LIB_DIR)/libmlx42.a
 STRING_LIB				:= $(STRING_LIB_DIR)/ft_string.a
 LIST_LIB				:= $(LIST_LIB_DIR)/list.a
 GNL_LIB					:= $(GNL_LIB_DIR)/get_next_line.a
 CONVERTER_LIB			:= $(CONVERTER_LIB_DIR)/converter.a
 FILE_LIB				:= $(FILE_LIB_DIR)/file.a
+MEMORY_LIB				:= $(MEMORY_LIB_DIR)/ft_memory.a
 
 # List of all libraries
-LIBRARIES				:= $(STRING_LIB) \
+LIBRARIES				:= $(MLX_LIB) \
+							$(STRING_LIB) \
 							$(LIST_LIB) \
 							$(GNL_LIB) \
 							$(CONVERTER_LIB) \
-							$(FILE_LIB)
+							$(FILE_LIB) \
+							$(MEMORY_LIB)
 
 #-----------------------COLORS-----------------------------------------------------------
 # Colors for Output
@@ -83,13 +80,12 @@ RESET					:= \033[0m
 
 #-----------------------RULES------------------------------------------------------------
 vpath %.c $(SRC_DIRS)
-vpath %.h $(SRC_DIRS)
 
 # Default Target
-all: $(NAME)
+all: $(MLX_LIB) $(NAME)
 
 # Build the Executable
-$(NAME): $(OBJ) $(LIBRARIES) $(MLX_LIB)
+$(NAME): $(OBJ) $(LIBRARIES)
 	@$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 	@echo "$(GREEN)Compiled $@ successfully!$(RESET)"
 
@@ -104,13 +100,13 @@ $(OBJ_DIR)/%.o: %.c $(HEADERS)
 
 # Compile mlx42 library
 $(MLX_LIB):
-	@if [ ! -d "$(MLX_LIB_DIR)" ] || [ -z "$$(ls -A $(MLX_LIB_DIR))" ]; then \
+	@if [ ! -d "$(MLX_REPO_DIR)" ] || [ -z "$$(ls -A $(MLX_REPO_DIR))" ]; then \
 		echo "$(YELLOW)>> Initializing MLX42 submodule...$(RESET)"; \
-		git submodule update --init --recursive $(MLX_LIB_DIR) > /dev/null; \
+		git submodule update --init --recursive $(MLX_REPO_DIR) > /dev/null; \
 	fi
 	@echo "$(YELLOW)>> Building MLX42...$(RESET)"
-	@cmake -S $(MLX_LIB_DIR) -B $(MLX_LIB_DIR)/build > /dev/null
-	@cmake --build $(MLX_LIB_DIR)/build > /dev/null
+	@cmake -S $(MLX_REPO_DIR) -B $(MLX_REPO_DIR)/build > /dev/null
+	@cmake --build $(MLX_REPO_DIR)/build > /dev/null
 
 # Compile cub3d.a file to use inside tests/ folder
 $(LIBRARY_FOR_TESTS): $(OBJ) $(LIBRARIES)

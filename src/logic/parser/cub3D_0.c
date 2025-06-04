@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3D_0.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/05/30 22:07:14 by rbom          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3D_0.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
+/*   Updated: 2025/06/04 19:29:52 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_map_data(t_data *data)
 
 void	free_null(void	**ptr)
 {
-	if (*ptr != NULL)
+	if (ptr && *ptr != NULL)
 	{
 		free(*ptr);
 		*ptr = NULL;
@@ -89,11 +89,12 @@ void	free_all(t_data *data, uint8_t exit_status)
 		free_null((void **)&data->clean_map[i++]);
 	free_null((void **)&data->clean_map);
 	i = 0;
-	while (data->resize_map != NULL && i < data->resize_map_size.y)
+	while (data->resize_map != NULL && i < data->resize_map_size.y && exit_status != 0)
 		free_null((void **)&data->resize_map[i++]);
-	free_null((void **)&data->resize_map);
+	if (exit_status != 0)
+		free_null((void **)&data->resize_map);
 	i = 0;
-	while (i < 4)
+	while (i < 4 && exit_status != 0)
 		free_null((void **)&data->clean_wall[i++]);
 }
 

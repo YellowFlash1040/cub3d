@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3D_7.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/05/30 21:56:22 by rbom          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3D_7.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
+/*   Updated: 2025/06/04 18:46:27 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	scrape_dir_map(t_data *data)
 	data->clean_map_size.x = data->map_x;
 	data->clean_map_size.y = data->map_y;
 	data->map_y = 0;
-	init_map(data);
+	initialize_map(data);
 	open_fd(data, data->file, &data->fd, 4);
 	while (true)
 	{
