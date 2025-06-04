@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:56:23 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/02 20:49:32 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:44:03 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void	draw_map(t_canvas *canvas, t_map *map)
 		x = -1;
 		while (++x < map->width)
 		{
-			if (map->cells[y][x] == '1')
+			if (map->cells[y][x] == WALL)
 				draw_cell(canvas, x, y, WALL_COLOR);
+			else if (map->cells[y][x] == CLOSED_DOOR)
+				draw_cell(canvas, x, y, DOOR_COLOR);
 			else
 				draw_cell(canvas, x, y, EMPTY_SPACE_COLOR);
 		}
