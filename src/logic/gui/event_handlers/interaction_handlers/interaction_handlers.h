@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event_handlers.h                                   :+:      :+:    :+:   */
+/*   interaction_handlers.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 16:15:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/04 16:34:24 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/04 16:31:09 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/04 17:16:47 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EVENT_HANDLERS_H
-# define EVENT_HANDLERS_H
+#ifndef INTERACTION_HANDLERS_H
+# define INTERACTION_HANDLERS_H
 
-# include "app.h"
-# include "movement_handlers.h"
-# include "settings_handlers.h"
-# include "interaction_handlers.h"
+# include "map.h"
+# include "player.h"
+# include "direction.h"
+# include "angles.h"
+# include "world_settings.h"
+# include "point.h"
 
-void	subscribe_to_keyboard_events(t_app *app);
-void	handle_key_pressed(mlx_key_data_t keydata, void *param);
+void	handle_door_interaction(t_map *map, t_player *player);
 
 #endif
