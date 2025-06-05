@@ -6,23 +6,26 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:22:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/04 12:34:02 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:53:14 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
 
 static void			fix_fish_eye_effect(t_ray *ray, double camera_angle);
+static t_texture	*choose_texture(t_textures *textures, t_ray *ray,
+						t_map *map);
 static t_texture	*choose_wall_texture(t_textures *textures, t_ray *ray);
 static t_color		add_shadows(t_ray *ray, t_color color);
 static void			draw_textured_wall_slice(t_canvas *canvas, t_ray *ray,
-	t_texture *texture, int ray_index);
+						t_texture *texture, int ray_index);
 
-void	draw_scene(t_canvas *canvas, t_camera *camera, t_textures *textures)
+void	draw_scene(t_canvas *canvas, t_camera *camera, t_textures *textures,
+	t_map *map)
 {
 	draw_surface(canvas, textures->ceiling);
 	draw_surface(canvas, textures->floor);
-	draw_walls(canvas, camera, textures);
+	draw_walls(canvas, camera, textures, map);
 }
 
 void	draw_surface(t_canvas *canvas, t_surface *surface)
@@ -54,7 +57,8 @@ static void	fix_fish_eye_effect(t_ray *ray, double camera_angle)
 	ray->length = ray->length * cos(correction_angle);
 }
 
-void	draw_walls(t_canvas *canvas, t_camera *camera, t_textures *textures)
+void	draw_walls(t_canvas *canvas, t_camera *camera, t_textures *textures,
+	t_map *map)
 {
 	t_ray		*ray;
 	t_texture	*texture;
@@ -64,9 +68,22 @@ void	draw_walls(t_canvas *canvas, t_camera *camera, t_textures *textures)
 		ray = &camera->rays[i];
 		fix_fish_eye_effect(ray, camera->angle);
 
-		texture = choose_wall_texture(textures, ray);
+		texture = choose_texture(textures, ray, map);
 		draw_textured_wall_slice(canvas, ray, texture, i);
 	}
+}
+
+static t_texture	*choose_texture(t_textures *textures, t_ray *ray,
+	t_map *map)
+{
+	int	x;
+	int	y;
+
+	x = ray->position.x / CELL_SIZE;
+	y = ray->position.y / CELL_SIZE;
+	if (is_door(map, x, y))
+		return (textures->door->texture);
+	return (choose_wall_texture(textures, ray));
 }
 
 static t_texture	*choose_wall_texture(t_textures *textures, t_ray *ray)

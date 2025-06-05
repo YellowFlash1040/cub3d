@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:45:06 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/04 18:55:08 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:51:51 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	setup_settings(t_settings *settings, t_data *data)
 	int			y;
 
 	player_pos = (t_point){data->resize_spawn.x, data->resize_spawn.y};
-	player_direction =  get_direction_from_data(data->resize_spawn_dir);
+	player_direction = get_direction_from_data(data->resize_spawn_dir);
 	x = player_pos.x * CELL_SIZE + CELL_SIZE / 2;
 	y = player_pos.y * CELL_SIZE + CELL_SIZE / 2;
 	settings->player_position = (t_fpoint){x, y};
@@ -36,6 +36,7 @@ int	setup_settings(t_settings *settings, t_data *data)
 	settings->south_wall_filepath = data->clean_wall[1];
 	settings->west_wall_filepath = data->clean_wall[2];
 	settings->east_wall_filepath = data->clean_wall[3];
+	settings->door_filepath = ft_strdup("./assets/door.png");
 	return (SUCCESS);
 }
 

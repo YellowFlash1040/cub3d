@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:55:51 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/02 19:24:43 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:35:30 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct settings
 	t_string	south_wall_filepath;
 	t_string	west_wall_filepath;
 	t_string	east_wall_filepath;
+	t_string	door_filepath;
 }	t_settings;
 
 t_settings	*init_settings(void);

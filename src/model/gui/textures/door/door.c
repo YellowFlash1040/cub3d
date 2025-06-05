@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures_setup.h                                   :+:      :+:    :+:   */
+/*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/31 16:47:29 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 14:45:12 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/05 14:30:19 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/05 14:32:12 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEXTURES_SETUP_H
-# define TEXTURES_SETUP_H
+#include "door.h"
 
-# include "textures.h"
-# include "settings.h"
-# include "errors.h"
+t_door	*init_door(void)
+{
+	t_door	*door;
 
-int		setup_textures(t_textures *textures, t_settings *settings);
-void	setup_surfaces(t_textures *textures, t_settings *settings);
-int		setup_walls(t_textures *textures, t_settings *settings);
-int		setup_door(t_textures *textures, t_settings *settings);
+	door = (t_door *)malloc(sizeof(t_door));
+	if (!door)
+		return (NULL);
+	door->texture = NULL;
+	return (door);
+}
 
-#endif
+void	destroy_door(t_door **door_ref)
+{
+	t_door	*door;
+
+	if (!door_ref || !*door_ref)
+		return ;
+	door = *door_ref;
+	if (door->texture)
+		mlx_delete_texture(door->texture);
+	free(door);
+	*door_ref = NULL;
+}

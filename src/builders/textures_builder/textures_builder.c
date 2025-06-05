@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 18:04:01 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/03 17:49:55 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:46:26 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ int	build_textures(t_textures *textures)
 	textures->east_wall = init_wall();
 	if (!textures->east_wall)
 		return (destroy_temp(textures), MALLOC_FAIL_ERR);
+	textures->door = init_door();
+	if (!textures->door)
+		return (destroy_temp(textures), MALLOC_FAIL_ERR);
 	return (SUCCESS);
 }
 
@@ -55,4 +58,6 @@ static void	destroy_temp(t_textures *textures)
 		destroy_wall(&textures->west_wall);
 	if (textures->east_wall)
 		destroy_wall(&textures->east_wall);
+	if (textures->door)
+		destroy_door(&textures->door);
 }
