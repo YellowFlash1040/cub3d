@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 13:56:51 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/03 17:42:57 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:57:13 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_app	*init_app(void)
 	app->canvas = NULL;
 	app->settings = NULL;
 	app->textures = NULL;
+	app->cursor_position = (t_point){0};
 	return (app);
 }
 
