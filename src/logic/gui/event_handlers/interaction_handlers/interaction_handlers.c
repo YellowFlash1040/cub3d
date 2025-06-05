@@ -6,14 +6,15 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:31:38 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/04 19:33:29 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:43:08 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interaction_handlers.h"
 
 static t_direction	get_direction(double angle);
-static t_point		get_cell(t_fpoint position, t_direction direction);
+static t_point		get_cell(t_fpoint position, t_direction direction,
+						int distance);
 
 void	handle_door_interaction(t_map *map, t_player *player)
 {
@@ -21,9 +22,15 @@ void	handle_door_interaction(t_map *map, t_player *player)
 	t_point		cell;
 
 	direction = get_direction(player->camera->angle);
-	cell = get_cell(player->position, direction);
+	cell = get_cell(player->position, direction, 1);
 	if (is_door(map, cell.x, cell.y))
 		toggle_door(map, cell.x, cell.y);
+	else
+	{
+		cell = get_cell(player->position, direction, 2);
+		if (is_door(map, cell.x, cell.y))
+			toggle_door(map, cell.x, cell.y);
+	}
 }
 
 static t_direction	get_direction(double angle)
@@ -40,19 +47,19 @@ static t_direction	get_direction(double angle)
 	return (DIRECTION_NONE);
 }
 
-static t_point	get_cell(t_fpoint position, t_direction direction)
+static t_point	get_cell(t_fpoint position, t_direction direction, int distance)
 {
 	t_point	cell;
 
 	cell.x = position.x / CELL_SIZE;
 	cell.y = position.y / CELL_SIZE;
 	if (direction == UP)
-		cell.y--;
+		cell.y -= distance;
 	else if (direction == DOWN)
-		cell.y++;
+		cell.y += distance;
 	else if (direction == LEFT)
-		cell.x--;
+		cell.x -= distance;
 	else if (direction == RIGHT)
-		cell.x++;
+		cell.x += distance;
 	return (cell);
 }
