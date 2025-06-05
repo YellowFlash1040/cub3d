@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:18:46 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 16:15:51 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:27:50 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	subscribe_to_keyboard_events(t_app *app)
 
 void	subscribe_to_mouse_events(t_app *app)
 {
+	mlx_set_cursor_mode(app->mlx, MLX_MOUSE_DISABLED);
 	mlx_cursor_hook(app->mlx, &handle_mouse_move, app);
 }  
 
