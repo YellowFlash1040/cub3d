@@ -6,7 +6,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/cub3d",
-			"args": [], //pass arguments to the program here
+			"args": ["./assets/maps/test_map.cub"], //pass arguments to the program here
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
