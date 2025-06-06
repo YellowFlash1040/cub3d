@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:33:47 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 16:07:15 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/05 17:31:43 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int argc, char **argv)
 		return (handle_error(app, result), result);
 	}
 	subscribe_to_keyboard_events(app);
-	subscribe_to_mouse_events(app);
+	// subscribe_to_mouse_events(app);
 	result = render(app);
 	if (result != SUCCESS)
 		return (handle_error(app, result), result);

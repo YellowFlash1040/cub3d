@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_settings.h                                  :+:      :+:    :+:   */
+/*   corners.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 13:47:19 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 09:16:15 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/06 11:29:49 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/06 11:29:50 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WINDOW_SETTINGS_H
-# define WINDOW_SETTINGS_H
+#ifndef CORNERS_H
+# define CORNERS_H
 
-# define WINDOW_TITLE "cub3d"
+# include <stdlib.h>
+# include "point.h"
 
-// Codam PC setup
-// # define WINDOW_WIDTH 1920
-// # define WINDOW_HEIGHT 1440
+# define CORNERS_INIT_ERR 1
 
-// # define WINDOW_WIDTH 2560
-// # define WINDOW_HEIGHT 1440
+typedef struct corners
+{
+	t_point	top_left;
+	t_point	bottom_right;
+}	t_corners;
 
-// My home PC setup
-# define WINDOW_WIDTH 960
-# define WINDOW_HEIGHT 720
+t_corners	*init_corners(void);
+void		destroy_corners(t_corners **corners_ref);
 
 #endif

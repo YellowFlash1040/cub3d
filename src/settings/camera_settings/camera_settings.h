@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:47:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/04 12:51:10 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/06 09:36:15 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 // # define ROTATION_ANGLE 0.05
 # define ROTATION_SPEED 2
 //Player's/camera's speed in units per second
-# define MOVEMENT_SPEED 100
+// # define MOVEMENT_SPEED 100
+
+# define MOVEMENT_SPEED 300
 
 #endif
 

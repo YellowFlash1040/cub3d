@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:40:56 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 14:44:04 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/06 13:15:43 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	render(t_app *app)
 	return (SUCCESS);
 }
 
+#include <stdio.h>
 void	render_frame(void *param)
 {
 	t_app		*app;
@@ -33,9 +34,11 @@ void	render_frame(void *param)
 	map = app->game->map;
 	clear_buffer(app->canvas->image);
 	populate_rays(map, player);
-	draw_scene(app->canvas, player->camera, app->textures, app->game->map);
+	// draw_scene(app->canvas, player->camera, app->textures, app->game->map);
 	if (app->settings->is_minimap_visible)
 		draw_minimap(app->canvas, map, player);
+	// t_fpoint position = app->game->player->position;
+	// printf("x: %lf; y: %lf\n", position.x, position.y);
 }
 
 void	clear_buffer(mlx_image_t *img)

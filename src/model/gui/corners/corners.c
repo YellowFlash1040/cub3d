@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_settings.h                                  :+:      :+:    :+:   */
+/*   corners.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 13:47:19 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 09:16:15 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/06 11:29:48 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/06 11:29:49 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WINDOW_SETTINGS_H
-# define WINDOW_SETTINGS_H
+#include "corners.h"
 
-# define WINDOW_TITLE "cub3d"
+t_corners	*init_corners(void)
+{
+	t_corners	*corners;
 
-// Codam PC setup
-// # define WINDOW_WIDTH 1920
-// # define WINDOW_HEIGHT 1440
+	corners = (t_corners *)malloc(sizeof(t_corners));
+	if (!corners)
+		return (NULL);
+	return (corners);
+}
 
-// # define WINDOW_WIDTH 2560
-// # define WINDOW_HEIGHT 1440
+void	destroy_corners(t_corners **corners_ref)
+{
+	t_corners	*corners;
 
-// My home PC setup
-# define WINDOW_WIDTH 960
-# define WINDOW_HEIGHT 720
-
-#endif
+	if (!corners_ref || !*corners_ref)
+		return ;
+	corners = *corners_ref;
+	free(corners);
+	*corners_ref = NULL;
+}

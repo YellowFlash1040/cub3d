@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:56:23 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 11:47:29 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/06 12:11:37 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,46 @@
 
 static void	draw_cell(t_canvas *canvas, t_point	point, t_color color);
 
-t_corners	find_corners(t_size map, t_fpoint player_position);
+t_corners	find_corners(t_size map_size, t_fpoint player_position);
+t_color		get_cell_color(t_map *map, int x, int y);
 
-void	draw_miniminimap(t_canvas *canvas, t_point point, t_map *map, t_player *player)
+void	draw_miniminimap(t_canvas *canvas, t_point start_point, t_map *map, t_player *player)
 {
-	int		x;
-	int		y;
-	t_color	color;
-	t_point	offset;
-	t_corners c;
+	t_corners	corners;
+	t_point		cell;
+	t_color		color;
+	t_point		offset;
 	
-	c = find_corners((t_size){map->width, map->height}, player->position);
-	y = c.top_left.y;
-	int y_counter = 0;
-	while (y < c.bottom_right.y)
+	corners = find_corners((t_size){map->width, map->height}, player->position);
+	cell.y = corners.top_left.y;
+	offset.y = start_point.y;
+	while (cell.y < corners.bottom_right.y)
 	{
-		x = c.top_left.x;
-		int x_counter = 0;
-		while (x < c.bottom_right.x)
+		cell.x = corners.top_left.x;
+		offset.x = start_point.x;
+		while (cell.x < corners.bottom_right.x)
 		{
-			if (map->cells[y][x] == WALL)
-				color = WALL_COLOR;
-			else if (map->cells[y][x] == CLOSED_DOOR)
-				color = DOOR_COLOR;
-			else
-				color = EMPTY_SPACE_COLOR;
-			offset.x = point.x + x_counter * MINIMAP_CELL_SIZE;
-			offset.y = point.y + y_counter * MINIMAP_CELL_SIZE;
+			color = get_cell_color(map, cell.x, cell.y);
 			draw_cell(canvas, offset, color);
-			x++;
-			x_counter++;
+			cell.x++;
+			offset.x += MINIMAP_CELL_SIZE;
 		}
-		y++;
-		y_counter++;
+		cell.y++;
+		offset.y += MINIMAP_CELL_SIZE;
 	}
+}
+
+t_color	get_cell_color(t_map *map, int x, int y)
+{
+	t_color	color;
+
+	if (map->cells[y][x] == WALL)
+		color = WALL_COLOR;
+	else if (map->cells[y][x] == CLOSED_DOOR)
+		color = DOOR_COLOR;
+	else
+		color = EMPTY_SPACE_COLOR;
+	return (color);
 }
 
 t_corners	find_corners(t_size map, t_fpoint player_position)
