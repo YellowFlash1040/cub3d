@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:44:39 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 16:12:50 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:56:57 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 
 # define KEY_CLOSE_WINDOW MLX_KEY_ESCAPE
 
-# define KEY_TOGGLE_MINIMAP MLX_KEY_TAB
+# define KEY_TOGGLE_MINIMAP MLX_KEY_CAPS_LOCK
+# define KEY_TOGGLE_CLIPPED_MINIMAP MLX_KEY_TAB
 # define KEY_TOGGLE_DOOR MLX_KEY_E
 
 # define MOUSE_SENSITIVITY 20

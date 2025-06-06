@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:17:24 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 16:17:26 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:13:19 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	rotate(mlx_t *mlx, t_direction direction, t_player *player);
 
-void	handle_mouse_move(double xpos, double ypos, void* param)
+void	handle_mouse_move(double xpos, double ypos, void *param)
 {
 	t_app		*app;
 	int			difference;

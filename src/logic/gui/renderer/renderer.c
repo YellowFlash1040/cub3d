@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:40:56 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 13:15:43 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:20:00 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	render_frame(void *param)
 	populate_rays(map, player);
 	// draw_scene(app->canvas, player->camera, app->textures, app->game->map);
 	if (app->settings->is_minimap_visible)
-		draw_minimap(app->canvas, map, player);
-	// t_fpoint position = app->game->player->position;
-	// printf("x: %lf; y: %lf\n", position.x, position.y);
+		draw_fullsize_minimap(app->canvas, map, player);
+	if (app->settings->is_clipped_minimap_visible)
+		draw_clipped_minimap(app->canvas, map, player);
 }
 
 void	clear_buffer(mlx_image_t *img)

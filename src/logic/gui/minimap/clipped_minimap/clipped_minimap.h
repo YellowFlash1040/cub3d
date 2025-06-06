@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   clipped_minimap.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 15:11:37 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 16:56:28 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/06 15:02:35 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/06 16:54:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minimap.h"
+#ifndef CLIPPED_MINIMAP_H
+# define CLIPPED_MINIMAP_H
 
-void	draw_minimap(t_canvas *canvas, t_map *map, t_player *player)
-{
-	draw_fullsize_minimap(canvas, map, player);
-	draw_clipped_minimap(canvas, map, player);
-}
+# include "minimap_helpers.h"
+
+void	draw_clipped_minimap(t_canvas *canvas, t_map *map, t_player *player);
+
+void	draw_clipped_map(t_canvas *canvas, t_point start_point, t_map *map,
+			t_player *player);
+void	draw_clipped_player(t_canvas *canvas, t_point start_point,
+			t_player *player, t_size map_size);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:23:33 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 12:44:27 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/06 14:22:58 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@
 # define MINIMAP_PLAYER_SIZE 4
 
 # define WALL_COLOR 0xffffffff
-# define EMPTY_SPACE_COLOR 0x000000ff
+// # define EMPTY_SPACE_COLOR 0x000000ff
+# define EMPTY_SPACE_COLOR 0xaaaaaaff
 # define DOOR_COLOR 0x00ffffff
 # define PLAYER_COLOR 0xff0000ff
 # define RAY_COLOR 0xffff00ff
-# define GRID_COLOR 0xff0000ff
+// # define GRID_COLOR 0xff0000ff
+// # define GRID_COLOR 0x0000ffff
+# define GRID_COLOR 0xaaaaaaff
 
 # define MINIMAP_VIEW_RADIUS 5
 # define MINIMAP_WIDTH 11

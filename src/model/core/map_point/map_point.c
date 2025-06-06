@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corners.c                                          :+:      :+:    :+:   */
+/*   map_point.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 11:29:48 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 15:57:12 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/06 15:56:28 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/06 16:05:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corners.h"
+#include "map_point.h"
 
-t_corners	*init_corners(void)
+t_map_point	*init_map_point(void)
 {
-	t_corners	*corners;
+	t_map_point	*map_point;
 
-	corners = (t_corners *)malloc(sizeof(t_corners));
-	if (!corners)
+	map_point = (t_map_point *)malloc(sizeof(t_map_point));
+	if (!map_point)
 		return (NULL);
-	corners->top_left = (t_map_point){0};
-	corners->bottom_right = (t_map_point){0};
-	return (corners);
+	map_point->x = 0;
+	map_point->y = 0;
+	return (map_point);
 }
 
-void	destroy_corners(t_corners **corners_ref)
+void	destroy_map_point(t_map_point **map_point_ref)
 {
-	t_corners	*corners;
+	t_map_point	*map_point;
 
-	if (!corners_ref || !*corners_ref)
+	if (!map_point_ref || !*map_point_ref)
 		return ;
-	corners = *corners_ref;
-	free(corners);
-	*corners_ref = NULL;
+	map_point = *map_point_ref;
+	free(map_point);
+	*map_point_ref = NULL;
 }

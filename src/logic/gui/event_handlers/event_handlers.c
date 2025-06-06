@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:18:46 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 16:27:50 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:21:28 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	subscribe_to_mouse_events(t_app *app)
 {
 	mlx_set_cursor_mode(app->mlx, MLX_MOUSE_DISABLED);
 	mlx_cursor_hook(app->mlx, &handle_mouse_move, app);
-}  
+}
 
 void	handle_key_pressed(mlx_key_data_t keydata, void *param)
 {
@@ -36,6 +36,10 @@ void	handle_key_pressed(mlx_key_data_t keydata, void *param)
 		mlx_close_window(app->mlx);
 	else if (keydata.key == KEY_TOGGLE_MINIMAP && keydata.action == MLX_PRESS)
 		toggle_minimap(app->settings);
+	else if (keydata.key == KEY_TOGGLE_CLIPPED_MINIMAP
+		&& keydata.action == MLX_PRESS
+		&& !app->settings->is_minimap_visible)
+		toggle_clipped_minimap(app->settings);
 	else if (keydata.key == KEY_TOGGLE_DOOR && keydata.action == MLX_PRESS)
 		handle_door_interaction(app->game->map, app->game->player);
 }

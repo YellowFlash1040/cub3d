@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   map_point.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 15:11:37 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 16:56:28 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/06 15:56:26 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/06 15:56:27 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minimap.h"
+#ifndef MAP_POINT_H
+# define MAP_POINT_H
 
-void	draw_minimap(t_canvas *canvas, t_map *map, t_player *player)
+# include <stdlib.h>
+
+# define MAP_POINT_INIT_ERR 1
+
+typedef struct map_point
 {
-	draw_fullsize_minimap(canvas, map, player);
-	draw_clipped_minimap(canvas, map, player);
-}
+	int	x;
+	int	y;
+}	t_map_point;
+
+t_map_point	*init_map_point(void);
+void		destroy_map_point(t_map_point **map_point_ref);
+
+#endif
