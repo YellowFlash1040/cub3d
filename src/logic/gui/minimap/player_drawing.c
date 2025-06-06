@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:56:03 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/02 20:55:20 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:43:29 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,29 @@ void	draw_player(t_canvas *canvas, t_player *player)
 
 	size = (t_size){MINIMAP_PLAYER_SIZE, MINIMAP_PLAYER_SIZE};
 	position = scale_position(player->position);
-	position.x = position.x - size.width / 2;
-	position.y = position.y - size.height / 2;
+
+	position.x -= size.width / 2;
+	position.y -= size.height / 2;
+
 	draw_rectangle(canvas, position, size, PLAYER_COLOR);
+
+	t_point top_left;
+	top_left.x = position.x - position.x % MINIMAP_CELL_SIZE
+	- MINIMAP_CELL_SIZE * MINIMAP_VIEW_RADIUS;
+	top_left.y = position.y - position.y % MINIMAP_CELL_SIZE
+	- MINIMAP_CELL_SIZE * MINIMAP_VIEW_RADIUS;
+
+	t_point minimap_pos;
+
+	minimap_pos.x = position.x - top_left.x;
+	minimap_pos.y = position.y - top_left.y;
+
+	minimap_pos.x += size.width / 2;
+	minimap_pos.y += size.height / 2;
+
+	draw_rectangle(canvas, minimap_pos, size, PLAYER_COLOR);
 }
+
 
 void	draw_rays(t_canvas *canvas, t_camera *camera)
 {
