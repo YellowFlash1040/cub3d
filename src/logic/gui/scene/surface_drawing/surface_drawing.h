@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   surface_drawing.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/25 15:21:52 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/07 19:27:53 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/07 17:00:31 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/07 17:28:05 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#ifndef SURFACE_DRAWING_H
+# define SURFACE_DRAWING_H
 
-# include "wall_drawing.h"
-# include "surface_drawing.h"
+# include "drawing.h"
+# include "surface.h"
+# include "settings.h"
 
-void	draw_scene(t_canvas *canvas, t_camera *camera, t_textures *textures,
-			t_map *map);
+void	draw_surface(t_canvas *canvas, t_surface *surface);
 
 #endif

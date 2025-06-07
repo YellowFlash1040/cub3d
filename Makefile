@@ -26,7 +26,7 @@ C_FILES 				:= $(shell find $(SRC_DIR) -name '*.c')
 HEADERS 				:= $(shell find $(SRC_DIR) -name '*.h')
 
 # Objects
-OBJ     				:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(C_FILES)))
+OBJ     				:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(C_FILES))
 
 #-----------------------LIBRARY FOLDERS----------------------------------------------------------
 
@@ -90,8 +90,8 @@ $(NAME): $(OBJ) $(LIBRARIES)
 	@echo "$(GREEN)Compiled $@ successfully!$(RESET)"
 
 # Compile Object Files
-$(OBJ_DIR)/%.o: %.c $(HEADERS)
-	@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Compile custom libraries
@@ -146,5 +146,6 @@ re: fclean all
 
 # Print all of the source (.c, .h) files list, to help prepare makefile for an eval
 print:
-	@echo $(notdir $(C_FILES)) | tr ' ' '\n' > c_files.txt
-	@echo $(notdir $(HEADERS)) | tr ' ' '\n' > headers.txt
+	@echo $(C_FILES) | tr ' ' '\n' > c_files.txt
+	@echo $(HEADERS) | tr ' ' '\n' > headers.txt
+	@echo $(OBJ) | tr ' ' '\n' > object_files.txt
