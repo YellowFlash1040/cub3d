@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:02:35 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 16:54:20 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:50:44 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ void	draw_clipped_map(t_canvas *canvas, t_point start_point, t_map *map,
 			t_player *player);
 void	draw_clipped_player(t_canvas *canvas, t_point start_point,
 			t_player *player, t_size map_size);
+void	draw_clipped_rays(t_canvas *canvas, t_point start_point,
+			t_camera *camera, t_size map_size);
 
 #endif

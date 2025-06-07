@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:06:34 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 17:21:00 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/07 13:02:35 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,4 @@ void	draw_clipped_minimap(t_canvas *canvas, t_map *map, t_player *player)
 	draw_grid(canvas, position, map_size, cell_size);
 	draw_clipped_player(canvas, position, player,
 		(t_size){map->width, map->height});
-	// draw_minirays(canvas, player->camera);
 }
