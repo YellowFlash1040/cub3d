@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:02:04 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/07 13:31:45 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/07 21:51:16 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static t_point	get_clipped_map_position(t_point start_point,
 					t_fpoint world_pos, t_size map_size);
+void			draw_direction_ray(t_canvas *canvas, t_point player_pos,
+					double angle);
 
 void	draw_clipped_player(t_canvas *canvas, t_point start_point,
 	t_player *player, t_size map_size)
@@ -27,6 +29,22 @@ void	draw_clipped_player(t_canvas *canvas, t_point start_point,
 	clipped_map_pos.x -= size.width / 2;
 	clipped_map_pos.y -= size.height / 2;
 	draw_rectangle(canvas, clipped_map_pos, size, PLAYER_COLOR);
+	draw_direction_ray(canvas, clipped_map_pos, player->camera->angle);
+}
+
+void	draw_direction_ray(t_canvas *canvas, t_point player_pos, double angle)
+{
+	t_vector	step;
+	t_point		end_point;
+
+	step = get_unit_vector(angle);
+	if (angle_looks_right(angle))
+		player_pos.x += MINIMAP_PLAYER_SIZE / 2;
+	if (angle_looks_down(angle))
+		player_pos.y += MINIMAP_PLAYER_SIZE / 2;
+	end_point.x = player_pos.x + step.x * 6;
+	end_point.y = player_pos.y + step.y * 6;
+	draw_line(canvas, player_pos, end_point, PLAYER_COLOR);
 }
 
 void	draw_clipped_rays(t_canvas *canvas, t_point start_point,
