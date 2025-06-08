@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:23:33 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 14:22:58 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:58:31 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 // Codam PC setup
 // # define MINIMAP_CELL_SIZE 32
-// # define MINIMAP_PLAYER_SIZE 8
+# define MINIMAP_CELL_SIZE 28
+# define MINIMAP_PLAYER_SIZE 8
 
 // My home PC setup
-# define MINIMAP_CELL_SIZE 16
-# define MINIMAP_PLAYER_SIZE 4
+// # define MINIMAP_CELL_SIZE 16
+// # define MINIMAP_PLAYER_SIZE 4
 
 # define WALL_COLOR 0xffffffff
 // # define EMPTY_SPACE_COLOR 0x000000ff

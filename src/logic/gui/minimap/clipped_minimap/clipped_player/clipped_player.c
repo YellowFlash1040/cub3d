@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:02:04 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/07 21:51:16 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:53:38 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	draw_direction_ray(t_canvas *canvas, t_point player_pos, double angle)
 		player_pos.x += MINIMAP_PLAYER_SIZE / 2;
 	if (angle_looks_down(angle))
 		player_pos.y += MINIMAP_PLAYER_SIZE / 2;
-	end_point.x = player_pos.x + step.x * 6;
-	end_point.y = player_pos.y + step.y * 6;
+	end_point.x = player_pos.x + step.x * MINIMAP_PLAYER_SIZE * 1.5;
+	end_point.y = player_pos.y + step.y * MINIMAP_PLAYER_SIZE * 1.5;
 	draw_line(canvas, player_pos, end_point, PLAYER_COLOR);
 }
 
