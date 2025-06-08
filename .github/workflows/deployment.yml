@@ -3,7 +3,7 @@ name: Deployment to Production
 on:
   push:
     branches:
-      - dev
+      - dev-2
 
 jobs:
   deploy:
@@ -13,16 +13,14 @@ jobs:
       - name: Checkout dev
         uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: dev-2
           submodules: recursive
 
       - name: Prepare files
         run: |
           mkdir prod
-          cp -r -t prod/ src libraries .gitignore
-          cp Makefile prod/Makefile
+          cp -r -t prod/ src libraries Makefile .gitignore .gitmodules assets
           rm -rf prod/libraries/mlx42/.git
-        #   cp CleanMakefile prod/Makefile
 
       - name: Install dependencies
         run: |
@@ -42,9 +40,11 @@ jobs:
         run: |
           cd prod
           git init
+          git config --global init.defaultBranch main
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git submodule add https://github.com/codam-coding-college/MLX42 libraries/mlx42
           git checkout -b prod
           git add .
           git commit -m "Deployment to Production"

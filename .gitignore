@@ -16,4 +16,4 @@
 !tests/**/Makefile
 !assets/**/*.png
 !assets/**/*.cub
-!CleanMakefile
+!libraries/mlx42

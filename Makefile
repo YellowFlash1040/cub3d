@@ -102,10 +102,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 $(MLX_LIB):
 	@if [ ! -d "$(MLX_REPO_DIR)" ] || [ -z "$$(ls -A $(MLX_REPO_DIR))" ]; then \
 		echo "$(YELLOW)>> Initializing MLX42 submodule...$(RESET)"; \
-		git submodule update --init --recursive $(MLX_REPO_DIR) > /dev/null; \
+		git submodule update --init --recursive $(MLX_REPO_DIR) > /dev/null 2>&1; \
 	fi
 	@echo "$(YELLOW)>> Building MLX42...$(RESET)"
-	@cmake -S $(MLX_REPO_DIR) -B $(MLX_REPO_DIR)/build > /dev/null
+	@cmake -S $(MLX_REPO_DIR) -Wno-dev -B $(MLX_REPO_DIR)/build > /dev/null
 	@cmake --build $(MLX_REPO_DIR)/build > /dev/null
 
 # Compile cub3d.a file to use inside tests/ folder
