@@ -3,7 +3,7 @@ name: Deployment to Production
 on:
   push:
     branches:
-      - dev
+      - dev-2
 
 jobs:
   deploy:
@@ -13,16 +13,13 @@ jobs:
       - name: Checkout dev
         uses: actions/checkout@v3
         with:
-          ref: dev
-          submodules: recursive
+          ref: dev-2
 
       - name: Prepare files
         run: |
           mkdir prod
-          cp -r -t prod/ src libraries .gitignore
-          cp Makefile prod/Makefile
-          rm -rf prod/libraries/mlx42/.git
-        #   cp CleanMakefile prod/Makefile
+          cp -r -t prod/ src libraries Makefile .gitignore .gitmodules
+          rm -rf prod/libraries/mlx42
 
       - name: Install dependencies
         run: |
