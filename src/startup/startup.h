@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:06:08 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/03 16:55:06 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/08 11:36:50 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@
 # include "settings_setup.h"
 # include "textures_setup.h"
 
-int	startup(t_app *app, t_settings *settings, t_map *map);
+int	startup(t_app *app, t_map *map);
 
 #endif

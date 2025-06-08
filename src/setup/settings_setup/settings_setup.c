@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:45:06 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/07 21:45:46 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:03:54 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_color		get_color_from_data(t_rgb value);
 static t_direction	get_direction_from_data(char d);
 static double		get_camera_angle(t_direction direction);
 
-int	setup_settings(t_settings *settings, t_data *data)
+void	setup_settings(t_settings *settings, t_data *data)
 {
 	t_point		player_pos;
 	t_direction	player_direction;
@@ -37,7 +37,6 @@ int	setup_settings(t_settings *settings, t_data *data)
 	settings->west_wall_filepath = data->clean_wall[2];
 	settings->east_wall_filepath = data->clean_wall[3];
 	settings->door_filepath = ft_strdup("./assets/textures/door.png");
-	return (SUCCESS);
 }
 
 static double	get_camera_angle(t_direction direction)
