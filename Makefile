@@ -18,7 +18,7 @@ SRC_DIR					:= src
 OBJ_DIR					:= obj
 LIB_DIR 				:= libraries
 
-SRC_DIRS				:= $(shell find $(SRC_DIR) -type d)
+SRC_DIRS				 = $(patsubst %/, %, $(sort $(dir $(HEADERS))))
 
 #-----------------------SOURCE FILES------------------------------------------------------------
 # Sources
@@ -149,3 +149,4 @@ print:
 	@echo $(C_FILES) | tr ' ' '\n' > c_files.txt
 	@echo $(HEADERS) | tr ' ' '\n' > headers.txt
 	@echo $(OBJ) | tr ' ' '\n' > object_files.txt
+	@echo $(SRC_DIRS) | tr ' ' '\n' > include.txt
