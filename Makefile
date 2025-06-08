@@ -105,8 +105,8 @@ $(MLX_LIB):
 		git submodule update --init --recursive $(MLX_REPO_DIR) > /dev/null; \
 	fi
 	@echo "$(YELLOW)>> Building MLX42...$(RESET)"
-	@cmake -S $(MLX_REPO_DIR) -B $(MLX_REPO_DIR)/build > /dev/null
-	@cmake --build $(MLX_REPO_DIR)/build > /dev/null
+	@cmake -S -Wno-dev $(MLX_REPO_DIR) -B $(MLX_REPO_DIR)/build > /dev/null
+	@cmake -Wno-dev --build $(MLX_REPO_DIR)/build > /dev/null
 
 # Compile cub3d.a file to use inside tests/ folder
 $(LIBRARY_FOR_TESTS): $(OBJ) $(LIBRARIES)
