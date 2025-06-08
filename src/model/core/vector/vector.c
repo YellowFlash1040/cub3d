@@ -6,11 +6,11 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:53:14 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/24 19:53:15 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:28:04 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector/vector.h"
+#include "vector.h"
 
 t_vector	*init_vector(void)
 {
