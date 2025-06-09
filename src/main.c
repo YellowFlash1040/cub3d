@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 12:33:47 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/08 12:03:04 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: akovtune <akovtune@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/05/14 12:33:47 by akovtune      #+#    #+#                 */
+/*   Updated: 2025/06/09 18:18:08 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ int	main(int argc, char **argv)
 	t_app	*app;
 	t_map	*map;
 
-	check_input(&data, argc, argv);
-	check_dir_map(&data);
-	scrape_dir_map(&data);
-	resize_map(&data);
+	parse_all(&data, argc, argv);
 	result = setup_app_using_data(&app, &data, &map);
 	if (result != SUCCESS)
 		return (handle_error(app, result));

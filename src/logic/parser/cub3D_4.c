@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D_4.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
-/*   Updated: 2025/06/05 14:16:59 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3D_4.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
+/*   Updated: 2025/06/09 17:39:39 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	check_map_line(t_data *data)
 	i = 0;
 	while (data->line[i] != '\n' && data->line[i] != '\0')
 	{
-		if (data->line[i] == ' ' || data->line[i] == '0'
+		if (data->line[i] == ' ' || data->line[i] == 'X' || data->line[i] == '0'
 			|| data->line[i] == '1' || data->line[i] == '2')
 			i++;
 		else if (data->line[i] == 'N' || data->line[i] == 'S'

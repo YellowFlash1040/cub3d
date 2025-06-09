@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 15:39:09 by rbom              #+#    #+#             */
-/*   Updated: 2025/06/04 18:43:56 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3D.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/05/15 15:39:09 by rbom          #+#    #+#                 */
+/*   Updated: 2025/06/09 18:17:08 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <sys/time.h>
 # include <sys/types.h> 
 # include <unistd.h>
-
 # include <stdbool.h>
 # include <limits.h>
 
@@ -67,6 +66,8 @@ typedef struct s_data
 	t_xy	end;
 	t_xy	resize_map_size;
 	char	**resize_map;
+	int		sprite_no;
+	t_xy	*sprite;
 }	t_data;
 
 typedef struct complete
@@ -132,5 +133,9 @@ void	resize_map_size_loop(t_data *data);
 void	resize_map_size(t_data *data);
 void	scrape_spawn(t_data *data, int x, int y);
 void	resize_map(t_data *data);
+
+void	count_sprite(t_data *data);
+void	scrape_sprite(t_data *data);
+void	parse_all(t_data *data, int argc, char **argv);
 
 #endif
