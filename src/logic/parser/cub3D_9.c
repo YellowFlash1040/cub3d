@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/09 17:47:20 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/09 18:18:20 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,13 @@ void	scrape_sprite(t_data *data)
 		}
 		y++;
 	}
+}
+
+void	parse_all(t_data *data, int argc, char **argv)
+{
+	check_input(data, argc, argv);
+	check_dir_map(data);
+	scrape_dir_map(data);
+	resize_map(data);
+	scrape_sprite(data);
 }
