@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:09 by rbom          #+#    #+#                 */
-/*   Updated: 2025/05/30 20:58:36 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/09 17:10:41 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,45 +22,8 @@
 # include <sys/time.h>
 # include <sys/types.h> 
 # include <unistd.h>
-
 # include <stdbool.h>
 # include <limits.h>
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
-
-typedef struct s_list
-{
-	char			buffer[BUFFER_SIZE + 1];
-	struct s_list	*next;
-}					t_list;
-
-typedef struct s_struct
-{
-	int		store_len;
-	bool	store_break;
-	int		buffer_pos;
-	int		buffer_len;
-	bool	buffer_break;
-	bool	error;
-	t_list	*buffer;
-	char	*line;
-}			t_struct;
-
-size_t	ft_strlen(const char *s);
-
-bool	read_store(int fd, char store[], t_struct *gnl);
-
-t_list	*read_buffer(int fd, t_struct *gnl);
-
-bool	write_store(char store[], t_struct *gnl);
-
-void	write_buffer(t_struct *gnl);
-
-void	free_list(t_struct *gnl);
-
-char	*get_next_line(int fd);
 
 typedef struct s_rgb
 {
@@ -100,6 +63,8 @@ typedef struct s_data
 	t_xy	end;
 	t_xy	resize_map_size;
 	char	**resize_map;
+	int		sprite_no;
+	t_xy	*sprite;
 }	t_data;
 
 typedef struct complete
@@ -165,5 +130,8 @@ void	resize_map_size_loop(t_data *data);
 void	resize_map_size(t_data *data);
 void	scrape_spawn(t_data *data, int x, int y);
 void	resize_map(t_data *data);
+
+void	count_sprite(t_data *data);
+void	scrape_sprite(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/05/30 22:07:14 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/09 17:10:11 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	init_error_message(t_data *data)
 	data->error[1] = "No argument provided\n";
 	data->error[2] = "More than one argument provided\n";
 	data->error[3] = "Ivalid file extension map\n";
-	data->error[4] = "Open";
-	data->error[5] = "Close";
+	data->error[4] = "Open: ";
+	data->error[5] = "Close: ";
 	data->error[6] = "Multiple wall entries\n";
 	data->error[7] = "No texture directory\n";
-	data->error[8] = "Malloc";
+	data->error[8] = "Malloc: ";
 	data->error[9] = "Ivalid file extension texture\n";
-	data->error[10] = "Open";
-	data->error[11] = "Close";
+	data->error[10] = "Open: ";
+	data->error[11] = "Close: ";
 	data->error[12] = "Too many arguments texture directory\n";
 	data->error[13] = "Multiple floor entries\n";
 	data->error[14] = "No RGB data\n";
@@ -61,11 +61,13 @@ void	init_map_data(t_data *data)
 	data->clean_wall[1] = NULL;
 	data->clean_wall[2] = NULL;
 	data->clean_wall[3] = NULL;
+	data->sprite_no = 0;
+	data->sprite = NULL;
 }
 
 void	free_null(void	**ptr)
 {
-	if (*ptr != NULL)
+	if (ptr != NULL && *ptr != NULL)
 	{
 		free(*ptr);
 		*ptr = NULL;
@@ -89,12 +91,15 @@ void	free_all(t_data *data, uint8_t exit_status)
 		free_null((void **)&data->clean_map[i++]);
 	free_null((void **)&data->clean_map);
 	i = 0;
-	while (data->resize_map != NULL && i < data->resize_map_size.y)
+	while (exit_status != 0 && data->resize_map != NULL
+		&& i < data->resize_map_size.y)
 		free_null((void **)&data->resize_map[i++]);
-	free_null((void **)&data->resize_map);
+	if (exit_status != 0)
+		free_null((void **)&data->resize_map);
 	i = 0;
-	while (i < 4)
+	while (exit_status != 0 && i < 4)
 		free_null((void **)&data->clean_wall[i++]);
+	free_null((void **)&data->sprite);
 }
 
 void	exit_all(t_data *data, uint8_t exit_status)
