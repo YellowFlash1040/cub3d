@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:05:54 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/03 18:36:22 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/08 11:59:16 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ static int	initialize_data(t_app *app);
 static int	build_data(t_app *app);
 static int	setup_data(t_app *app, t_settings *settings, t_map *map);
 
-int	startup(t_app *app, t_settings *settings, t_map *map)
+int	startup(t_app *app, t_map *map)
 {
-	int	result;
+	int			result;
+	t_settings	*settings;
 
-	app->settings = settings;
+	settings = app->settings;
 	result = initialize_data(app);
 	if (result != SUCCESS)
 		return (result);

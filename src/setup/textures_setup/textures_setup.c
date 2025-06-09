@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:47:36 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/31 20:02:30 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/07 21:42:00 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int	setup_textures(t_textures *textures, t_settings *settings)
 
 	setup_surfaces(textures, settings);
 	result = setup_walls(textures, settings);
+	if (result != SUCCESS)
+		return (result);
+	result = setup_door(textures, settings);
 	if (result != SUCCESS)
 		return (result);
 	return (SUCCESS);
@@ -48,6 +51,14 @@ int	setup_walls(t_textures *textures, t_settings *settings)
 	textures->east_wall->direction = EAST;
 	textures->east_wall->texture = mlx_load_png(settings->east_wall_filepath);
 	if (!textures->east_wall->texture)
+		return (MLX_ERR);
+	return (SUCCESS);
+}
+
+int	setup_door(t_textures *textures, t_settings *settings)
+{
+	textures->door->texture = mlx_load_png(settings->door_filepath);
+	if (!textures->door->texture)
 		return (MLX_ERR);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
-/*   Updated: 2025/06/04 18:58:17 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:16:59 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 bool	check_dir_floor(t_data *data)
 {
-	int	i;
 	int	f;
 
-	i = 0;
 	f = 4;
 	while (f < 6)
 	{

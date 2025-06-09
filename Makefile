@@ -18,7 +18,7 @@ SRC_DIR					:= src
 OBJ_DIR					:= obj
 LIB_DIR 				:= libraries
 
-SRC_DIRS				:= $(shell find $(SRC_DIR) -type d)
+SRC_DIRS				 = $(patsubst %/, %, $(sort $(dir $(HEADERS))))
 
 #-----------------------SOURCE FILES------------------------------------------------------------
 # Sources
@@ -26,7 +26,7 @@ C_FILES 				:= $(shell find $(SRC_DIR) -name '*.c')
 HEADERS 				:= $(shell find $(SRC_DIR) -name '*.h')
 
 # Objects
-OBJ     				:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(C_FILES)))
+OBJ     				:= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(C_FILES))
 
 #-----------------------LIBRARY FOLDERS----------------------------------------------------------
 
@@ -90,8 +90,8 @@ $(NAME): $(OBJ) $(LIBRARIES)
 	@echo "$(GREEN)Compiled $@ successfully!$(RESET)"
 
 # Compile Object Files
-$(OBJ_DIR)/%.o: %.c $(HEADERS)
-	@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Compile custom libraries
@@ -102,10 +102,10 @@ $(OBJ_DIR)/%.o: %.c $(HEADERS)
 $(MLX_LIB):
 	@if [ ! -d "$(MLX_REPO_DIR)" ] || [ -z "$$(ls -A $(MLX_REPO_DIR))" ]; then \
 		echo "$(YELLOW)>> Initializing MLX42 submodule...$(RESET)"; \
-		git submodule update --init --recursive $(MLX_REPO_DIR) > /dev/null; \
+		git submodule update --init --recursive $(MLX_REPO_DIR) > /dev/null 2>&1; \
 	fi
 	@echo "$(YELLOW)>> Building MLX42...$(RESET)"
-	@cmake -S $(MLX_REPO_DIR) -B $(MLX_REPO_DIR)/build > /dev/null
+	@cmake -S $(MLX_REPO_DIR) -Wno-dev -B $(MLX_REPO_DIR)/build > /dev/null
 	@cmake --build $(MLX_REPO_DIR)/build > /dev/null
 
 # Compile cub3d.a file to use inside tests/ folder
@@ -146,5 +146,7 @@ re: fclean all
 
 # Print all of the source (.c, .h) files list, to help prepare makefile for an eval
 print:
-	@echo $(notdir $(C_FILES)) | tr ' ' '\n' > c_files.txt
-	@echo $(notdir $(HEADERS)) | tr ' ' '\n' > headers.txt
+	@echo $(C_FILES) | tr ' ' '\n' > c_files.txt
+	@echo $(HEADERS) | tr ' ' '\n' > headers.txt
+	@echo $(OBJ) | tr ' ' '\n' > object_files.txt
+	@echo $(SRC_DIRS) | tr ' ' '\n' > include.txt

@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
-/*   Updated: 2025/06/04 19:29:52 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:54:24 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	free_all(t_data *data, uint8_t exit_status)
 		free_null((void **)&data->clean_map[i++]);
 	free_null((void **)&data->clean_map);
 	i = 0;
-	while (data->resize_map != NULL && i < data->resize_map_size.y && exit_status != 0)
+	while (data->resize_map != NULL && i < data->resize_map_size.y
+		&& exit_status != 0)
 		free_null((void **)&data->resize_map[i++]);
 	if (exit_status != 0)
 		free_null((void **)&data->resize_map);

@@ -6,43 +6,33 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:56:23 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/04 16:44:03 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:38:17 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minimap.h"
 
-static void	draw_cell(t_canvas *canvas, int x, int y, t_color color);
-
-void	draw_map(t_canvas *canvas, t_map *map)
+void	draw_map(t_canvas *canvas, t_point point, t_map *map)
 {
 	int		x;
 	int		y;
+	t_color	color;
+	t_point	offset;
 
-	y = -1;
-	while (++y < map->height)
+	y = 0;
+	offset.y = point.y;
+	while (y < map->height)
 	{
-		x = -1;
-		while (++x < map->width)
+		x = 0;
+		offset.x = point.x;
+		while (x < map->width)
 		{
-			if (map->cells[y][x] == WALL)
-				draw_cell(canvas, x, y, WALL_COLOR);
-			else if (map->cells[y][x] == CLOSED_DOOR)
-				draw_cell(canvas, x, y, DOOR_COLOR);
-			else
-				draw_cell(canvas, x, y, EMPTY_SPACE_COLOR);
+			color = get_cell_color(map, x, y);
+			draw_cell(canvas, offset, color);
+			x++;
+			offset.x += MINIMAP_CELL_SIZE;
 		}
+		y++;
+		offset.y += MINIMAP_CELL_SIZE;
 	}
-}
-
-static void	draw_cell(t_canvas *canvas, int x, int y, t_color color)
-{
-	t_point	point;
-	t_size	size;
-
-	point.x = x * MINIMAP_CELL_SIZE;
-	point.y = y * MINIMAP_CELL_SIZE;
-	size.width = MINIMAP_CELL_SIZE;
-	size.height = MINIMAP_CELL_SIZE;
-	draw_rectangle(canvas, point, size, color);
 }

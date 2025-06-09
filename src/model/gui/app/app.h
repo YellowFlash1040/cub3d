@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:58:54 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/29 16:24:44 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:56:50 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct app
 	t_game		*game;
 	t_canvas	*canvas;
 	t_textures	*textures;
+	t_point		cursor_position;
 }				t_app;
 
 t_app			*init_app(void);

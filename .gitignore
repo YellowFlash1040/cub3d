@@ -14,4 +14,6 @@
 !tests/**/*.c
 !tests/**/*.h
 !tests/**/Makefile
-!CleanMakefile
+!assets/**/*.png
+!assets/**/*.cub
+!libraries/mlx42

@@ -6,11 +6,11 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:53:18 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/26 16:41:46 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:27:53 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray/ray.h"
+#include "ray.h"
 
 t_ray	*init_ray(void)
 {

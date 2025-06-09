@@ -6,11 +6,11 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 15:53:07 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/29 17:17:23 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:27:39 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera/camera.h"
+#include "camera.h"
 
 t_camera	*init_camera(void)
 {
