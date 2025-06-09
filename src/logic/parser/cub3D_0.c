@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/09 17:10:11 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/09 17:39:13 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	free_all(t_data *data, uint8_t exit_status)
 	while (exit_status != 0 && data->resize_map != NULL
 		&& i < data->resize_map_size.y)
 		free_null((void **)&data->resize_map[i++]);
+	if (exit_status != 0)
+		free_null((void **)&data->resize_map);
 	if (exit_status != 0)
 		free_null((void **)&data->resize_map);
 	i = 0;

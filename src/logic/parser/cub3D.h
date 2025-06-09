@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:09 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/09 17:10:41 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/09 17:39:57 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	check_map(t_data *data);
 void	check_dir_map(t_data *data);
 
 void	reset_dir(t_data *data);
-void	init_map(t_data *data);
+void	initialize_map(t_data *data);
 void	scrape_texture(t_data *data, int w, int i);
 bool	scrape_dir_wall_loop(t_data *data, int w);
 bool	scrape_dir_wal(t_data *data);
