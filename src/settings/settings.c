@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:55:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 17:10:13 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:00:40 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ void	destroy_settings(t_settings **settings_ref)
 		destroy_string(&settings->west_wall_filepath);
 	if (settings->east_wall_filepath)
 		destroy_string(&settings->east_wall_filepath);
-	if (settings->door_filepath)
-		destroy_string(&settings->door_filepath);
 	free(settings);
 	*settings_ref = NULL;
 }
+/*
+if (settings->door_filepath)
+		destroy_string(&settings->door_filepath);
+*/
