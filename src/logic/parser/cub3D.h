@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:09 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/09 17:39:57 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/09 17:47:49 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <limits.h>
+
+# include "ft_string.h"
+# include "get_next_line.h"
 
 typedef struct s_rgb
 {

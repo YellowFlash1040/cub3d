@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/09 17:15:06 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/09 17:47:20 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	scrape_sprite(t_data *data)
 	int	y;
 	int	i;
 
+	count_sprite(data);
 	y = 0;
 	i = 0;
 	while (y < data->resize_map_size.y && i < data->sprite_no)
@@ -51,7 +52,7 @@ void	scrape_sprite(t_data *data)
 			{
 				data->sprite[i].x = x;
 				data->sprite[i].y = y;
-				data->resize_map[y][x] == '0';
+				data->resize_map[y][x] = '0';
 				i++;
 			}
 			x++;
