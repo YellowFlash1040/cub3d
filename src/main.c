@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: akovtune <akovtune@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/05/14 12:33:47 by akovtune      #+#    #+#                 */
-/*   Updated: 2025/06/09 18:18:08 by rbom          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/14 12:33:47 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/09 19:01:46 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ int	main(int argc, char **argv)
 	free_all(&data, 0);
 	result = startup(app, map);
 	if (result != SUCCESS)
-		return (destroy_map(&map), handle_error(app, result), result);
+	{
+		if (!(app->game && app->game->map))
+			destroy_map(&map);
+		return (handle_error(app, result), result);
+	}
 	subscribe_to_keyboard_events(app);
 	subscribe_to_mouse_events(app);
 	result = render(app);
