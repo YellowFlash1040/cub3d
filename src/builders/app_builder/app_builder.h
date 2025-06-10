@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:57:41 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/25 16:01:47 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:52:17 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "app.h"
 # include "errors.h"
 
-int	build_app(t_app *app);
+int	build_app(t_app **app_ref);
 
 #endif

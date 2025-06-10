@@ -6,58 +6,68 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 18:04:01 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 14:46:26 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:51:14 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "textures_builder.h"
 
-static void	destroy_temp(t_textures *textures);
+static int	build_surfaces(t_textures *textures);
+static int	build_walls(t_textures *textures);
+static int	build_door(t_textures *textures);
 
-int	build_textures(t_textures *textures)
+int	build_textures(t_textures **textures_ref)
 {
-	if (!textures)
+	t_textures	*textures;
+	int			result;
+
+	if (!textures_ref || !*textures_ref)
 		return (EMPTY_PTR_ERR);
-	textures->ceiling = init_surface();
-	if (!textures->ceiling)
-		return (destroy_temp(textures), MALLOC_FAIL_ERR);
-	textures->floor = init_surface();
-	if (!textures->ceiling)
-		return (destroy_temp(textures), MALLOC_FAIL_ERR);
-	textures->north_wall = init_wall();
-	if (!textures->north_wall)
-		return (destroy_temp(textures), MALLOC_FAIL_ERR);
-	textures->south_wall = init_wall();
-	if (!textures->south_wall)
-		return (destroy_temp(textures), MALLOC_FAIL_ERR);
-	textures->west_wall = init_wall();
-	if (!textures->west_wall)
-		return (destroy_temp(textures), MALLOC_FAIL_ERR);
-	textures->east_wall = init_wall();
-	if (!textures->east_wall)
-		return (destroy_temp(textures), MALLOC_FAIL_ERR);
-	textures->door = init_door();
-	if (!textures->door)
-		return (destroy_temp(textures), MALLOC_FAIL_ERR);
+	textures = *textures_ref;
+	result = build_surfaces(textures);
+	if (result != SUCCESS)
+		return (destroy_textures(textures_ref), result);
+	result = build_walls(textures);
+	if (result != SUCCESS)
+		return (destroy_textures(textures_ref), result);
+	result = build_door(textures);
+	if (result != SUCCESS)
+		return (destroy_textures(textures_ref), result);
 	return (SUCCESS);
 }
 
-static void	destroy_temp(t_textures *textures)
+static int	build_surfaces(t_textures *textures)
 {
-	if (!textures)
-		return ;
-	if (textures->ceiling)
-		destroy_surface(&textures->ceiling);
-	if (textures->floor)
-		destroy_surface(&textures->floor);
-	if (textures->north_wall)
-		destroy_wall(&textures->north_wall);
-	if (textures->south_wall)
-		destroy_wall(&textures->south_wall);
-	if (textures->west_wall)
-		destroy_wall(&textures->west_wall);
-	if (textures->east_wall)
-		destroy_wall(&textures->east_wall);
-	if (textures->door)
-		destroy_door(&textures->door);
+	textures->ceiling = init_surface();
+	if (!textures->ceiling)
+		return (MALLOC_FAIL_ERR);
+	textures->floor = init_surface();
+	if (!textures->ceiling)
+		return (MALLOC_FAIL_ERR);
+	return (SUCCESS);
+}
+
+static int	build_walls(t_textures *textures)
+{
+	textures->north_wall = init_wall();
+	if (!textures->north_wall)
+		return (MALLOC_FAIL_ERR);
+	textures->south_wall = init_wall();
+	if (!textures->south_wall)
+		return (MALLOC_FAIL_ERR);
+	textures->west_wall = init_wall();
+	if (!textures->west_wall)
+		return (MALLOC_FAIL_ERR);
+	textures->east_wall = init_wall();
+	if (!textures->east_wall)
+		return (MALLOC_FAIL_ERR);
+	return (SUCCESS);
+}
+
+static int	build_door(t_textures *textures)
+{
+	textures->door = init_door();
+	if (!textures->door)
+		return (MALLOC_FAIL_ERR);
+	return (SUCCESS);
 }
