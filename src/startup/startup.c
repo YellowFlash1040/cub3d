@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:05:54 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/08 11:59:16 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:52:41 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,16 @@ static int	build_data(t_app *app)
 {
 	int	result;
 
-	result = build_canvas(app->canvas, app->mlx);
+	result = build_canvas(&app->canvas, app->mlx);
 	if (result != SUCCESS)
 		return (result);
-	result = build_textures(app->textures);
+	result = build_textures(&app->textures);
 	if (result != SUCCESS)
 		return (result);
-	result = build_player(app->game->player);
+	result = build_player(&app->game->player);
 	if (result != SUCCESS)
 		return (result);
-	result = build_camera(app->game->player->camera, RAYS_COUNT);
+	result = build_camera(&app->game->player->camera, RAYS_COUNT);
 	if (result != SUCCESS)
 		return (result);
 	return (SUCCESS);

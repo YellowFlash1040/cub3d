@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:58:54 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 15:56:50 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:26:07 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@
 # include "canvas.h"
 # include "settings.h"
 # include "textures.h"
+# include "animations.h"
 
 # define APP_INIT_ERR 1
 
 typedef struct app
 {
-	mlx_t		*mlx;
-	t_settings	*settings;
-	t_game		*game;
-	t_canvas	*canvas;
-	t_textures	*textures;
-	t_point		cursor_position;
+	mlx_t			*mlx;
+	t_settings		*settings;
+	t_game			*game;
+	t_canvas		*canvas;
+	t_textures		*textures;
+	t_animations	*animations;
+	t_point			cursor_position;
 }				t_app;
 
 t_app			*init_app(void);

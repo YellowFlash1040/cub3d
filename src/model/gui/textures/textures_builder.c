@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 18:04:01 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/10 16:51:14 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/10 17:02:49 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/10 17:02:58 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "textures_builder.h"
+#include "textures.h"
 
 static int	build_surfaces(t_textures *textures);
 static int	build_walls(t_textures *textures);

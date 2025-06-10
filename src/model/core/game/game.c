@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:48:27 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/29 17:08:18 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:01:30 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,20 @@ void	destroy_game(t_game **game_ref)
 		destroy_player(&game->player);
 	free(game);
 	*game_ref = NULL;
+}
+
+int	build_game(t_game **game_ref)
+{
+	t_game	*game;
+
+	if (!game_ref || !*game_ref)
+		return (EMPTY_PTR_ERR);
+	game = *game_ref;
+	game->map = init_map();
+	if (!game->map)
+		return (destroy_game(game_ref), MALLOC_FAIL_ERR);
+	game->player = init_player();
+	if (!game->player)
+		return (destroy_game(game_ref), MALLOC_FAIL_ERR);
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:48:25 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/18 12:58:20 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:04:10 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct game
 }	t_game;
 
 t_game	*init_game(void);
+int		build_game(t_game **game_ref);
 void	destroy_game(t_game **game_ref);
 
 #endif
