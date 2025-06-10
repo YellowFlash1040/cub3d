@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:45:06 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/09 19:00:15 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:57:00 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	setup_settings(t_settings *settings, t_data *data)
 	settings->south_wall_filepath = data->clean_wall[1];
 	settings->west_wall_filepath = data->clean_wall[2];
 	settings->east_wall_filepath = data->clean_wall[3];
-	settings->door_filepath = "./assets/textures/door.png";
+	settings->door_filepath = "./assets/textures/static/door.png";
 }
 
 static double	get_camera_angle(t_direction direction)
