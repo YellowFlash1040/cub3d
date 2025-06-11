@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:05:54 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/10 16:52:41 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:59:34 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ static int	initialize_data(t_app *app)
 	app->textures = init_textures();
 	if (!app->textures)
 		return (MALLOC_FAIL_ERR);
+	app->animations = init_animations();
+	if (!app->animations)
+		return (MALLOC_FAIL_ERR);
 	app->game = init_game();
 	if (!app->game)
 		return (MALLOC_FAIL_ERR);
@@ -84,6 +87,9 @@ static int	setup_data(t_app *app, t_settings *settings, t_map *map)
 	setup_player(app->game->player, settings);
 	setup_camera(app->game->player->camera, settings);
 	result = setup_textures(app->textures, settings);
+	if (result != SUCCESS)
+		return (result);
+	result = setup_animations(app->animations, settings);
 	if (result != SUCCESS)
 		return (result);
 	return (SUCCESS);
