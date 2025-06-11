@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:28:42 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/10 17:12:16 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:34:15 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
 # include "door.h"
 
 # define TEXTURES_INIT_ERR 1
+
+typedef enum e_texture_name
+{
+	TEXTURE_NORTH_WALL,
+	TEXTURE_SOUTH_WALL,
+	TEXTURE_WEST_WALL,
+	TEXTURE_EAST_WALL,
+	TEXTURE_DOOR,
+	TEXTURE_NAMES_COUNT
+}	t_texture_name;
+// TEXTURE_NAMES_COUNT is a nice trick, with which you 
+// can always tell how many items there are
 
 typedef struct textures
 {
