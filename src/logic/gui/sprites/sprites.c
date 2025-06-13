@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:09:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/13 17:13:24 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:32:14 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	draw_sprite(t_canvas *canvas, t_camera *camera, t_npc npc, t_sprite *sprite
 	double new_x = dx * cosine - dy * sine;
 	double new_y = dx * sine + dy * cosine;
 
-	// Computer mathematic errors fix
+	// Fix float number precision errors
 	if (is_almost_zero(new_x))
 		new_x = 0;
 	if (is_almost_zero(new_y))
@@ -56,7 +56,7 @@ void	draw_sprite(t_canvas *canvas, t_camera *camera, t_npc npc, t_sprite *sprite
 	if (depth > 1)
 	{
 		// Formula 3
-		// projection_factor or "distance to the projection plane"
+		// projection factor or "distance to the projection plane"
 		double projection_factor = (GAME_SCREEN_WIDTH / 2) / tan(camera->fov / 2);
 
 		// Formula 4 (which I don't get yet)
@@ -69,7 +69,21 @@ void	draw_sprite(t_canvas *canvas, t_camera *camera, t_npc npc, t_sprite *sprite
 		|| screen_x > GAME_SCREEN_WIDTH
 		|| screen_y > GAME_SCREEN_HEIGHT)
 			return ;
-		
+
+		int ray_index = horizontal_offset + RAYS_COUNT / 2;
+
+		if (ray_index < 0)
+			ray_index = 0;
+		else if (ray_index >= RAYS_COUNT)
+			ray_index = RAYS_COUNT - 1;
+
+		printf("horizontal_offset: %lf\n", horizontal_offset);
+		printf("ray_index: %d\n", ray_index);
+		printf("\n");
+
+		if (depth > camera->rays[ray_index].length)
+			return ;
+
 		draw_rectangle(canvas, (t_point){screen_x, screen_y}, (t_size){10, 10}, 0x00ffffff);
 		// draw_pixel(canvas, screen_x, screen_y, 0x00ffffff);
 	}
