@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 15:46:04 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/13 10:25:41 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:47:33 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CONVERTER_H
 
 # include "configuration.h"
-# include "cub3D.h"
+# include "parser.h"
 # include "direction.h"
 # include "geometry.h"
 # include "point.h"

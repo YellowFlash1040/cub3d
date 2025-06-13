@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3D.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/05/15 15:39:09 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/09 18:17:08 by rbom          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/15 15:39:09 by rbom              #+#    #+#             */
+/*   Updated: 2025/06/13 14:47:23 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef PARSER_H
+# define PARSER_H
 
 # include <fcntl.h>
 # include <stdint.h>
@@ -66,8 +66,8 @@ typedef struct s_data
 	t_xy	end;
 	t_xy	resize_map_size;
 	char	**resize_map;
-	int		sprite_no;
-	t_xy	*sprite;
+	int		sprites_count;
+	t_xy	*sprites;
 }	t_data;
 
 typedef struct complete

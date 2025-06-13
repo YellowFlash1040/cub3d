@@ -6,11 +6,11 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
-/*   Updated: 2025/06/05 14:17:19 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:48:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parser.h"
 
 void	atouint8(t_data *data, int f, int i, char c)
 {

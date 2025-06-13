@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3D_9.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/09 18:18:20 by rbom          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3D_9.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
+/*   Updated: 2025/06/13 14:48:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parser.h"
 
 void	count_sprite(t_data *data)
 {
@@ -24,13 +24,13 @@ void	count_sprite(t_data *data)
 		while (x < data->resize_map_size.x)
 		{
 			if (data->resize_map[y][x] == 'X')
-				data->sprite_no++;
+				data->sprites_count++;
 			x++;
 		}
 		y++;
 	}
-	data->sprite = malloc((data->sprite_no) * sizeof(t_xy));
-	if (data->sprite == NULL)
+	data->sprites = malloc((data->sprites_count) * sizeof(t_xy));
+	if (data->sprites == NULL)
 		exit_all(data, 8);
 }
 
@@ -43,15 +43,15 @@ void	scrape_sprite(t_data *data)
 	count_sprite(data);
 	y = 0;
 	i = 0;
-	while (y < data->resize_map_size.y && i < data->sprite_no)
+	while (y < data->resize_map_size.y && i < data->sprites_count)
 	{
 		x = 0;
-		while (x < data->resize_map_size.x && i < data->sprite_no)
+		while (x < data->resize_map_size.x && i < data->sprites_count)
 		{
 			if (data->resize_map[y][x] == 'X')
 			{
-				data->sprite[i].x = x;
-				data->sprite[i].y = y;
+				data->sprites[i].x = x;
+				data->sprites[i].y = y;
 				data->resize_map[y][x] = '0';
 				i++;
 			}
