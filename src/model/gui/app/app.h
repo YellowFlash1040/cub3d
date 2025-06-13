@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:58:54 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/10 16:26:07 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:04:52 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct app
 }				t_app;
 
 t_app			*init_app(void);
+int				build_app(t_app **app_ref);
 void			destroy_app(t_app **app_ref);
 
 #endif
