@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   renderer.h                                         :+:      :+:    :+:   */
+/*   sprites.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 16:40:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/13 17:11:54 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/11 14:09:31 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/13 17:13:14 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDERER_H
-# define RENDERER_H
+#ifndef SPRITES_H
+# define SPRITES_H
 
-# include "ft_memory.h"
-# include "app.h"
-# include "minimap.h"
-# include "scene.h"
-# include "sprites.h"
-# include "animations_manager.h"
+# include "settings.h"
+# include "canvas.h"
+# include "drawing.h"
+# include "camera.h"
+# include "game.h"
+# include "textures.h"
+# include "geometry.h"
 
-int		render(t_app *app);
-void	render_frame(void *param);
-void	clear_buffer(mlx_image_t *img);
+# include <stdio.h>
+
+void	draw_sprites(t_canvas *canvas, t_camera *camera, t_game *game,
+			t_textures *textures);
+void	draw_sprite(t_canvas *canvas, t_camera *camera, t_npc npc,
+			t_sprite *sprite);
 
 #endif
