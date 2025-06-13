@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animations_loader.h                                :+:      :+:    :+:   */
+/*   animation_loader.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 19:03:34 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/10 21:05:08 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:34:14 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMATIONS_LOADER_H
-# define ANIMATIONS_LOADER_H
+#ifndef ANIMATION_LOADER_H
+# define ANIMATION_LOADER_H
 
 # include "texture.h"
 # include "ft_string.h"

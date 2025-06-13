@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animations_loader.c                                :+:      :+:    :+:   */
+/*   animation_loader.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:20:56 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 13:44:11 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:34:26 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "animations_loader.h"
+#include "animation_loader.h"
 
 static int	load_frames(t_sprite_sheet *sprite_sheet, t_animation *animation);
 static void	copy_pixels(t_sprite_sheet *sprite_sheet,
