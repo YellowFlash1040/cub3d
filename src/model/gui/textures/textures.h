@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:28:42 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 12:34:15 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:05:08 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "wall.h"
 # include "surface.h"
 # include "door.h"
+# include "sprite.h"
 
 # define TEXTURES_INIT_ERR 1
 
@@ -42,6 +43,7 @@ typedef struct textures
 	t_wall		*west_wall;
 	t_wall		*east_wall;
 	t_door		*door;
+	t_sprite	*npc_sprite;
 }	t_textures;
 
 t_textures	*init_textures(void);

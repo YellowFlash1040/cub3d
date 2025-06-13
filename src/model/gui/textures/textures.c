@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:28:45 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 14:36:52 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:05:35 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_textures	*init_textures(void)
 	textures->west_wall = NULL;
 	textures->east_wall = NULL;
 	textures->door = NULL;
+	textures->npc_sprite = NULL;
 	return (textures);
 }
 
@@ -50,6 +51,8 @@ void	destroy_textures(t_textures **textures_ref)
 		destroy_wall(&textures->east_wall);
 	if (textures->door)
 		destroy_door(&textures->door);
+	if (textures->npc_sprite)
+		destroy_sprite(&textures->npc_sprite);
 	free(textures);
 	*textures_ref = NULL;
 }

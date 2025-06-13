@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:02:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/10 17:02:58 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:07:06 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	build_surfaces(t_textures *textures);
 static int	build_walls(t_textures *textures);
 static int	build_door(t_textures *textures);
+static int	build_npc(t_textures *textures);
 
 int	build_textures(t_textures **textures_ref)
 {
@@ -31,6 +32,9 @@ int	build_textures(t_textures **textures_ref)
 	if (result != SUCCESS)
 		return (destroy_textures(textures_ref), result);
 	result = build_door(textures);
+	if (result != SUCCESS)
+		return (destroy_textures(textures_ref), result);
+	result = build_npc(textures);
 	if (result != SUCCESS)
 		return (destroy_textures(textures_ref), result);
 	return (SUCCESS);
@@ -68,6 +72,14 @@ static int	build_door(t_textures *textures)
 {
 	textures->door = init_door();
 	if (!textures->door)
+		return (MALLOC_FAIL_ERR);
+	return (SUCCESS);
+}
+
+static int	build_npc(t_textures *textures)
+{
+	textures->npc_sprite = init_sprite();
+	if (!textures->npc_sprite)
 		return (MALLOC_FAIL_ERR);
 	return (SUCCESS);
 }
