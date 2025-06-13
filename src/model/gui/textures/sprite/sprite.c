@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 20:55:33 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/10 20:56:03 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:08:23 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	destroy_sprite(t_sprite **sprite_ref)
 	if (!sprite_ref || !*sprite_ref)
 		return ;
 	sprite = *sprite_ref;
-	if (sprite->texture)
-		mlx_delete_texture(sprite->texture);
+	// if (sprite->texture)
+	// 	mlx_delete_texture(sprite->texture);
 	free(sprite);
 	*sprite_ref = NULL;
 }

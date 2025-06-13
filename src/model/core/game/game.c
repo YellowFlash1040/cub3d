@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:48:27 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/13 14:53:46 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:53:22 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	build_game(t_game **game_ref)
 	if (!game_ref || !*game_ref)
 		return (EMPTY_PTR_ERR);
 	game = *game_ref;
-	game->map = init_map();
-	if (!game->map)
-		return (destroy_game(game_ref), MALLOC_FAIL_ERR);
+	// game->map = init_map();
+	// if (!game->map)
+	// 	return (destroy_game(game_ref), MALLOC_FAIL_ERR);
 	game->player = init_player();
 	if (!game->player)
 		return (destroy_game(game_ref), MALLOC_FAIL_ERR);
