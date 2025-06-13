@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:29:35 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 13:40:13 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:54:40 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	destroy_wall(t_wall **wall_ref)
 	if (!wall_ref || !*wall_ref)
 		return ;
 	wall = *wall_ref;
-	// if (wall->texture)
-	// 	mlx_delete_texture(wall->texture);
 	free(wall);
 	*wall_ref = NULL;
 }
