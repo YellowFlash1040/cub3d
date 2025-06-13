@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 20:08:34 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 13:36:39 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:07:36 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	update_textures(t_textures *textures, t_animations *animations)
 	update_texture(&textures->west_wall->texture, animation);
 	animation = animations->east_wall;
 	update_texture(&textures->east_wall->texture, animation);
+	animation = animations->sprite;
+	update_texture(&textures->npc_sprite->texture, animation);
 }
-// animation = animations->sprite;
-// update_texture(&textures->sprite->texture, animation);
 
 static void	update_texture(t_texture **texture_ref, t_animation *animation)
 {
