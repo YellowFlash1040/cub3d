@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 12:17:58 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 16:34:57 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:15:12 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,23 @@ int	setup_animations(t_animations *animations, t_configuration *config)
 	t_string	filepath;
 
 	filepath = config->animations[ANIMATION_SPRITE];
-	result = load_animation(filepath, &animations->sprite);
+	result = load_animation(filepath, 32, &animations->sprite);
 	if (result != SUCCESS)
 		return (result);
 	filepath = config->animations[ANIMATION_NORTH_WALL];
-	result = load_animation(filepath, &animations->north_wall);
+	result = load_animation(filepath, 16, &animations->north_wall);
 	if (result != SUCCESS)
 		return (result);
 	filepath = config->animations[ANIMATION_SOUTH_WALL];
-	result = load_animation(filepath, &animations->south_wall);
+	result = load_animation(filepath, 16, &animations->south_wall);
 	if (result != SUCCESS)
 		return (result);
 	filepath = config->animations[ANIMATION_WEST_WALL];
-	result = load_animation(filepath, &animations->west_wall);
+	result = load_animation(filepath, 16, &animations->west_wall);
 	if (result != SUCCESS)
 		return (result);
 	filepath = config->animations[ANIMATION_EAST_WALL];
-	result = load_animation(filepath, &animations->east_wall);
+	result = load_animation(filepath, 16, &animations->east_wall);
 	if (result != SUCCESS)
 		return (result);
 	return (SUCCESS);
