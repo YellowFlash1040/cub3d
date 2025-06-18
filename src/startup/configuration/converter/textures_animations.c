@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 15:45:38 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 17:00:07 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:51:29 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	copy_animations_file_paths(t_string *animations)
 {
 	t_string	file_path;
 
-	file_path = ft_strdup("./assets/textures/animated/sprite.png");
+	file_path = ft_strdup("./assets/textures/animated/darth_vader.png");
 	if (!file_path)
 		return (MALLOC_FAIL_ERR);
 	animations[ANIMATION_SPRITE] = file_path;
