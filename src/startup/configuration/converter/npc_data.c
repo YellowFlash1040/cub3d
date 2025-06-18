@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:59 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/13 10:19:02 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/17 10:00:32 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ static void	copy_data(t_data *data, t_npc *npcs)
 	{
 		npcs[i].x = data->sprites[i].x * CELL_SIZE + CELL_SIZE / 2;
 		npcs[i].y = data->sprites[i].y * CELL_SIZE + CELL_SIZE / 2;
-		npcs[i].z = 20;
+		npcs[i].z = 0;
 	}
 }
