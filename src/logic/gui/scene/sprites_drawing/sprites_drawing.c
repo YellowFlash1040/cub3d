@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:09:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/18 16:46:52 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/18 18:01:07 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	draw_sprite(t_canvas *canvas, t_camera *camera, t_npc npc, t_sprite *sprite
 	double sprite_screen_width = SPRITE_SIZE / depth * distance_to_the_screen;
 	double sprite_screen_height = SPRITE_SIZE / depth * distance_to_the_screen;
 	
-	/*--------------------NOT NOT NOT MY PART (OK, now it is my code, but it has to become DRY)-----------------------------*/
 	// Calculate sprite bounds on screen
     double sprite_left = screen_x - sprite_screen_width / 2;
     double sprite_right = screen_x + sprite_screen_width / 2;
@@ -74,17 +73,13 @@ void	draw_sprite(t_canvas *canvas, t_camera *camera, t_npc npc, t_sprite *sprite
     double sprite_bottom = screen_y + sprite_screen_height / 2;
 
     // Early culling - if completely off screen
-    if (sprite_right < 0 || sprite_left >= GAME_SCREEN_WIDTH || 
-        sprite_bottom < 0 || sprite_top >= GAME_SCREEN_HEIGHT)
+    if (sprite_right < 0 || sprite_left >= GAME_SCREEN_WIDTH
+		|| sprite_bottom < 0 || sprite_top >= GAME_SCREEN_HEIGHT)
 	{
         return ;
 	}
 
     // Clamp sprite bounds to screen
-    // int draw_left = (int)fmax(0, sprite_left);
-    // int draw_right = (int)fmin(GAME_SCREEN_WIDTH - 1, sprite_right);
-    // int draw_top = (int)fmax(0, sprite_top);
-    // int draw_bottom = (int)fmin(GAME_SCREEN_HEIGHT - 1, sprite_bottom);
 	int draw_left = sprite_left;
 	if (draw_left < 0)
 		draw_left = 0;
@@ -97,7 +92,6 @@ void	draw_sprite(t_canvas *canvas, t_camera *camera, t_npc npc, t_sprite *sprite
 	int draw_bottom = sprite_bottom;
 	if (draw_bottom >= GAME_SCREEN_HEIGHT)
 		draw_bottom = GAME_SCREEN_HEIGHT - 1;
-	/*--------------------NOT NOT NOT MY PART-----------------------------*/
 
 	/*-----------------------WALL OCCLUSION--------------------------*/
     double sprite_angular_width = 2.0 * atan((SPRITE_SIZE / 2.0) / depth);
@@ -122,7 +116,6 @@ void	draw_sprite(t_canvas *canvas, t_camera *camera, t_npc npc, t_sprite *sprite
     
 	if (total_strips < 1)
         return ;
-	/*------------------------------------------------*/
     
     // For partial rendering, we'll divide the sprite into strips
     double strip_width = (draw_right - draw_left + 1) / (double)total_strips;
@@ -135,47 +128,18 @@ void	draw_sprite(t_canvas *canvas, t_camera *camera, t_npc npc, t_sprite *sprite
         // Check if this strip is visible (not occluded by walls)
         if (depth < camera->rays[ray_index].length)
         {
-
-			/*---------------------------------------------*/
-			// // Calculate strip bounds with proper rounding
-			int strip_left, strip_right;
-
-			if (i == 0) {
-			    strip_left = draw_left;
-			} else {
-			    strip_left = draw_left + (int)round(strip_width * i);
-			}
-
-			if (i == total_strips - 1) {
-			    strip_right = draw_right;  // Ensure last strip reaches the right edge
-			} else {
-			    strip_right = draw_left + (int)round(strip_width * (i + 1)) - 1;
-			}
-
-			t_point draw_point = {strip_left, draw_top};
-            t_size strip_size = {strip_right - strip_left + 1, strip_height};
-            draw_rectangle(canvas, draw_point, strip_size, 0xffff00ff);
+            // Calculate strip bounds
+			int strip_left = draw_left + (strip_width * i);
+            int strip_right = draw_left + (strip_width * (i + 1));
+            
+            t_point draw_point = {strip_left, draw_top};
+            t_size strip_size = {strip_right - strip_left, strip_height};
 
 			t_point sprite_position;
 			sprite_position.x = strip_left - (screen_x - sprite_screen_width / 2);
 			sprite_position.y = draw_top - (screen_y - sprite_screen_height / 2);
 
 			draw_strip(canvas, draw_point, sprite_position, strip_size, sprite->texture, (t_size){sprite_screen_width, sprite_screen_height});
-			/*---------------------------------------------*/
-
-            // Calculate strip bounds
-			// int strip_left = draw_left + (strip_width * i);
-            // int strip_right = draw_left + (strip_width * (i + 1));
-            
-            // t_point draw_point = {strip_left, draw_top};
-            // t_size strip_size = {strip_right - strip_left, strip_height};
-            // // draw_rectangle(canvas, draw_point, strip_size, 0xffff00ff);
-
-			// t_point sprite_position;
-			// sprite_position.x = strip_left - (screen_x - sprite_screen_width / 2);
-			// sprite_position.y = draw_top - (screen_y - sprite_screen_height / 2);
-
-			// draw_strip(canvas, draw_point, sprite_position, strip_size, sprite->texture, (t_size){sprite_screen_width, sprite_screen_height});
         }
     }
 }
@@ -195,7 +159,7 @@ void draw_strip(t_canvas *canvas, t_point draw_point, t_point sprite_position, t
 		for (int x = 0; x < strip_size.width; x++)
 		{
 			t_color pixel = get_texture_pixel(texture, texture_x, texture_y);
-			// Skip black pixels (make them transparent)
+			// Skip transparent pixels
 			if (pixel != 0x000000) // RGB(0,0,0)
 			    draw_pixel(canvas, draw_point.x + x, draw_point.y + y, pixel);
 			texture_x += texture_x_step;
@@ -243,18 +207,3 @@ projection_distance = distance from camera to the projection plane
 object_world_distance = distance from camera to the object
 object_screen_height = height to draw on screen in pixels
 */
-
-void draw_texture(t_canvas *canvas, t_texture *texture)
-{
-	for (int y = 0; y < (int)texture->height; y++)
-	{
-		for (int x = 0; x < (int)texture->width; x++)
-		{
-			t_color pixel = get_texture_pixel(texture, x, y);
-			t_point position;
-			position.x = GAME_SCREEN_WIDTH - x;
-			position.y = 0 + y;
-			draw_pixel(canvas, position.x, position.y, pixel);
-		}
-	}
-}

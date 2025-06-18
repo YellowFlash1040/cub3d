@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:40:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/13 17:11:54 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/15 12:28:37 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "app.h"
 # include "minimap.h"
 # include "scene.h"
-# include "sprites.h"
 # include "animations_manager.h"
 
 int		render(t_app *app);
