@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:19:33 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 11:47:30 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:38:59 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 # define ANIMATION_INIT_ERR 1
 
-# define FRAMES_COUNT 16
 # define ANIMATION_DELAY 0.1
 
 typedef struct animation
