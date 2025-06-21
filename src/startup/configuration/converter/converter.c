@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 15:02:27 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/21 13:50:27 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:01:54 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ t_configuration	*convert_data_to_configuration(t_data *data)
 	configuration = init_configuration();
 	if (!configuration)
 		return (NULL);
-	// configuration->textures = get_textures(data);
-	// if (!configuration->textures)
-	// 	return (destroy_configuration(&configuration, true), NULL);
-	// configuration->animations = get_animations();
 	configuration->animations = get_animations(data);
 	if (!configuration->animations)
 		return (destroy_configuration(&configuration, true), NULL);
