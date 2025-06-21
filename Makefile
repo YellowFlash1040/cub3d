@@ -94,7 +94,7 @@ $(NAME): $(OBJ) $(LIBRARIES)
 	@echo "$(GREEN)Compiled $@ successfully!$(RESET)"
 
 # Compile Object Files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) Makefile
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
