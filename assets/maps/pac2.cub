@@ -1,0 +1,53 @@
+NO textures/Pac-Man/Ghosts/Panic/ghost_panic1a.png
+NO textures/Pac-Man/Ghosts/Panic/ghost_panic1b.png
+NO textures/Pac-Man/Ghosts/Panic/ghost_panic2a.png
+NO textures/Pac-Man/Ghosts/Panic/ghost_panic2b.png
+SO textures/Pac-Man/pac_open_right.png
+SO textures/Pac-Man/pac_semi_right.png
+SO textures/Pac-Man/pac_closed.png
+SO textures/Pac-Man/pac_semi_right.png
+EA textures/Pac-Man/Dying/pacman_dying1.png
+EA textures/Pac-Man/Dying/pacman_dying2.png
+EA textures/Pac-Man/Dying/pacman_dying3.png
+EA textures/Pac-Man/Dying/pacman_dying4.png
+EA textures/Pac-Man/Dying/pacman_dying5.png
+EA textures/Pac-Man/Dying/pacman_dying6.png
+EA textures/Pac-Man/Dying/pacman_dying7.png
+EA textures/Pac-Man/Dying/pacman_dying8.png
+EA textures/Pac-Man/Dying/pacman_dying9.png
+EA textures/Pac-Man/Dying/pacman_dying10.png
+EA textures/black.png
+EA textures/Pac-Man/Dying/pacman_woosh.png
+EA textures/black.png
+EA textures/black.png
+EA textures/Pac-Man/Dying/pacman_woosh.png
+EA textures/black.png
+WE textures/Pac-Man/pac_open_left.png
+WE textures/Pac-Man/pac_semi_left.png
+WE textures/Pac-Man/pac_closed.png
+WE textures/Pac-Man/pac_semi_left.png
+
+
+F 0,0,0
+C 0,0,0
+
+111111111111111111111111111111
+100000000000000000000000000001
+1o1111111111110000000011100001
+100000000000000000110000000001
+100000000000000000110000000001
+100000000001000000000100000001
+101111110001110110000100100001
+100000000000000000000111110001
+101111110000100000000100000001
+101000010000100000000000000001
+101000010000100111111110000001
+1010000100001000000000c00000N1
+101000010000100111111110000001
+1000000o00001000000000o0000001
+100000110000100110000110000001
+100000110000100000000000000001
+100000000000100000000000000001
+111111111111111111111111111001
+1o1o1c1c1o1o111111111111111111
+111111111111111111111111111111
