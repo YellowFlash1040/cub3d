@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:33:47 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/13 14:50:23 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:04:49 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ int	main(int argc, char **argv)
 		return (free_all(&data, 1), MALLOC_FAIL_ERR);
 	free_all(&data, 0);
 	result = startup(&app, configuration);
-	destroy_configuration(&configuration);
 	if (result != SUCCESS)
-		return (handle_error(app, result));
+		return (destroy_configuration(&configuration, true),
+			handle_error(app, result));
+	destroy_configuration(&configuration, false);
 	subscribe_to_keyboard_events(app);
 	subscribe_to_mouse_events(app);
 	result = render(app);

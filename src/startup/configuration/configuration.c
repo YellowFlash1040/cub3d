@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:56:37 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 17:40:55 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:56:30 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_configuration	*init_configuration(void)
 	return (configuration);
 }
 
-void	destroy_configuration(t_configuration **configuration_ref)
+void	destroy_configuration(t_configuration **configuration_ref,
+	bool full_destruction)
 {
 	t_configuration	*configuration;
 
@@ -42,6 +43,10 @@ void	destroy_configuration(t_configuration **configuration_ref)
 		destroy_string_array(&configuration->textures);
 	if (configuration->animations)
 		destroy_string_array(&configuration->animations);
+	if (full_destruction && configuration->map)
+		destroy_map(&configuration->map);
+	if (full_destruction && configuration->npcs)
+		free(configuration->npcs);
 	free(configuration);
 	*configuration_ref = NULL;
 }

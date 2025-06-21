@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 15:02:27 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/13 12:14:56 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:57:47 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ t_configuration	*convert_data_to_configuration(t_data *data)
 		return (NULL);
 	configuration->textures = get_textures(data);
 	if (!configuration->textures)
-		return (destroy_configuration(&configuration), NULL);
+		return (destroy_configuration(&configuration, true), NULL);
 	configuration->animations = get_animations();
 	if (!configuration->animations)
-		return (destroy_configuration(&configuration), NULL);
+		return (destroy_configuration(&configuration, true), NULL);
 	configuration->floor_color = get_color_from_data(data->clean_floor[0]);
 	configuration->ceiling_color = get_color_from_data(data->clean_floor[1]);
 	configuration->map = get_map(data);
 	if (!configuration->map)
-		return (destroy_configuration(&configuration), NULL);
+		return (destroy_configuration(&configuration, true), NULL);
 	configuration->player_position = get_player_position(data);
 	configuration->camera_angle = get_camera_angle(data);
 	configuration->npcs = get_npcs(data);

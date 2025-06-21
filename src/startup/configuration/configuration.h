@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:56:34 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 17:40:44 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:08:50 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct configuration
 }	t_configuration;
 
 t_configuration	*init_configuration(void);
-void			destroy_configuration(t_configuration **configuration_ref);
+void			destroy_configuration(t_configuration **configuration_ref,
+					bool full_destruction);
 
 #endif
