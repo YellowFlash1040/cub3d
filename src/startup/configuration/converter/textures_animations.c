@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 15:45:38 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/21 13:47:20 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:40:08 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_string	*get_animations(t_data *data)
 	animations[ANIMATION_WEST_WALL] = data->clean_wall[2];
 	animations[ANIMATION_EAST_WALL] = data->clean_wall[3];
 	animations[ANIMATION_DOOR] = ft_strdup("./assets/textures/static/door.png");
-	animations[ANIMATION_SPRITE] = ft_strdup("./assets/textures/animated/darth_vader.png");
+	animations[ANIMATION_SPRITE] = ft_strdup("./assets/textures/animated/sprites/darth_vader.png");
 	return (animations);
 }
 

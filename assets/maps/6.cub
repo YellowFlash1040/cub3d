@@ -1,11 +1,7 @@
-NO textures/Pac-Man/Ghosts/K/ghost_right1.png
-NO textures/Pac-Man/Ghosts/K/ghost_right2.png
-SO textures/Pac-Man/Ghosts/R/ghost_right1.png
-SO textures/Pac-Man/Ghosts/R/ghost_right2.png
-EA textures/Pac-Man/Ghosts/G/ghost_right1.png
-EA textures/Pac-Man/Ghosts/G/ghost_right2.png
-WE textures/Pac-Man/Ghosts/B/ghost_right1.png
-WE textures/Pac-Man/Ghosts/B/ghost_right2.png
+NO assets/textures/static/walls/wall21.png
+SO assets/textures/static/walls/wall22.png
+WE assets/textures/static/walls/wall23.png
+EA assets/textures/static/walls/wall24.png
 
 F 0,0,0
 C 0,0,0
@@ -20,7 +16,7 @@ C 0,0,0
 10000000000011000010000001
 11111101111011011110111111
 11111101000000000010111111
-111111010111cc111010111111
+11111101011122111010111111
 10000000010000001000000001
 11111101011111111010111111
 11111101000000000010111111
@@ -28,7 +24,7 @@ C 0,0,0
 10000000000011000000000001
 10111101111011011110111101
 1000110000000E000000110001
-11101101c11111111c10110111
+11101101211111111210110111
 10000001000011000010000001
 10111111111011011111111101
 10000000000000000000000001

@@ -1,15 +1,7 @@
-NO textures/torch/torch1_wall.png
-NO textures/torch/torch2_wall.png
-NO textures/torch/torch3_wall.png
-SO textures/torch/torch1_wall.png
-SO textures/torch/torch2_wall.png
-SO textures/torch/torch3_wall.png
-WE textures/torch/torch1_wall.png
-WE textures/torch/torch2_wall.png
-WE textures/torch/torch3_wall.png
-EA textures/torch/torch1_wall.png
-EA textures/torch/torch2_wall.png
-EA textures/torch/torch3_wall.png
+NO assets/textures/static/walls/wall17.png
+SO assets/textures/static/walls/wall18.png
+WE assets/textures/static/walls/wall19.png
+EA assets/textures/static/walls/wall20.png
 
 F 184,113,39
 C 51,198,227

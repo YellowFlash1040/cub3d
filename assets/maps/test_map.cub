@@ -1,7 +1,7 @@
-NO ./assets/textures/static/wall0.png
-SO ./assets/textures/static/wall1.png
-WE ./assets/textures/static/wall2.png
-EA ./assets/textures/static/wall3.png
+NO assets/textures/animated/walls/wall1.png
+SO assets/textures/animated/walls/wall2.png
+WE assets/textures/animated/walls/wall3.png
+EA assets/textures/animated/walls/wall4.png
 
 F 0,0,0
 C 255,255,255
