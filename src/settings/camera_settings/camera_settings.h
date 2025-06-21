@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:47:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/13 13:47:22 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:42:21 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // How many rays camera casts
 // # define RAYS_COUNT 128
-# define RAYS_COUNT 120
+# define RAYS_COUNT 240
 // # define RAYS_COUNT 100
 //Player's/camera's field of view in degrees (not radians)
 # define CAMERA_FIELD_OF_VIEW 60
