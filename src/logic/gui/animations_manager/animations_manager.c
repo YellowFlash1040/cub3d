@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 20:08:34 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 14:07:36 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:35:16 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	update_animations(t_animations *animations)
 	switch_frame(animations->south_wall);
 	switch_frame(animations->west_wall);
 	switch_frame(animations->east_wall);
+	switch_frame(animations->door);
 	switch_frame(animations->sprite);
 }
 
@@ -60,6 +61,8 @@ void	update_textures(t_textures *textures, t_animations *animations)
 	update_texture(&textures->west_wall->texture, animation);
 	animation = animations->east_wall;
 	update_texture(&textures->east_wall->texture, animation);
+	animation = animations->door;
+	update_texture(&textures->door->texture, animation);
 	animation = animations->sprite;
 	update_texture(&textures->npc_sprite->texture, animation);
 }

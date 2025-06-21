@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:21:01 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 13:19:18 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:28:50 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef enum e_animation_name
 	ANIMATION_SOUTH_WALL,
 	ANIMATION_WEST_WALL,
 	ANIMATION_EAST_WALL,
+	ANIMATION_DOOR,
 	ANIMATION_SPRITE,
 	ANIMATION_NAMES_COUNT
 }	t_animation_name;
@@ -37,6 +38,7 @@ typedef struct animations
 	t_animation	*south_wall;
 	t_animation	*west_wall;
 	t_animation	*east_wall;
+	t_animation	*door;
 	t_animation	*sprite;
 }	t_animations;
 

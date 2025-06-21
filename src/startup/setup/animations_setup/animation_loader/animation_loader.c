@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:20:56 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/18 17:28:21 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:25:00 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static int	load_frames(t_sprite_sheet *sprite_sheet, t_animation *animation);
 static void	copy_pixels(t_sprite_sheet *sprite_sheet,
 				int sprite_sheet_x, t_frame *frame);
 
-int	load_animation(t_string file_path, int frame_width,
-	t_animation **animation_ref)
+int	load_animation(t_string file_path, t_animation **animation_ref)
 {
 	t_sprite_sheet	*sprite_sheet;
 	t_animation		*animation;
@@ -29,7 +28,7 @@ int	load_animation(t_string file_path, int frame_width,
 	sprite_sheet = mlx_load_png(file_path);
 	if (!sprite_sheet)
 		return (MLX_ERR);
-	frames_count = sprite_sheet->width / frame_width;
+	frames_count = sprite_sheet->width / sprite_sheet->height;
 	animation = create_animation(frames_count, ANIMATION_DELAY, true);
 	if (!animation)
 		return (mlx_delete_texture(sprite_sheet), MALLOC_FAIL_ERR);

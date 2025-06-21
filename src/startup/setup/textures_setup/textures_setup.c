@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:47:36 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/13 16:54:58 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:31:51 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 int	setup_textures(t_textures *textures, t_configuration *config)
 {
-	int	result;
-
 	setup_surfaces(textures, config);
-	result = setup_door(textures, config);
-	if (result != SUCCESS)
-		return (result);
 	return (SUCCESS);
 }
 

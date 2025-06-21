@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 19:03:34 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/18 17:34:09 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:25:08 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 
 typedef mlx_texture_t	t_sprite_sheet;
 
-int	load_animation(t_string file_path, int frame_width,
-		t_animation **animation_ref);
+int	load_animation(t_string file_path, t_animation **animation_ref);
+// int	load_animation(t_string file_path, int frame_width,
+// 		t_animation **animation_ref);
 
 #endif

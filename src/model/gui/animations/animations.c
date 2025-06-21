@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:23:37 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/11 11:31:27 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:29:46 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_animations	*init_animations(void)
 	animations->south_wall = NULL;
 	animations->west_wall = NULL;
 	animations->east_wall = NULL;
+	animations->door = NULL;
 	animations->sprite = NULL;
 	return (animations);
 }
@@ -46,6 +47,9 @@ int	build_animations(t_animations **animations_ref)
 	animations->east_wall = init_animation();
 	if (!animations->east_wall)
 		return (destroy_animations(animations_ref), MALLOC_FAIL_ERR);
+	animations->door = init_animation();
+	if (!animations->door)
+		return (destroy_animations(animations_ref), MALLOC_FAIL_ERR);
 	animations->sprite = init_animation();
 	if (!animations->sprite)
 		return (destroy_animations(animations_ref), MALLOC_FAIL_ERR);
@@ -67,6 +71,8 @@ void	destroy_animations(t_animations **animations_ref)
 		destroy_animation(&animations->west_wall);
 	if (animations->east_wall)
 		destroy_animation(&animations->east_wall);
+	if (animations->door)
+		destroy_animation(&animations->door);
 	if (animations->sprite)
 		destroy_animation(&animations->sprite);
 	free(animations);

@@ -6,12 +6,13 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 15:02:27 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/21 12:57:47 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:50:27 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "converter.h"
 
+static t_map	*get_map(t_data *data);
 static double	get_camera_angle(t_data *data);
 static t_color	get_color_from_data(t_rgb value);
 static t_fpoint	get_player_position(t_data *data);
@@ -23,10 +24,11 @@ t_configuration	*convert_data_to_configuration(t_data *data)
 	configuration = init_configuration();
 	if (!configuration)
 		return (NULL);
-	configuration->textures = get_textures(data);
-	if (!configuration->textures)
-		return (destroy_configuration(&configuration, true), NULL);
-	configuration->animations = get_animations();
+	// configuration->textures = get_textures(data);
+	// if (!configuration->textures)
+	// 	return (destroy_configuration(&configuration, true), NULL);
+	// configuration->animations = get_animations();
+	configuration->animations = get_animations(data);
 	if (!configuration->animations)
 		return (destroy_configuration(&configuration, true), NULL);
 	configuration->floor_color = get_color_from_data(data->clean_floor[0]);
@@ -41,7 +43,7 @@ t_configuration	*convert_data_to_configuration(t_data *data)
 	return (configuration);
 }
 
-t_map	*get_map(t_data *data)
+static t_map	*get_map(t_data *data)
 {
 	t_map	*map;
 
