@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/26 15:17:51 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/26 17:29:39 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	exit_all(t_data *data, uint8_t exit_status)
 		write(2, "Error\n", 6);
 	if (exit_status != 19)
 	{
-		write(2, data->error[exit_status], strlen(data->error[exit_status]));
+		write(2, data->error[exit_status], ft_strlen(data->error[exit_status]));
 		if (exit_status == 4 || exit_status == 5 || exit_status == 8)
 			perror("");
 	}
 	else if (exit_status == 19)
 	{
-		write(2, mlx_strerror(mlx_errno), strlen(mlx_strerror(mlx_errno)));
+		write(2, mlx_strerror(mlx_errno), ft_strlen(mlx_strerror(mlx_errno)));
 		write(2, "\n", 1);
 	}
 	free_all(data, exit_status);
@@ -71,8 +71,8 @@ void	check_extension(t_data *data, char *file, char *ext)
 	int	len_ext;
 	int	len_name;
 
-	len_ext = strlen(ext);
-	len_name = strlen(file) - len_ext;
+	len_ext = ft_strlen(ext);
+	len_name = ft_strlen(file) - len_ext;
 	len_ext--;
 	if (len_name <= 0)
 		exit_all(data, 3);

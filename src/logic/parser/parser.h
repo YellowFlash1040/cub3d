@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:09 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/26 14:38:46 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/26 17:33:07 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <limits.h>
+
+# define DEFAULT_DOOR "./assets/textures/animated/walls/door1.png"
+# define DEFAULT_SPRITE "./assets/textures/animated/sprites/spr1.png"
 
 typedef struct s_rgb
 {

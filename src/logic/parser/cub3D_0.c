@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/26 16:07:06 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/26 17:33:17 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	init_map_data(t_data *data)
 	data->clean_wall[1] = NULL;
 	data->clean_wall[2] = NULL;
 	data->clean_wall[3] = NULL;
-	data->clean_wall[4] = strdup("./assets/textures/animated/walls/door1.png");
+	data->clean_wall[4] = ft_strdup(DEFAULT_DOOR);
 	if (data->clean_wall[4] == NULL)
 		exit_all(data, 8);
-	data->clean_wall[5] = strdup("./assets/textures/animated/sprites/spr1.png");
+	data->clean_wall[5] = ft_strdup(DEFAULT_SPRITE);
 	if (data->clean_wall[5] == NULL)
 		exit_all(data, 8);
 	data->sprites = NULL;
