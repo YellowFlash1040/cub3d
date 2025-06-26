@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   file.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 17:37:24 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/14 12:43:43 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   file.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: akovtune <akovtune@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/08 17:37:24 by akovtune      #+#    #+#                 */
+/*   Updated: 2025/06/26 15:25:31 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ char	**read_all_lines(char *filepath, int *lines_count)
 
 static char	**move_from_list_to_array(t_list *lines, int lines_count)
 {
-	char	**result;
-	int		i;
+	char		**result;
+	int			i;
 	t_list_node	*next_line;
 	t_list_node	*line;
 

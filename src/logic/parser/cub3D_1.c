@@ -1,16 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D_1.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
-/*   Updated: 2025/06/13 14:48:20 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3D_1.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
+/*   Updated: 2025/06/26 15:17:51 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+void	free_all(t_data *data, uint8_t exit_status)
+{
+	int	i;
+
+	free_null((void **)&data->line);
+	close_fd(data, &data->fd);
+	i = 0;
+	while (data->temp_map != NULL && i < data->clean_map_size.y)
+		free_null((void **)&data->temp_map[i++]);
+	free_null((void **)&data->temp_map);
+	i = 0;
+	while (data->clean_map != NULL && i < data->clean_map_size.y)
+		free_null((void **)&data->clean_map[i++]);
+	free_null((void **)&data->clean_map);
+	i = 0;
+	while (exit_status != 0 && data->resize_map && i < data->resize_map_size.y)
+		free_null((void **)&data->resize_map[i++]);
+	if (exit_status != 0)
+		free_null((void **)&data->resize_map);
+	i = 0;
+	while (exit_status != 0 && i < 6)
+		free_null((void **)&data->clean_wall[i++]);
+	free_null((void **)&data->sprites);
+}
+
+void	exit_all(t_data *data, uint8_t exit_status)
+{
+	if (exit_status != 0)
+		write(2, "Error\n", 6);
+	if (exit_status != 19)
+	{
+		write(2, data->error[exit_status], strlen(data->error[exit_status]));
+		if (exit_status == 4 || exit_status == 5 || exit_status == 8)
+			perror("");
+	}
+	else if (exit_status == 19)
+	{
+		write(2, mlx_strerror(mlx_errno), strlen(mlx_strerror(mlx_errno)));
+		write(2, "\n", 1);
+	}
+	free_all(data, exit_status);
+	exit(exit_status);
+}
 
 void	check_number_args(t_data *data, int argc, char **argv)
 {
@@ -22,49 +66,28 @@ void	check_number_args(t_data *data, int argc, char **argv)
 		data->file = argv[1];
 }
 
-void	check_extension(t_data *data, char *str, char *ext, int exit_status)
+void	check_extension(t_data *data, char *file, char *ext)
 {
-	int	s_i;
-	int	e_i;
+	int	len_ext;
+	int	len_name;
 
-	s_i = ft_strlen(str);
-	e_i = ft_strlen(ext);
-	if (s_i <= e_i)
-		exit_all(data, exit_status);
-	while (e_i >= 0 && str[s_i] == ext[e_i])
-	{
-		s_i--;
-		e_i--;
-	}
-	if (e_i == -1)
-		return ;
-	s_i = ft_strlen(str);
-	e_i = ft_strlen(ext);
-	while (e_i >= 0 && str[s_i] == ext[e_i] - 32)
-	{
-		s_i--;
-		e_i--;
-	}
-	if (e_i != -1)
-		exit_all(data, exit_status);
+	len_ext = strlen(ext);
+	len_name = strlen(file) - len_ext;
+	len_ext--;
+	if (len_name <= 0)
+		exit_all(data, 3);
+	while (len_ext > 0 && (ext[len_ext] == file[len_name + len_ext]
+			|| ext[len_ext] == file[len_name + len_ext] + 32))
+		len_ext--;
+	if (len_ext != 0 || ext[len_ext] != '.' || file[len_name + len_ext] != '.')
+		exit_all(data, 3);
 }
 
-void	check_input(t_data *data, int argc, char **argv)
+void	reset_dir(t_data *data)
 {
-	init_map_data(data);
-	check_number_args(data, argc, argv);
-	check_extension(data, data->file, ".cub", 3);
-}
+	int	i;
 
-void	open_fd(t_data *data, char *file, int *fd, int exit_status)
-{
-	*fd = open(file, O_RDONLY);
-	if (*fd == -1)
-		exit_all(data, exit_status);
-}
-
-void	close_fd(t_data *data, int fd, int exit_status)
-{
-	if (close(fd) == -1)
-		exit_all(data, exit_status);
+	i = 0;
+	while (i < 9)
+		data->dir_check[i++] = false;
 }

@@ -1,101 +1,107 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D_5.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
-/*   Updated: 2025/06/13 14:48:20 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3D_5.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
+/*   Updated: 2025/06/26 14:31:35 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	reset_dir(t_data *data)
+uint8_t	atouint8(t_data *data, int i)
 {
-	int	i;
+	uint8_t	x;
 
-	i = 0;
-	while (i < 6)
-	{
-		data->dir_check[i] = false;
+	x = 0;
+	while (ft_isdigit(data->line[i]) == true)
+		x = x * 10 + data->line[i++] - 48;
+	return (x);
+}
+
+int	scrape_floor_loop(t_data *data, int f, int i, char c)
+{
+	if (c == 'r')
+		data->clean_floor[f - 6].r = atouint8(data, i);
+	else if (c == 'g')
+		data->clean_floor[f - 6].g = atouint8(data, i);
+	else if (c == 'b')
+		data->clean_floor[f - 6].b = atouint8(data, i);
+	while (ft_isdigit(data->line[i]) == true)
 		i++;
-	}
-}
-
-void	initialize_map(t_data *data)
-{
-	int	y;
-
-	data->temp_map = malloc(data->clean_map_size.y * sizeof(char *));
-	if (data->temp_map == NULL)
-		exit_all(data, 8);
-	data->clean_map = malloc(data->clean_map_size.y * sizeof(char *));
-	if (data->clean_map == NULL)
-		exit_all(data, 8);
-	y = 0;
-	while (y < data->clean_map_size.y)
-	{
-		data->temp_map[y] = malloc(data->clean_map_size.x + 1);
-		if (data->temp_map[y] == NULL)
-			exit_all(data, 8);
-		data->clean_map[y] = malloc(data->clean_map_size.x + 1);
-		if (data->clean_map[y] == NULL)
-			exit_all(data, 8);
-		y++;
-	}
-}
-
-void	scrape_texture(t_data *data, int w, int i)
-{
-	int		x;
-
-	x = 0;
-	while (ft_isspace(data->line[i + x]) == false)
-		x++;
-	data->clean_wall[w] = malloc(x + 1);
-	if (data->clean_wall[w] == NULL)
-		exit_all(data, 8);
-	x = 0;
-	while (ft_isspace(data->line[i + x]) == false)
-	{
-		data->clean_wall[w][x] = data->line[i + x];
-		x++;
-	}
-	data->clean_wall[w][x] = '\0';
-}
-
-bool	scrape_dir_wall_loop(t_data *data, int w)
-{
-	int	i;
-
-	i = 0;
 	while (ft_isspace(data->line[i]) == true)
 		i++;
-	if (data->line[i] == data->dir[w][0] && data->line[i + 1] == data->dir[w][1]
-		&& ft_isspace(data->line[i + 2]))
-	{
-		i += 3;
-		while (ft_isspace(data->line[i]) == true)
-			i++;
-		scrape_texture(data, w, i);
-		data->dir_check[w] = true;
-		return (true);
-	}
-	return (false);
+	if (data->line[i] == ',')
+		i++;
+	while (ft_isspace(data->line[i]) == true)
+		i++;
+	return (i);
 }
 
-bool	scrape_dir_wal(t_data *data)
+bool	scrape_floor(t_data *data, int d, int i)
 {
-	int	w;
+	if (data->line[i] != data->dir[d][0]
+		|| ft_isspace(data->line[i + 1]) == false)
+		return (false);
+	i += 2;
+	while (ft_isspace(data->line[i]) == true)
+		i++;
+	i = scrape_floor_loop(data, d, i, 'r');
+	i = scrape_floor_loop(data, d, i, 'g');
+	i = scrape_floor_loop(data, d, i, 'b');
+	data->dir_check[d] = true;
+	return (true);
+}
 
-	w = 0;
-	while (w < 4)
+void	scrape_dir(t_data *data)
+{
+	int	d;
+	int	i;
+
+	if (empty_line(data->line) == true)
+		return ;
+	d = 0;
+	while (d < 8)
 	{
-		if (scrape_dir_wall_loop(data, w) == true)
-			return (true);
-		w++;
+		i = 0;
+		while (ft_isspace(data->line[i]) == true)
+			i++;
+		if (d < 6 && scrape_wall(data, d, i) == true)
+			return ;
+		else if (d >= 6 && scrape_floor(data, d, i) == true)
+			return ;
+		d++;
 	}
-	return (false);
+}
+
+void	scrape_map(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->line[i] != '\n' && data->line[i] != '\0')
+	{
+		if (ft_isspace(data->line[i]) == true)
+			data->temp_map[data->map_y][i] = ' ';
+		else
+			data->temp_map[data->map_y][i] = data->line[i];
+		if (data->line[i] == 'N' || data->line[i] == 'S' || data->line[i] == 'W'
+			|| data->line[i] == 'E')
+			data->clean_map[data->map_y][i] = data->line[i];
+		else
+			data->clean_map[data->map_y][i] = ' ';
+		i++;
+	}
+	while (i < data->clean_map_size.x)
+	{
+		data->temp_map[data->map_y][i] = ' ';
+		data->clean_map[data->map_y][i] = ' ';
+		i++;
+	}
+	data->temp_map[data->map_y][i] = '\0';
+	data->clean_map[data->map_y][i] = '\0';
+	data->map_y += 1;
 }
