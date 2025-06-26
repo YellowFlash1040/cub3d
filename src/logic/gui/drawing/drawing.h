@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   drawing.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 16:13:31 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/02 20:55:09 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   drawing.h                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: akovtune <akovtune@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/05/17 16:13:31 by akovtune      #+#    #+#                 */
+/*   Updated: 2025/06/26 18:02:17 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DRAWING_H
 # define DRAWING_H
 
+# include "geometry.h"
 # include "canvas.h"
 # include "color.h"
 

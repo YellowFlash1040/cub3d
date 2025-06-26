@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   drawing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 16:22:57 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/18 17:26:29 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   drawing.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: akovtune <akovtune@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/05/17 16:22:57 by akovtune      #+#    #+#                 */
+/*   Updated: 2025/06/26 18:01:42 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	draw_line(t_canvas *canvas, t_point start, t_point end, t_color color)
 	t_line_params	lp;
 	int				error_times_two;
 
-	lp.dx = abs(end.x - start.x);
-	lp.dy = abs(end.y - start.y);
+	lp.dx = ft_abs(end.x - start.x);
+	lp.dy = ft_abs(end.y - start.y);
 	lp.step_x = determine_step(start.x, end.x);
 	lp.step_y = determine_step(start.y, end.y);
 	lp.error = lp.dx - lp.dy;

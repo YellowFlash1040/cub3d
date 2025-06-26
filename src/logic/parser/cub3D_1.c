@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/26 17:29:39 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/26 17:41:03 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	exit_all(t_data *data, uint8_t exit_status)
 	}
 	else if (exit_status == 19)
 	{
-		write(2, mlx_strerror(mlx_errno), ft_strlen(mlx_strerror(mlx_errno)));
+		write(2, mlx_strerror(mlx_errno),
+			ft_strlen((char *)mlx_strerror(mlx_errno)));
 		write(2, "\n", 1);
 	}
 	free_all(data, exit_status);

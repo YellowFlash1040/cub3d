@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   mouse_event_handlers.c                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/05 16:17:24 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 15:13:19 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   mouse_event_handlers.c                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: akovtune <akovtune@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/06/05 16:17:24 by akovtune      #+#    #+#                 */
+/*   Updated: 2025/06/26 18:01:46 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handle_mouse_move(double xpos, double ypos, void *param)
 	app = (t_app *)param;
 	if (app->cursor_position.x == 0 && app->cursor_position.y == 0)
 		app->cursor_position = (t_point){xpos, ypos};
-	difference = abs(app->cursor_position.x - (int)xpos);
+	difference = ft_abs(app->cursor_position.x - (int)xpos);
 	if (difference > MOUSE_SENSITIVITY)
 	{
 		if (app->cursor_position.x < xpos)

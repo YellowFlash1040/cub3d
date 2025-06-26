@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   geometry.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/23 14:03:16 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/24 19:54:14 by akovtune         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														::::::::			*/
+/*   geometry.c										 :+:	:+:			*/
+/*													 +:+					*/
+/*   By: akovtune <akovtune@student.42.fr>			+#+					 */
+/*												   +#+					  */
+/*   Created: 2025/05/23 14:03:16 by akovtune	  #+#	#+#				 */
+/*   Updated: 2025/06/26 18:00:20 by rbom		  ########   odam.nl		 */
+/*																			*/
 /* ************************************************************************** */
 
 #include "geometry.h"
@@ -71,3 +71,12 @@ So if you want to go up you have to subtract value from y
 Angles increase ClockWise ❗️
 unless you flip the value of delta_y using -sin()
 */
+
+int	ft_abs(int x)
+{
+	if (x >= 0)
+		return (x);
+	if (x == INT_MIN)
+		return ((unsigned int)INT_MAX + 1);
+	return (-x);
+}
