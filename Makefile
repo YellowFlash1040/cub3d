@@ -20,6 +20,13 @@ LIB_DIR 				:= libraries
 
 SRC_DIRS				 = $(patsubst %/, %, $(sort $(dir $(HEADERS))))
 
+#-----------------------ADDITIONAL SETUP------------------------------------------
+COMPILE_MSG_SHOWN		:=
+
+ASSETS_DIR				:= assets
+TEXTURES_DIR			:= $(ASSETS_DIR)/textures
+TEXTURES_ARCHIVE		:= $(ASSETS_DIR)/archives/textures.zip
+
 #-----------------------SOURCE FILES------------------------------------------------------------
 # Sources
 C_FILES 				:= $(shell find $(SRC_DIR) -name '*.c')
@@ -86,7 +93,7 @@ RESET					:= \033[0m
 vpath %.c $(SRC_DIRS)
 
 # Default Target
-all: $(MLX_LIB) $(NAME)
+all: $(TEXTURES_DIR) $(MLX_LIB) $(NAME)
 
 # Build the Executable
 $(NAME): $(OBJ) $(LIBRARIES)
@@ -95,6 +102,8 @@ $(NAME): $(OBJ) $(LIBRARIES)
 
 # Compile Object Files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) Makefile
+	$(if $(COMPILE_MSG_SHOWN),,$(eval COMPILE_MSG_SHOWN := 1) \
+	@echo "$(YELLOW)>> Compiling object files...$(RESET)")
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -111,6 +120,13 @@ $(MLX_LIB):
 	@echo "$(YELLOW)>> Building MLX42...$(RESET)"
 	@cmake -S $(MLX_REPO_DIR) -Wno-dev -B $(MLX_REPO_DIR)/build > /dev/null
 	@cmake --build $(MLX_REPO_DIR)/build > /dev/null
+
+# Prepare textures
+$(TEXTURES_DIR):
+	@if [ ! -d "$(TEXTURES_DIR)" ] || [ -z "$$(ls -A $(TEXTURES_DIR))" ]; then \
+		echo "$(YELLOW)>> Extracting textures...$(RESET)"; \
+		unzip -q $(TEXTURES_ARCHIVE) -d $(ASSETS_DIR); \
+	fi
 
 # Compile cub3d.a file to use inside tests/ folder
 $(LIBRARY_FOR_TESTS): $(OBJ) $(LIBRARIES)
@@ -136,6 +152,8 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@echo "$(RED)Removed $(NAME)$(RESET)"
+	@rm -rf $(TEXTURES_DIR)
+	@echo "$(RED)Removed textures$(RESET)"
 	@for lib in $(LIB_DIR)/*; do \
 		if [ -f $$lib/Makefile ]; then \
 			$(MAKE) -C $$lib fclean > /dev/null; \
