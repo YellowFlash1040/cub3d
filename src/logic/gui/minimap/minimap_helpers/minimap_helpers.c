@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:05:14 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 15:31:08 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/15 12:25:27 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ t_color	get_cell_color(t_map *map, int x, int y)
 	if (map->cells[y][x] == WALL)
 		color = WALL_COLOR;
 	else if (map->cells[y][x] == CLOSED_DOOR)
-		color = DOOR_COLOR;
+		color = CLOSED_DOOR_COLOR;
+	else if (map->cells[y][x] == OPENED_DOOR)
+		color = OPENED_DOOR_COLOR;
 	else
 		color = EMPTY_SPACE_COLOR;
 	return (color);

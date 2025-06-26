@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:48:20 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/04 17:17:26 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:01:50 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,29 @@ void	destroy_cells(t_string **cells_ref, int rows_count)
 		free(cells[i]);
 	free(cells);
 	*cells_ref = NULL;
+}
+
+int	build_map(t_map *map, int width, int height)
+{
+	int	i;
+
+	if (!map)
+		return (EMPTY_PTR_ERR);
+	if (width <= 0 || height <= 0)
+		return (INVALID_VALUE);
+	map->width = width;
+	map->height = height;
+	map->cells = (t_string *)malloc(sizeof(t_string) * (map->height + 1));
+	if (!map->cells)
+		return (MALLOC_FAIL_ERR);
+	i = -1;
+	while (++i < map->height)
+	{
+		map->cells[i] = (char *)malloc(sizeof(char) * (map->width + 1));
+		if (!map->cells[i])
+			return (destroy_cells(&map->cells, i), MALLOC_FAIL_ERR);
+		ft_bzero(map->cells[i], map->width + 1);
+	}
+	map->cells[i] = NULL;
+	return (SUCCESS);
 }

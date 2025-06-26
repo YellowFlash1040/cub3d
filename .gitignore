@@ -11,9 +11,6 @@
 !libraries/**/*.c
 !libraries/**/*.h
 !libraries/**/Makefile
-!tests/**/*.c
-!tests/**/*.h
-!tests/**/Makefile
-!assets/**/*.png
 !assets/**/*.cub
+!assets/**/*.zip
 !libraries/mlx42

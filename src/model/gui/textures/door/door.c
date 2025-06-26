@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:30:19 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 14:32:12 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:44:52 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	destroy_door(t_door **door_ref)
 	if (!door_ref || !*door_ref)
 		return ;
 	door = *door_ref;
-	if (door->texture)
-		mlx_delete_texture(door->texture);
 	free(door);
 	*door_ref = NULL;
 }

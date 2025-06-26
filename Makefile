@@ -41,6 +41,7 @@ GNL_LIB_DIR				:= $(LIB_DIR)/get_next_line
 CONVERTER_LIB_DIR		:= $(LIB_DIR)/converter
 FILE_LIB_DIR			:= $(LIB_DIR)/file
 MEMORY_LIB_DIR			:= $(LIB_DIR)/ft_memory
+STRING_ARRAY_LIB_DIR	:= $(LIB_DIR)/string_array
 
 # List of all library directories
 LIB_DIRS				:= $(MLX_LIB_DIR) \
@@ -49,7 +50,8 @@ LIB_DIRS				:= $(MLX_LIB_DIR) \
 							$(GNL_LIB_DIR) \
 							$(CONVERTER_LIB_DIR) \
 							$(FILE_LIB_DIR) \
-							$(MEMORY_LIB_DIR)
+							$(MEMORY_LIB_DIR) \
+							$(STRING_ARRAY_LIB_DIR)
 
 #-----------------------LIBRARIES--------------------------------------------------------
 # Libraries
@@ -60,6 +62,7 @@ GNL_LIB					:= $(GNL_LIB_DIR)/get_next_line.a
 CONVERTER_LIB			:= $(CONVERTER_LIB_DIR)/converter.a
 FILE_LIB				:= $(FILE_LIB_DIR)/file.a
 MEMORY_LIB				:= $(MEMORY_LIB_DIR)/ft_memory.a
+STRING_ARRAY_LIB		:= $(STRING_ARRAY_LIB_DIR)/string_array.a
 
 # List of all libraries
 LIBRARIES				:= $(MLX_LIB) \
@@ -68,7 +71,8 @@ LIBRARIES				:= $(MLX_LIB) \
 							$(GNL_LIB) \
 							$(CONVERTER_LIB) \
 							$(FILE_LIB) \
-							$(MEMORY_LIB)
+							$(MEMORY_LIB) \
+							$(STRING_ARRAY_LIB)
 
 #-----------------------COLORS-----------------------------------------------------------
 # Colors for Output
@@ -90,7 +94,7 @@ $(NAME): $(OBJ) $(LIBRARIES)
 	@echo "$(GREEN)Compiled $@ successfully!$(RESET)"
 
 # Compile Object Files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) Makefile
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 

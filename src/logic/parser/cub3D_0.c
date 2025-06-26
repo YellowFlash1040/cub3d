@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3D_0.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/09 18:24:35 by rbom          ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3D_0.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
+/*   Updated: 2025/06/13 14:48:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parser.h"
 
 void	init_error_message(t_data *data)
 {
@@ -61,8 +61,8 @@ void	init_map_data(t_data *data)
 	data->clean_wall[1] = NULL;
 	data->clean_wall[2] = NULL;
 	data->clean_wall[3] = NULL;
-	data->sprite_no = 0;
-	data->sprite = NULL;
+	data->sprites_count = 0;
+	data->sprites = NULL;
 }
 
 void	free_null(void	**ptr)
@@ -100,7 +100,7 @@ void	free_all(t_data *data, uint8_t exit_status)
 	i = 0;
 	while (exit_status != 0 && i < 4)
 		free_null((void **)&data->clean_wall[i++]);
-	free_null((void **)&data->sprite);
+	free_null((void **)&data->sprites);
 }
 
 void	exit_all(t_data *data, uint8_t exit_status)

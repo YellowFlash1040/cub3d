@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 15:53:07 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/08 12:27:39 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:00:30 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,22 @@ void	destroy_camera(t_camera **camera_ref)
 		free(camera->rays);
 	free(camera);
 	*camera_ref = NULL;
+}
+
+int	build_camera(t_camera **camera_ref, int rays_amount)
+{
+	t_camera	*camera;
+	int			rays_arr_size;
+
+	if (!camera_ref || !*camera_ref)
+		return (EMPTY_PTR_ERR);
+	camera = *camera_ref;
+	rays_arr_size = sizeof(t_ray) * (rays_amount + 1);
+	camera->rays = NULL;
+	camera->rays = (t_ray *)malloc(rays_arr_size);
+	if (!camera->rays)
+		return (destroy_camera(camera_ref), MALLOC_FAIL_ERR);
+	ft_bzero(camera->rays, rays_arr_size);
+	camera->rays_count = rays_amount;
+	return (SUCCESS);
 }

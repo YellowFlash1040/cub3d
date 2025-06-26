@@ -6,11 +6,11 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
-/*   Updated: 2025/06/04 18:46:27 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:48:20 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "parser.h"
 
 void	scrape_map_loop(t_data *data, int i)
 {

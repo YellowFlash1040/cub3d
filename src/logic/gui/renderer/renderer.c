@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:40:56 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/07 13:43:13 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/15 12:30:14 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,20 @@ void	render_frame(void *param)
 {
 	t_app		*app;
 	t_player	*player;
-	t_map		*map;
+	t_game		*game;
 
 	app = (t_app *)param;
+	game = app->game;
 	player = app->game->player;
-	map = app->game->map;
 	clear_buffer(app->canvas->image);
-	populate_rays(map, player);
-	draw_scene(app->canvas, player->camera, app->textures, app->game->map);
+	update_animations(app->animations);
+	update_textures(app->textures, app->animations);
+	populate_rays(game->map, player);
+	draw_scene(app->canvas, player->camera, game, app->textures);
 	if (app->settings->is_minimap_visible)
-		draw_fullsize_minimap(app->canvas, map, player);
+		draw_fullsize_minimap(app->canvas, game->map, player);
 	if (app->settings->is_clipped_minimap_visible)
-		draw_clipped_minimap(app->canvas, map, player);
+		draw_clipped_minimap(app->canvas, game->map, player);
 }
 
 void	clear_buffer(mlx_image_t *img)

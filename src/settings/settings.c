@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:55:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 17:10:13 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:47:55 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,10 @@ t_settings	*init_settings(void)
 	settings = (t_settings *)malloc(sizeof(t_settings));
 	if (!settings)
 		return (NULL);
-	settings->player_position = (t_fpoint){0};
-	settings->camera_fov = 0;
-	settings->camera_angle = 0;
+	settings->camera_fov = CAMERA_FIELD_OF_VIEW * DEGREE;
 	settings->is_minimap_visible = false;
 	settings->is_clipped_minimap_visible = true;
-	settings->prev_clipped_minimap_state = true;
-	settings->ceiling_color = (t_color){0};
-	settings->floor_color = (t_color){0};
-	settings->north_wall_filepath = NULL;
-	settings->south_wall_filepath = NULL;
-	settings->west_wall_filepath = NULL;
-	settings->east_wall_filepath = NULL;
-	settings->door_filepath = NULL;
+	settings->prev_clipped_minimap_state = false;
 	return (settings);
 }
 
@@ -42,16 +33,6 @@ void	destroy_settings(t_settings **settings_ref)
 	if (!settings_ref || !*settings_ref)
 		return ;
 	settings = *settings_ref;
-	if (settings->north_wall_filepath)
-		destroy_string(&settings->north_wall_filepath);
-	if (settings->south_wall_filepath)
-		destroy_string(&settings->south_wall_filepath);
-	if (settings->west_wall_filepath)
-		destroy_string(&settings->west_wall_filepath);
-	if (settings->east_wall_filepath)
-		destroy_string(&settings->east_wall_filepath);
-	if (settings->door_filepath)
-		destroy_string(&settings->door_filepath);
 	free(settings);
 	*settings_ref = NULL;
 }

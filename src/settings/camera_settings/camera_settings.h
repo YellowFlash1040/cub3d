@@ -6,22 +6,23 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:47:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 09:36:15 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:42:21 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAMERA_SETTINGS_H
 # define CAMERA_SETTINGS_H
 
+// How many rays camera casts
 // # define RAYS_COUNT 128
-# define RAYS_COUNT 120
+# define RAYS_COUNT 240
 // # define RAYS_COUNT 100
+//Player's/camera's field of view in degrees (not radians)
 # define CAMERA_FIELD_OF_VIEW 60
-// # define ROTATION_ANGLE 0.05
+//Player's/camera's rotation speed in units per second
 # define ROTATION_SPEED 2
-//Player's/camera's speed in units per second
+//Player's/camera's horizontal/vertical movement speed in units per second
 // # define MOVEMENT_SPEED 100
-
 # define MOVEMENT_SPEED 300
 
 #endif

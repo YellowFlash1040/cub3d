@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:46:45 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/03 18:29:01 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:01:06 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ void	destroy_canvas(t_canvas **canvas_ref)
 	canvas = *canvas_ref;
 	free(canvas);
 	*canvas_ref = NULL;
+}
+
+int	build_canvas(t_canvas **canvas_ref, mlx_t *mlx)
+{
+	t_canvas	*canvas;
+
+	if (!canvas_ref || !*canvas_ref)
+		return (EMPTY_PTR_ERR);
+	canvas = *canvas_ref;
+	canvas->image = mlx_new_image(mlx, canvas->size.width, canvas->size.height);
+	if (!canvas->image)
+		return (destroy_canvas(canvas_ref), MLX_ERR);
+	canvas->pixels = canvas->image->pixels;
+	return (SUCCESS);
 }
 
 int	canvas_to_window(mlx_t *mlx, t_canvas *canvas)

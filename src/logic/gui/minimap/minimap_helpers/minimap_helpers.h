@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:07:57 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 15:31:18 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:11:02 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@
 # include "drawing.h"
 # include "game.h"
 # include "rays.h"
-# include "corners.h"
+# include "map_point.h"
+
+typedef struct corners
+{
+	t_map_point	top_left;
+	t_map_point	bottom_right;
+}	t_corners;
 
 t_corners	find_corners(t_size map_size, t_fpoint player_position);
 t_color		get_cell_color(t_map *map, int x, int y);
