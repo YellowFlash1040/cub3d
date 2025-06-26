@@ -1,97 +1,121 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D_6.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
-/*   Updated: 2025/06/13 14:48:20 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3D_6.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
+/*   Updated: 2025/06/26 14:31:42 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	atouint8(t_data *data, int f, int i, char c)
+void	scrape_dir_map(t_data *data)
 {
-	if (c == 'r')
+	reset_dir(data);
+	data->clean_map_size.x = data->map_x;
+	data->clean_map_size.y = data->map_y;
+	data->map_y = 0;
+	init_temp_clean_map(data);
+	open_fd(data, data->file, &data->fd);
+	while (true)
 	{
-		data->clean_floor[f - 4].r = 0;
-		while (ft_isdigit(data->line[i]) == true)
-			data->clean_floor[f - 4].r
-				= data->clean_floor[f - 4].r * 10 + data->line[i++] - 48;
+		data->line = get_next_line(data->fd);
+		if (data->line == NULL)
+			break ;
+		else if (check_dir_complete(data) == false)
+			scrape_dir(data);
+		else if (check_dir_complete(data) == true)
+			scrape_map(data);
+		free_null((void **)&data->line);
 	}
-	else if (c == 'g')
-	{
-		data->clean_floor[f - 4].g = 0;
-		while (ft_isdigit(data->line[i]) == true)
-			data->clean_floor[f - 4].g
-				= data->clean_floor[f - 4].g * 10 + data->line[i++] - 48;
-	}
-	else if (c == 'b')
-	{
-		data->clean_floor[f - 4].b = 0;
-		while (ft_isdigit(data->line[i]) == true)
-			data->clean_floor[f - 4].b
-				= data->clean_floor[f - 4].b * 10 + data->line[i++] - 48;
-	}
+	close_fd(data, &data->fd);
 }
 
-int	scrape_loop_skip(t_data *data, int f, int i, char c)
+bool	flood_fill(t_data *data, int x, int y, bool stop)
 {
-	atouint8(data, f, i, c);
-	while (ft_isdigit(data->line[i]) == true)
-		i++;
-	while (ft_isspace(data->line[i]) == true)
-		i++;
-	if (data->line[i] == ',')
-		i++;
-	while (ft_isspace(data->line[i]) == true)
-		i++;
-	return (i);
-}
-
-bool	scrape_dir_floor_loop(t_data *data, int f)
-{
-	int	i;
-
-	i = 0;
-	while (ft_isspace(data->line[i]) == true)
-		i++;
-	if (data->line[i] == data->dir[f][0] && ft_isspace(data->line[i + 1]))
-	{
-		i += 2;
-		while (ft_isspace(data->line[i]) == true)
-			i++;
-		i = scrape_loop_skip(data, f, i, 'r');
-		i = scrape_loop_skip(data, f, i, 'g');
-		i = scrape_loop_skip(data, f, i, 'b');
-		data->dir_check[f] = true;
-		return (true);
-	}
+	if (x == 0 || x == data->clean_map_size.x - 1
+		|| y == 0 || y == data->clean_map_size.y - 1
+		|| data->temp_map[y][x - 1] == ' ' || data->temp_map[y][x + 1] == ' '
+		|| data->temp_map[y - 1][x] == ' ' || data->temp_map[y + 1][x] == ' ')
+		exit_all(data, 18);
+	if (data->clean_map[y][x - 1] != ' ' && data->clean_map[y][x + 1] != ' '
+		&& data->clean_map[y - 1][x] != ' ' && data->clean_map[y + 1][x] != ' ')
+		return (stop);
+	if (data->clean_map[y][x - 1] == ' ')
+		data->clean_map[y][x - 1] = data->temp_map[y][x - 1];
+	if (data->clean_map[y][x + 1] == ' ')
+		data->clean_map[y][x + 1] = data->temp_map[y][x + 1];
+	if (data->clean_map[y - 1][x] == ' ')
+		data->clean_map[y - 1][x] = data->temp_map[y - 1][x];
+	if (data->clean_map[y + 1][x] == ' ')
+		data->clean_map[y + 1][x] = data->temp_map[y + 1][x];
 	return (false);
 }
 
-bool	scrape_dir_floor(t_data *data)
+void	generate_clean_map(t_data *data)
 {
-	int	f;
+	int		x;
+	int		y;
+	bool	stop;
 
-	f = 4;
-	while (f < 6)
+	y = 0;
+	stop = true;
+	while (y < data->clean_map_size.y)
 	{
-		if (scrape_dir_floor_loop(data, f) == true)
-			return (true);
-		f++;
+		x = 0;
+		while (x < data->clean_map_size.x)
+		{
+			if (data->clean_map[y][x] != ' ' && data->clean_map[y][x] != '1')
+				stop = flood_fill(data, x, y, stop);
+			x++;
+		}
+		y++;
+		if (y == data->clean_map_size.y && stop == false)
+		{
+			y = 0;
+			stop = true;
+		}
 	}
-	return (false);
 }
 
-void	scrape_dir(t_data *data)
+void	resize_map_y(t_data *data)
 {
-	if (empty_line(data->line) == true)
-		return ;
-	else if (scrape_dir_wal(data) == true)
-		return ;
-	else if (scrape_dir_floor(data) == true)
-		return ;
+	int	y;
+
+	y = 0;
+	while (empty_line(data->clean_map[y]) == true && y < data->clean_map_size.y)
+		y++;
+	data->start.y = y;
+	while (y < data->clean_map_size.y && !empty_line(data->clean_map[y]))
+		y++;
+	data->end.y = y;
+	data->resize_map_size.y = data->end.y - data->start.y;
+}
+
+void	resize_map_x(t_data *data)
+{
+	int	x;
+	int	y;
+
+	data->start.x = data->clean_map_size.x;
+	data->end.x = 0;
+	y = data->start.y;
+	while (y < data->end.y)
+	{
+		x = 0;
+		while (x < data->clean_map_size.x)
+		{
+			if (ft_isspace(data->clean_map[y][x]) == false && x < data->start.x)
+				data->start.x = x;
+			if (ft_isspace(data->clean_map[y][x]) == false && x > data->end.x)
+				data->end.x = x;
+			x++;
+		}
+		y++;
+	}
+	data->end.x++;
+	data->resize_map_size.x = data->end.x - data->start.x;
 }

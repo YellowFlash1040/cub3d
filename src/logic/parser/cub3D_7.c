@@ -1,102 +1,117 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D_7.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
-/*   Updated: 2025/06/13 14:48:20 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3D_7.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
+/*   Updated: 2025/06/26 14:38:32 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	scrape_map_loop(t_data *data, int i)
+void	scrape_spawn(t_data *data, int x, int y)
 {
-	if (ft_isspace(data->line[i]) == true)
-		data->temp_map[data->map_y][i] = ' ';
-	else
-		data->temp_map[data->map_y][i] = data->line[i];
-	if (data->line[i] == 'N'
-		|| data->line[i] == 'S'
-		|| data->line[i] == 'W'
-		|| data->line[i] == 'E')
-		data->clean_map[data->map_y][i] = data->line[i];
-	else
-		data->clean_map[data->map_y][i] = ' ';
+	if (data->resize_map[y][x] == 'N' || data->resize_map[y][x] == 'S'
+		|| data->resize_map[y][x] == 'W' || data->resize_map[y][x] == 'E')
+	{
+		data->resize_spawn.x = x;
+		data->resize_spawn.y = y;
+		data->resize_spawn_dir = data->resize_map[y][x];
+		data->resize_map[y][x] = '0';
+	}
 }
 
-void	scrape_map(t_data *data)
+void	resize_map(t_data *data)
 {
+	int	x;
+	int	y;
+
+	data->resize_map = malloc(data->resize_map_size.y * sizeof(char *));
+	if (data->resize_map == NULL)
+		exit_all(data, 8);
+	y = 0;
+	while (y < data->resize_map_size.y)
+		data->resize_map[y++] = NULL;
+	y = 0;
+	while (y < data->resize_map_size.y)
+	{
+		data->resize_map[y] = malloc(data->resize_map_size.x + 1);
+		if (data->resize_map[y] == NULL)
+			exit_all(data, 8);
+		x = 0;
+		while (x < data->resize_map_size.x)
+		{
+			data->resize_map[y][x]
+				= data->clean_map[y + data->start.y][x + data->start.x];
+			scrape_spawn(data, x++, y);
+		}
+		data->resize_map[y++][x] = '\0';
+	}
+}
+
+void	count_sprite(t_data *data)
+{
+	int	x;
+	int	y;
+
+	data->sprites_count = 0;
+	y = 0;
+	while (y < data->resize_map_size.y)
+	{
+		x = 0;
+		while (x < data->resize_map_size.x)
+		{
+			if (data->resize_map[y][x] == 'X')
+				data->sprites_count++;
+			x++;
+		}
+		y++;
+	}
+	data->sprites = malloc((data->sprites_count) * sizeof(t_xy));
+	if (data->sprites == NULL)
+		exit_all(data, 8);
+}
+
+void	scrape_sprite(t_data *data)
+{
+	int	x;
+	int	y;
 	int	i;
 
-	if (empty_line(data->line) == true && data->map_y == 0)
-		return ;
+	y = 0;
 	i = 0;
-	while (data->line[i] != '\n' && data->line[i] != '\0')
+	while (y < data->resize_map_size.y && i < data->sprites_count)
 	{
-		scrape_map_loop(data, i);
-		i++;
+		x = 0;
+		while (x < data->resize_map_size.x && i < data->sprites_count)
+		{
+			if (data->resize_map[y][x] == 'X')
+			{
+				data->sprites[i].x = x;
+				data->sprites[i].y = y;
+				data->resize_map[y][x] = '0';
+				i++;
+			}
+			x++;
+		}
+		y++;
 	}
-	while (i < data->clean_map_size.x)
-	{
-		data->temp_map[data->map_y][i] = ' ';
-		data->clean_map[data->map_y][i] = ' ';
-		i++;
-	}
-	data->temp_map[data->map_y][i] = '\0';
-	data->clean_map[data->map_y][i] = '\0';
-	data->map_y += 1;
 }
 
-void	scrape_dir_map(t_data *data)
+void	parse_all(t_data *data, int argc, char **argv)
 {
-	reset_dir(data);
-	data->clean_map_size.x = data->map_x;
-	data->clean_map_size.y = data->map_y;
-	data->map_y = 0;
-	initialize_map(data);
-	open_fd(data, data->file, &data->fd, 4);
-	while (true)
-	{
-		data->line = get_next_line(data->fd);
-		if (data->line == NULL)
-			break ;
-		else if (check_dir_complete(data) == false)
-			scrape_dir(data);
-		else if (check_dir_complete(data) == true)
-			scrape_map(data);
-		free_null((void **)&data->line);
-	}
-	close_fd(data, data->fd, 5);
-}
-
-void	check_enclosure(t_data *data, int x, int y)
-{
-	if (x == 0 || x == data->clean_map_size.x - 1
-		|| y == 0 || y == data->clean_map_size.y - 1
-		|| data->temp_map[y][x - 1] == ' '
-		|| data->temp_map[y][x + 1] == ' '
-		|| data->temp_map[y - 1][x] == ' '
-		|| data->temp_map[y + 1][x] == ' ')
-		exit_all(data, 21);
-}
-
-bool	flood_fill(t_data *data, int x, int y, bool stop)
-{
-	if (data->clean_map[y][x - 1] != ' '
-		&& data->clean_map[y][x + 1] != ' '
-		&& data->clean_map[y - 1][x] != ' '
-		&& data->clean_map[y + 1][x] != ' ')
-		return (stop);
-	if (data->clean_map[y][x - 1] == ' ')
-		data->clean_map[y][x - 1] = data->temp_map[y][x - 1];
-	if (data->clean_map[y][x + 1] == ' ')
-		data->clean_map[y][x + 1] = data->temp_map[y][x + 1];
-	if (data->clean_map[y - 1][x] == ' ')
-		data->clean_map[y - 1][x] = data->temp_map[y - 1][x];
-	if (data->clean_map[y + 1][x] == ' ')
-		data->clean_map[y + 1][x] = data->temp_map[y + 1][x];
-	return (false);
+	init_map_data(data);
+	check_number_args(data, argc, argv);
+	check_extension(data, data->file, ".cub");
+	check_dir_map(data);
+	scrape_dir_map(data);
+	generate_clean_map(data);
+	resize_map_y(data);
+	resize_map_x(data);
+	resize_map(data);
+	count_sprite(data);
+	scrape_sprite(data);
 }

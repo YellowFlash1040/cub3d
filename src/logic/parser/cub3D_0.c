@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D_0.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 15:39:23 by rbom              #+#    #+#             */
-/*   Updated: 2025/06/13 14:48:20 by akovtune         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3D_0.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbom <rbom@student.codam.nl>                 +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
+/*   Updated: 2025/06/26 17:33:17 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,37 +23,31 @@ void	init_error_message(t_data *data)
 	data->error[6] = "Multiple wall entries\n";
 	data->error[7] = "No texture directory\n";
 	data->error[8] = "Malloc: ";
-	data->error[9] = "Ivalid file extension texture\n";
-	data->error[10] = "Open: ";
-	data->error[11] = "Close: ";
-	data->error[12] = "Too many arguments texture directory\n";
-	data->error[13] = "Multiple floor entries\n";
-	data->error[14] = "No RGB data\n";
-	data->error[15] = "Invalid RGB format\n";
-	data->error[16] = "Invalid RGB value\n";
-	data->error[17] = "Invalid map data\n";
-	data->error[18] = "Multiple spawn points\n";
-	data->error[19] = "Invalid map tokens\n";
-	data->error[20] = "No spawn points\n";
-	data->error[21] = "Map not fully enclosed\n";
+	data->error[9] = "Too many arguments texture directory\n";
+	data->error[10] = "Multiple floor entries\n";
+	data->error[11] = "No RGB data\n";
+	data->error[12] = "Invalid RGB format\n";
+	data->error[13] = "Invalid RGB value\n";
+	data->error[14] = "Invalid or incomplete data\n";
+	data->error[15] = "Multiple spawn points\n";
+	data->error[16] = "Invalid map tokens\n";
+	data->error[17] = "No map or spawn points\n";
+	data->error[18] = "Map not fully enclosed\n";
 }
 
 void	init_map_data(t_data *data)
 {
 	init_error_message(data);
-	data->line = NULL;
-	reset_dir(data);
+	data->fd = -1;
 	data->dir[0] = "NO";
 	data->dir[1] = "SO";
 	data->dir[2] = "WE";
 	data->dir[3] = "EA";
-	data->dir[4] = "F";
-	data->dir[5] = "C";
-	data->map_x = 0;
-	data->map_y = 0;
-	data->temp_y = 0;
-	data->spawn = false;
-	data->texture = NULL;
+	data->dir[4] = "DO";
+	data->dir[5] = "SP";
+	data->dir[6] = "F";
+	data->dir[7] = "C";
+	data->line = NULL;
 	data->temp_map = NULL;
 	data->clean_map = NULL;
 	data->resize_map = NULL;
@@ -61,7 +55,12 @@ void	init_map_data(t_data *data)
 	data->clean_wall[1] = NULL;
 	data->clean_wall[2] = NULL;
 	data->clean_wall[3] = NULL;
-	data->sprites_count = 0;
+	data->clean_wall[4] = ft_strdup(DEFAULT_DOOR);
+	if (data->clean_wall[4] == NULL)
+		exit_all(data, 8);
+	data->clean_wall[5] = ft_strdup(DEFAULT_SPRITE);
+	if (data->clean_wall[5] == NULL)
+		exit_all(data, 8);
 	data->sprites = NULL;
 }
 
@@ -74,43 +73,16 @@ void	free_null(void	**ptr)
 	}
 }
 
-void	free_all(t_data *data, uint8_t exit_status)
+void	open_fd(t_data *data, char *file, int *fd)
 {
-	int	i;
-
-	free_null((void **)&data->line);
-	free_null((void **)&data->texture);
-	if (exit_status > 5 && exit_status < 21)
-		close_fd(data, data->fd, 5);
-	i = 0;
-	while (data->temp_map != NULL && i < data->clean_map_size.y)
-		free_null((void **)&data->temp_map[i++]);
-	free_null((void **)&data->temp_map);
-	i = 0;
-	while (data->clean_map != NULL && i < data->clean_map_size.y)
-		free_null((void **)&data->clean_map[i++]);
-	free_null((void **)&data->clean_map);
-	i = 0;
-	while (exit_status && data->resize_map && i < data->resize_map_size.y)
-		free_null((void **)&data->resize_map[i++]);
-	if (exit_status != 0)
-		free_null((void **)&data->resize_map);
-	if (exit_status != 0)
-		free_null((void **)&data->resize_map);
-	i = 0;
-	while (exit_status != 0 && i < 4)
-		free_null((void **)&data->clean_wall[i++]);
-	free_null((void **)&data->sprites);
+	*fd = open(file, O_RDONLY);
+	if (*fd == -1)
+		exit_all(data, 4);
 }
 
-void	exit_all(t_data *data, uint8_t exit_status)
+void	close_fd(t_data *data, int *fd)
 {
-	if (exit_status != 0)
-		write(2, "Error\n", 6);
-	write(2, data->error[exit_status], ft_strlen(data->error[exit_status]));
-	if (exit_status == 4 || exit_status == 5 || exit_status == 8
-		|| exit_status == 10 || exit_status == 11)
-		perror("");
-	free_all(data, exit_status);
-	exit(exit_status);
+	if (*fd != -1 && close(*fd) == -1)
+		exit_all(data, 5);
+	*fd = -1;
 }
