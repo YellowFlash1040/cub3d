@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:00:53 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/07 19:30:32 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:31:18 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ static t_texture	*choose_wall_texture(t_textures *textures, t_ray *ray)
 	t_texture	*texture;
 
 	if (ray->hit_type == HORIZONTAL_HIT && angle_looks_up(ray->angle))
-		texture = textures->south_wall->texture;
-	else if (ray->hit_type == HORIZONTAL_HIT && angle_looks_down(ray->angle))
 		texture = textures->north_wall->texture;
+	else if (ray->hit_type == HORIZONTAL_HIT && angle_looks_down(ray->angle))
+		texture = textures->south_wall->texture;
 	else if (ray->hit_type == VERTICAL_HIT && angle_looks_left(ray->angle))
-		texture = textures->east_wall->texture;
-	else if (ray->hit_type == VERTICAL_HIT && angle_looks_right(ray->angle))
 		texture = textures->west_wall->texture;
+	else if (ray->hit_type == VERTICAL_HIT && angle_looks_right(ray->angle))
+		texture = textures->east_wall->texture;
 	else
 		texture = NULL;
 	return (texture);

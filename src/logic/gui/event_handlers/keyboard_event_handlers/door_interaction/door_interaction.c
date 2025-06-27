@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interaction_handlers.c                             :+:      :+:    :+:   */
+/*   door_interaction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:31:38 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/05 15:43:08 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:35:42 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "interaction_handlers.h"
+#include "door_interaction.h"
 
 static t_direction	get_direction(double angle);
 static t_point		get_cell(t_fpoint position, t_direction direction,

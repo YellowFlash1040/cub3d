@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement_handlers.h                                :+:      :+:    :+:   */
+/*   door_interaction.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 16:27:28 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/04 16:32:48 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/04 16:31:09 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/27 18:10:03 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MOVEMENT_HANDLERS_H
-# define MOVEMENT_HANDLERS_H
+#ifndef DOOR_INTERACTION_H
+# define DOOR_INTERACTION_H
 
-# include "key_bindings.h"
-# include "movements.h"
-# include "rotations.h"
-# include "game.h"
+# include "map.h"
+# include "player.h"
+# include "direction.h"
+# include "angles.h"
+# include "world_settings.h"
+# include "point.h"
 
-void	handle_movement(mlx_t *mlx, mlx_key_data_t keydata, t_game *game);
-void	handle_rotation(mlx_t *mlx, mlx_key_data_t keydata, t_game *game);
+void	handle_door_interaction(t_map *map, t_player *player);
 
 #endif
