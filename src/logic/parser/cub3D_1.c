@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/26 17:41:03 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/27 18:07:18 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	free_all(t_data *data, uint8_t exit_status)
 	while (exit_status != 0 && i < 6)
 		free_null((void **)&data->clean_wall[i++]);
 	free_null((void **)&data->sprites);
+	get_next_line(-1);
 }
 
 void	exit_all(t_data *data, uint8_t exit_status)

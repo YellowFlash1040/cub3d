@@ -6,7 +6,7 @@
 /*   By: rbom <rbom@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:39:23 by rbom          #+#    #+#                 */
-/*   Updated: 2025/06/26 14:31:06 by rbom          ########   odam.nl         */
+/*   Updated: 2025/06/27 17:18:06 by rbom          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	check_wall(t_data *data, int d, int i)
 {
 	if (data->line[i] != data->dir[d][0] || data->line[i + 1] != data->dir[d][1]
-		|| ft_isspace(data->line[i + 2] == false))
+		|| ft_isspace(data->line[i + 2]) == false)
 		return (false);
 	if (data->dir_check[d] == true)
 		exit_all(data, 6);
