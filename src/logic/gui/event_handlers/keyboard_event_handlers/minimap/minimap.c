@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings_handlers.c                                :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:29:15 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 17:17:11 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:27:25 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "settings_handlers.h"
+#include "minimap_visibility.h"
 
 void	toggle_minimap(t_settings *settings)
 {

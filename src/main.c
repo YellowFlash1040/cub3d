@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:33:47 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/21 13:04:49 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:53:06 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "parser.h"
 #include "converter.h"
 #include "startup.h"
+#include "lifecycle.h"
 
 int	handle_error(t_app *app, int err_code);
 
@@ -42,10 +43,9 @@ int	main(int argc, char **argv)
 	destroy_configuration(&configuration, false);
 	subscribe_to_keyboard_events(app);
 	subscribe_to_mouse_events(app);
-	result = render(app);
+	result = keep_app_running(app);
 	if (result != SUCCESS)
 		return (handle_error(app, result));
-	keep_app_running(app->mlx);
 	destroy_app(&app);
 	return (SUCCESS);
 }

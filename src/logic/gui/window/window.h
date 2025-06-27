@@ -6,7 +6,7 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:34:50 by akovtune          #+#    #+#             */
-/*   Updated: 2025/05/28 14:05:18 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:45:29 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,5 @@
 # include "errors.h"
 
 int		connect_to_display(mlx_t **mlx_out);
-void	keep_app_running(mlx_t *mlx);
 
 #endif

@@ -6,29 +6,17 @@
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:40:56 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/15 12:30:14 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:46:04 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
 
-int	render(t_app *app)
+void	render_frame(t_app *app)
 {
-	bool	success;
-
-	success = mlx_loop_hook(app->mlx, render_frame, app);
-	if (!success)
-		return (MLX_ERR);
-	return (SUCCESS);
-}
-
-void	render_frame(void *param)
-{
-	t_app		*app;
 	t_player	*player;
 	t_game		*game;
 
-	app = (t_app *)param;
 	game = app->game;
 	player = app->game->player;
 	clear_buffer(app->canvas->image);

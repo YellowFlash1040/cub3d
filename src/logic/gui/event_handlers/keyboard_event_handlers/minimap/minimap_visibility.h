@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings_handlers.h                                :+:      :+:    :+:   */
+/*   minimap_visibility.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:29:18 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/06 17:03:20 by akovtune         ###   ########.fr       */
+/*   Updated: 2025/06/27 18:09:22 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SETTINGS_HANDLERS_H
-# define SETTINGS_HANDLERS_H
+#ifndef MINIMAP_VISIBILITY_H
+# define MINIMAP_VISIBILITY_H
 
 # include "settings.h"
 

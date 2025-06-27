@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   renderer.h                                         :+:      :+:    :+:   */
+/*   lifecycle.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovtune <akovtune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 16:40:49 by akovtune          #+#    #+#             */
-/*   Updated: 2025/06/27 17:49:01 by akovtune         ###   ########.fr       */
+/*   Created: 2025/06/27 17:46:39 by akovtune          #+#    #+#             */
+/*   Updated: 2025/06/27 17:52:44 by akovtune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDERER_H
-# define RENDERER_H
+#include "lifecycle.h"
 
-# include "ft_memory.h"
-# include "app.h"
-# include "minimap.h"
-# include "scene.h"
-# include "animations_manager.h"
+static void	run(void *param);
 
-void	render_frame(t_app *app);
-void	clear_buffer(mlx_image_t *img);
+int	keep_app_running(t_app *app)
+{
+	bool	success;
 
-#endif
+	success = mlx_loop_hook(app->mlx, run, app);
+	if (!success)
+		return (MLX_ERR);
+	mlx_loop(app->mlx);
+	return (SUCCESS);
+}
+
+static void	run(void *param)
+{
+	t_app	*app;
+
+	app = (t_app *)param;
+	handle_keyboard(app);
+	handle_mouse(app);
+	render_frame(app);
+}
