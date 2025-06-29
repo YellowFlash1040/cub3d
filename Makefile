@@ -90,7 +90,6 @@ YELLOW					:= \033[0;33m
 RESET					:= \033[0m
 
 #-----------------------RULES------------------------------------------------------------
-vpath %.c $(SRC_DIRS)
 
 # Default Target
 all: $(TEXTURES_DIR) $(MLX_LIB) $(NAME)
@@ -128,16 +127,6 @@ $(TEXTURES_DIR):
 		unzip -q $(TEXTURES_ARCHIVE) -d $(ASSETS_DIR); \
 	fi
 
-# Compile cub3d.a file to use inside tests/ folder
-$(LIBRARY_FOR_TESTS): $(OBJ) $(LIBRARIES)
-	@for lib in $(LIBRARIES); do \
-		ar x $$lib ; \
-		ar src $@ *.o ; \
-		rm *.o ; \
-	done
-	@ar src $@ $(OBJ)
-	@ar d $@ main.o
-
 # Clean up Object Files
 clean:
 	@rm -rf $(OBJ_DIR)
@@ -170,5 +159,3 @@ re: fclean all
 print:
 	@echo $(C_FILES) | tr ' ' '\n' > c_files.txt
 	@echo $(HEADERS) | tr ' ' '\n' > headers.txt
-	@echo $(OBJ) | tr ' ' '\n' > object_files.txt
-	@echo $(SRC_DIRS) | tr ' ' '\n' > include.txt
