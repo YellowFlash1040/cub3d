@@ -7,7 +7,6 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/include",
-                "~/.capt/root/usr/include"
             ]
         }
     ],
