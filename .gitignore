@@ -1,0 +1,16 @@
+*
+!*/
+.*
+!.gitkeep
+!.gitignore
+!.gitmodules
+!.github/
+!src/**/*.c
+!src/**/*.h
+!Makefile
+!libraries/**/*.c
+!libraries/**/*.h
+!libraries/**/Makefile
+!assets/**/*.cub
+!assets/**/*.zip
+!libraries/mlx42
