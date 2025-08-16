@@ -3,6 +3,7 @@
 .*
 !.gitkeep
 !.gitignore
+!.gitmodules
 !.github/
 !src/**/*.c
 !src/**/*.h
@@ -10,7 +11,6 @@
 !libraries/**/*.c
 !libraries/**/*.h
 !libraries/**/Makefile
-!tests/**/*.c
-!tests/**/*.h
-!tests/**/Makefile
-!CleanMakefile
+!assets/**/*.cub
+!assets/**/*.zip
+!libraries/mlx42

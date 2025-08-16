@@ -14,16 +14,17 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: dev
+          submodules: recursive
 
       - name: Prepare files
         run: |
           mkdir prod
-          cp -r -t prod/ src libraries .gitignore
-          cp CleanMakefile prod/Makefile
+          cp -r -t prod/ src libraries Makefile .gitignore .gitmodules assets
+          rm -rf prod/libraries/mlx42/.git
 
-    #   - name: Install dependencies
-    #     run: |
-    #       sudo apt-get update && sudo apt-get install -y <PACKAGE>
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
 
       - name: Verify build
         run: |
@@ -31,13 +32,19 @@ jobs:
           make
           make fclean
 
+      - name: Remove mlx42
+        run: |
+          rm -rf prod/libraries/mlx42
+
       - name: Commit and push to prod
         run: |
           cd prod
           git init
+          git config --global init.defaultBranch main
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git submodule add https://github.com/codam-coding-college/MLX42 libraries/mlx42
           git checkout -b prod
           git add .
           git commit -m "Deployment to Production"
