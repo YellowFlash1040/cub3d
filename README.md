@@ -3,7 +3,7 @@
 A simple 3D raycasting engine built in C using the [MLX42](https://github.com/codam-coding-college/MLX42) library, inspired by Wolfenstein 3D.  
 The program renders a first-person view of a maze using a 2D map and simulates depth through raycasting using a [DDA raycasting algorithm](https://aaaa.sh/creatures/dda-algorithm-interactive/)
 
-This project is part of the 42 School curriculum and demonstrates proficiency in graphics programming, mathematical concepts, event handling, and memory management.
+This project is part of the [Codam](https://www.codam.nl/en/) curriculum, [42 School](https://42.fr/en/homepage/) campus, and demonstrates proficiency in graphics programming, mathematical concepts, event handling, and memory management.
 
 ## Prerequisites:
 
