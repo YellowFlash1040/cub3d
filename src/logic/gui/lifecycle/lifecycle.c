@@ -31,6 +31,6 @@ static void	run(void *param)
 
 	app = (t_app *)param;
 	handle_keyboard(app);
-	handle_mouse(app);
+	// handle_mouse(app);
 	render_frame(app);
 }
