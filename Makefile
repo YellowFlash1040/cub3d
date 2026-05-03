@@ -102,7 +102,8 @@ $(NAME): $(OBJ) $(LIBRARIES)
 # Compile Object Files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) Makefile
 	$(if $(COMPILE_MSG_SHOWN),,$(eval COMPILE_MSG_SHOWN := 1) \
-	@echo "$(YELLOW)>> Compiling object files...$(RESET)")
+	@echo "$(YELLOW)>> Compiling object files:$(RESET)")
+	@printf "$(YELLOW)   %-38.38s\r" $(notdir $@)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
