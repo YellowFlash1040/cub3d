@@ -1,22 +1,13 @@
 # cub3d
 
 A simple 3D raycasting engine built in C using the [MLX42](https://github.com/codam-coding-college/MLX42) library, inspired by Wolfenstein 3D.  
-The program renders a first-person view of a maze using a 2D map and simulates depth through raycasting.
+The program renders a first-person view of a maze using a 2D map and simulates depth through raycasting using a [DDA raycasting algorithm](https://aaaa.sh/creatures/dda-algorithm-interactive/)
 
 This project is part of the 42 School curriculum and demonstrates proficiency in graphics programming, mathematical concepts, event handling, and memory management.
 
 ## Prerequisites:
 
 Before building the project, ensure you have the following installed:
-
-- GNU Make
-- GCC (C compiler)
-- G++ (C++ compiler, required for MLX42)
-- CMake
-- X11 development libraries
-- libbsd
-- unzip
-- OpenGL development libraries (libgl1-mesa-dev, libglx-dev)
 
 - GNU Make
 - GNU Compiler Collection:
@@ -44,7 +35,8 @@ sudo apt update && sudo apt install \
 1.  Clone the repository:
 
 ```
-git clone https://github.com/YellowFlash1040/cub3d.gitcd cub3d
+git clone https://github.com/YellowFlash1040/cub3d
+cd cub3d
 ```
 
 2.  Build the project:
@@ -60,7 +52,7 @@ This will create an executable named `cub3d` in the project directory.
 Run the program with a map configuration file:
 
 ```
-./cub3d maps/map.cub
+./cub3d assets/maps/map_1.cub
 ```
 
 ### Controls
@@ -68,6 +60,8 @@ Run the program with a map configuration file:
 - **W / A / S / D**: Move the player
 - **Left / Right Arrow**: Rotate the camera
 - **ESC / Close window**: Quit the program
+- **Tab**: Enable/disable minimap
+- **CapsLock**: switch minimap view mode
 
 ## Map Format
 
@@ -77,10 +71,13 @@ Maps must be provided in a `.cub` configuration file and follow specific rules:
 - Valid characters:
   - `0` – empty space
   - `1` – wall
+  - `2` – door
   - `N`, `S`, `E`, `W` – player starting position and orientation
 - The file also includes:
   - Texture paths for each wall direction
   - Floor and ceiling colors
+
+For examples look into `assets/maps` folder
 
 ## Features
 
@@ -88,17 +85,11 @@ Maps must be provided in a `.cub` configuration file and follow specific rules:
 - Textured walls
 - Player movement and rotation
 - Collision detection
-- Minimap (if implemented)
-- Basic lighting/shading effects (if implemented)
+- Minimap
+- Basic lighting/shading effects (use `6.cub` and `10.cub` map files inside `assets/maps` folder)
 
 ## Example
 
 ```
-./cub3d maps/example.cub
+./cub3d assets/maps/map_1.cub
 ```
-
-## Notes
-
-- The rendering uses a raycasting algorithm similar to early 3D games.
-- Proper parsing and validation of the `.cub` file are required.
-- Memory management and error handling are critical for stability.
