@@ -16,14 +16,14 @@
 # define WINDOW_TITLE "cub3d"
 
 // Codam PC setup
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1440
+// # define WINDOW_WIDTH 1920
+// # define WINDOW_HEIGHT 1440
 
 // # define WINDOW_WIDTH 2560
 // # define WINDOW_HEIGHT 1440
 
 // My home PC setup
-// # define WINDOW_WIDTH 960
-// # define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 960
+# define WINDOW_HEIGHT 720
 
 #endif

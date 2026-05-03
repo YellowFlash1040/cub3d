@@ -14,11 +14,13 @@
 # define WORLD_SETTINGS_H
 
 // Codam PC setup
-# define CELL_SIZE 64
+// # define CELL_SIZE 64
 # define SPRITE_WIDTH 64
 # define SPRITE_HEIGHT 64
 
 // My home PC setup
-// # define CELL_SIZE 32
+# define CELL_SIZE 32
+// # define SPRITE_WIDTH 32
+// # define SPRITE_HEIGHT 32
 
 #endif

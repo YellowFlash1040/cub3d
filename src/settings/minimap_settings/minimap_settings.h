@@ -15,12 +15,12 @@
 
 // Codam PC setup
 // # define MINIMAP_CELL_SIZE 32
-# define MINIMAP_CELL_SIZE 28
-# define MINIMAP_PLAYER_SIZE 8
+// # define MINIMAP_CELL_SIZE 28
+// # define MINIMAP_PLAYER_SIZE 8
 
 // My home PC setup
-// # define MINIMAP_CELL_SIZE 16
-// # define MINIMAP_PLAYER_SIZE 4
+# define MINIMAP_CELL_SIZE 16
+# define MINIMAP_PLAYER_SIZE 4
 
 # define WALL_COLOR 0xffffffff
 // # define EMPTY_SPACE_COLOR 0x000000ff
