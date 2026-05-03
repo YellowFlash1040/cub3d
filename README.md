@@ -87,9 +87,3 @@ For examples look into `assets/maps` folder
 - Collision detection
 - Minimap
 - Basic lighting/shading effects (use `6.cub` and `10.cub` map files inside `assets/maps` folder)
-
-## Example
-
-```
-./cub3d assets/maps/map_1.cub
-```
