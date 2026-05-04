@@ -5,6 +5,10 @@ The program renders a first-person view of a maze using a 2D map and simulates d
 
 This project is part of the [Codam](https://www.codam.nl/en/) curriculum, [42 School](https://42.fr/en/homepage/) campus, and demonstrates proficiency in graphics programming, mathematical concepts, event handling, and memory management.
 
+<p align="center">
+<img src="assets/preview.png" alt="cub3d preview" />
+</p>
+
 ## Prerequisites:
 
 Before building the project, ensure you have the following installed:
